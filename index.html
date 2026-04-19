@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZP10 Mathematik – Übungstrainer</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f8f7f4; --bg-card: #ffffff; --bg-secondary: #f1efe8;
+      --text: #1a1a18; --text-secondary: #5f5e5a; --text-tertiary: #888780;
+      --border: rgba(0,0,0,0.12); --border-strong: rgba(0,0,0,0.25);
+      --blue-bg: #e6f1fb; --blue-text: #0c447c; --blue-mid: #378add;
+      --green-bg: #eaf3de; --green-text: #27500a; --green-mid: #639922;
+      --amber-bg: #faeeda; --amber-text: #633806; --amber-mid: #ba7517;
+      --red-bg: #fcebeb; --red-text: #791f1f;
+      --radius-md: 8px; --radius-lg: 12px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1c1c1a; --bg-card: #252523; --bg-secondary: #2c2c2a;
+        --text: #f0ede8; --text-secondary: #b4b2a9; --text-tertiary: #888780;
+        --border: rgba(255,255,255,0.1); --border-strong: rgba(255,255,255,0.22);
+        --blue-bg: #042c53; --blue-text: #85b7eb;
+        --green-bg: #173404; --green-text: #c0dd97;
+        --amber-bg: #412402; --amber-text: #fac775;
+        --red-bg: #501313; --red-text: #f09595;
+      }
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    header { background: var(--bg-card); border-bottom: 0.5px solid var(--border); padding: 0.875rem 1.5rem; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 100; }
+    header .logo { font-size: 16px; font-weight: 600; color: var(--text); }
+    header .logo span { color: var(--blue-mid); }
+    header .breadcrumb { font-size: 13px; color: var(--text-tertiary); display: flex; align-items: center; gap: 6px; }
+    .container { max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .page { display: none; }
+    .page.active { display: block; }
+    h1 { font-size: 26px; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+    h2 { font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 1rem; }
+    h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+    p { font-size: 15px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 0.75rem; }
+    .subtitle { font-size: 15px; color: var(--text-secondary); margin-bottom: 2.5rem; line-height: 1.6; }
+    .part-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 2rem; }
+    @media (max-width: 520px) { .part-grid { grid-template-columns: 1fr; } }
+    .part-card { background: var(--bg-card); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 1.5rem; cursor: pointer; transition: border-color 0.15s; text-align: center; }
+    .part-card:hover { border-color: var(--border-strong); }
+    .part-card.blue:hover { border-color: var(--blue-mid); }
+    .part-card.green:hover { border-color: var(--green-mid); }
+    .part-icon { font-size: 40px; margin-bottom: 1rem; display: block; }
+    .part-title { font-size: 17px; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+    .part-subtitle { font-size: 13px; font-weight: 500; color: var(--text-secondary); margin-bottom: 0.75rem; }
+    .part-desc { font-size: 13px; color: var(--text-tertiary); line-height: 1.55; }
+    .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: var(--radius-md); font-size: 12px; font-weight: 500; }
+    .badge-blue { background: var(--blue-bg); color: var(--blue-text); }
+    .badge-green { background: var(--green-bg); color: var(--green-text); }
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 0.75rem; margin-top: 0.25rem; }
+    .topic-btn { width: 100%; padding: 0.875rem 1rem; background: var(--bg-card); border: 0.5px solid var(--border); border-radius: var(--radius-md); font-size: 15px; color: var(--text); cursor: pointer; text-align: left; transition: all 0.15s; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; font-family: inherit; }
+    .topic-btn:hover { border-color: var(--border-strong); background: var(--bg-secondary); }
+    .topic-icon { width: 32px; height: 32px; border-radius: var(--radius-md); background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+    .topic-arrow { margin-left: auto; color: var(--text-tertiary); font-size: 14px; }
+    .btn { padding: 0.55rem 1.1rem; border: 0.5px solid var(--border-strong); border-radius: var(--radius-md); background: var(--bg-card); color: var(--text); font-size: 14px; cursor: pointer; transition: all 0.15s; font-family: inherit; white-space: nowrap; }
+    .btn:hover { background: var(--bg-secondary); }
+    .btn:active { transform: scale(0.98); }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn-primary { background: #185fa5; color: #e6f1fb; border-color: #185fa5; }
+    .btn-primary:hover { background: #0c447c; border-color: #0c447c; }
+    .btn-success { background: #3b6d11; color: #eaf3de; border-color: #3b6d11; }
+    .btn-success:hover { background: #27500a; }
+    .btn-amber { background: var(--amber-bg); color: var(--amber-text); border-color: var(--amber-mid); }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 0.5px solid var(--border); }
+    .nav-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 1.75rem; flex-wrap: wrap; }
+    .nav-bar .btn { font-size: 13px; padding: 0.4rem 0.8rem; }
+    .task-box { background: var(--bg-card); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1rem; font-size: 15px; color: var(--text); line-height: 1.75; }
+    .task-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 0.75rem; }
+    .task-counter { font-size: 12px; color: var(--text-tertiary); margin-bottom: 0.5rem; }
+    .hint-box { background: var(--amber-bg); border: 0.5px solid var(--amber-mid); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 1rem; }
+    .hint-box h3 { color: var(--amber-text); margin-bottom: 0.75rem; }
+    .hint-box ul { padding-left: 1.25rem; }
+    .hint-box li { font-size: 14px; line-height: 1.65; margin-bottom: 0.4rem; color: var(--amber-text); }
+    .solution-box { background: var(--green-bg); border: 0.5px solid var(--green-mid); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 1rem; }
+    .solution-box h3 { color: var(--green-text); margin-bottom: 0.75rem; }
+    .solution-box p { color: var(--green-text); font-size: 14px; line-height: 1.75; margin-bottom: 0; }
+    .solution-result { margin-top: 1rem; padding-top: 0.75rem; border-top: 0.5px solid var(--green-mid); font-weight: 600; font-size: 14px; color: var(--green-text); }
+    .check-box { background: var(--bg-card); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 1rem; }
+    .check-box p { font-size: 13px; color: var(--text-secondary); margin-bottom: 0.75rem; }
+    .check-input-row { display: flex; gap: 8px; align-items: center; }
+    .check-input { flex: 1; padding: 0.55rem 0.875rem; border: 0.5px solid var(--border-strong); border-radius: var(--radius-md); font-size: 14px; color: var(--text); background: var(--bg); font-family: inherit; outline: none; }
+    .check-input:focus { border-color: var(--blue-mid); }
+    .result-correct { margin-top: 0.75rem; padding: 0.6rem 1rem; background: var(--green-bg); color: var(--green-text); border-radius: var(--radius-md); font-size: 14px; font-weight: 500; }
+    .result-wrong { margin-top: 0.75rem; padding: 0.6rem 1rem; background: var(--red-bg); color: var(--red-text); border-radius: var(--radius-md); font-size: 14px; }
+    .task-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; gap: 12px; }
+    .task-header h2 { margin-bottom: 0; flex: 1; }
+    footer { text-align: center; padding: 2rem 1rem; font-size: 12px; color: var(--text-tertiary); border-top: 0.5px solid var(--border); margin-top: 3rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">ZP10 <span>Mathematik</span></div>
+  <div class="breadcrumb" id="breadcrumb"></div>
+</header>
+
+<!-- START PAGE -->
+<div id="start-page" class="page active">
+  <div class="container">
+    <h1>Übungstrainer</h1>
+    <p class="subtitle">Bereite dich gezielt auf die Zentrale Prüfung 10 vor.<br>Wähle den Prüfungsteil, dann ein Themengebiet – und los geht's.</p>
+    <div class="section-label">Prüfungsteil wählen</div>
+    <div class="part-grid">
+      <div class="part-card blue" onclick="selectPart(1)">
+        <span class="part-icon">✏️</span>
+        <div class="part-title">Prüfungsteil 1</div>
+        <div class="part-subtitle">Ohne Hilfsmittel</div>
+        <div class="part-desc">Grundrechenarten, Terme, Gleichungen, lineare Funktionen, Wahrscheinlichkeit</div>
+      </div>
+      <div class="part-card green" onclick="selectPart(2)">
+        <span class="part-icon">📐</span>
+        <div class="part-title">Prüfungsteil 2</div>
+        <div class="part-subtitle">Mit Hilfsmitteln</div>
+        <div class="part-desc">Körper, Exponentialfunktionen, Stochastik, Dreiecke, Parabeln</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOPICS PAGE -->
+<div id="topics-page" class="page">
+  <div class="container">
+    <div class="nav-bar">
+      <button class="btn" onclick="showPage('start-page'); setBreadcrumb('')">← Startseite</button>
+      <span id="part-badge" class="badge"></span>
+    </div>
+    <h2 id="topics-title">Themengebiet wählen</h2>
+    <p>Wähle ein Thema aus. Du kannst danach jederzeit das Thema oder den Prüfungsteil wechseln.</p>
+    <div class="section-label" style="margin-top:1.5rem;">Verfügbare Themen</div>
+    <div id="topics-list"></div>
+  </div>
+</div>
+
+<!-- TASK PAGE -->
+<div id="task-page" class="page">
+  <div class="container">
+    <div class="nav-bar">
+      <button class="btn" onclick="showPage('start-page'); setBreadcrumb('')">← Startseite</button>
+      <button class="btn" onclick="showPage('topics-page')">Thema wechseln</button>
+      <span id="task-badge" class="badge"></span>
+    </div>
+    <div class="task-header">
+      <h2 id="task-topic-title"></h2>
+      <button class="btn" onclick="loadNewTask()">↻ Neue Aufgabe</button>
+    </div>
+    <div id="task-content"></div>
+    <div id="hint-section" style="display:none;"></div>
+    <div id="check-section" style="display:none;">
+      <div class="check-box">
+        <h3>Lösung überprüfen</h3>
+        <p>Gib dein Ergebnis ein (z.B. „x = 4" oder „27 cm²"):</p>
+        <div class="check-input-row">
+          <input class="check-input" id="user-answer" placeholder="Deine Antwort…" onkeydown="if(event.key==='Enter') checkAnswer()" />
+          <button class="btn btn-primary" onclick="checkAnswer()">Prüfen</button>
+        </div>
+        <div id="check-result"></div>
+      </div>
+    </div>
+    <div id="solution-section" style="display:none;"></div>
+    <div class="btn-row">
+      <button class="btn btn-amber" onclick="toggleHint()">💡 Hinweis</button>
+      <button class="btn" onclick="toggleCheck()">✓ Lösung prüfen</button>
+      <button class="btn btn-success" onclick="toggleSolution()">📋 Musterlösung</button>
+      <button class="btn btn-primary" onclick="loadNewTask()">Neue Aufgabe →</button>
+    </div>
+  </div>
+</div>
+
+<footer>ZP10 Mathematik Übungstrainer · NRW · Orientiert an den Zentralen Prüfungen 2022–2025</footer>
+
+<script>
+const TOPICS = {
+  1: [
+    { id: 'zahlen',      label: 'Zahlen & Terme',           icon: '🔢', desc: 'Potenzen, Wurzeln, Vorzeichen, Termwerte' },
+    { id: 'gleichungen', label: 'Gleichungen',               icon: '⚖️', desc: 'Lineare Gleichungen, Bruchgleichungen, LGS' },
+    { id: 'funktionen1', label: 'Lineare Funktionen',        icon: '📈', desc: 'Steigung, y-Achsenabschnitt, Geraden' },
+    { id: 'geometrie1',  label: 'Geometrie & Flächen',       icon: '📐', desc: 'Flächeninhalte, Umfang, Winkel' },
+    { id: 'stochastik1', label: 'Wahrscheinlichkeit',        icon: '🎲', desc: 'Einfache Wahrscheinlichkeiten, Ziehen ohne Zurücklegen' },
+    { id: 'parabeln1',   label: 'Quadratische Funktionen',   icon: '∪',  desc: 'Scheitelpunkt, Nullstellen, Funktionsgleichung' },
+  ],
+  2: [
+    { id: 'volumen',     label: 'Volumen & Körper',          icon: '⬡',  desc: 'Zylinder, Kugel, Quader im Sachkontext' },
+    { id: 'exponential', label: 'Exponentialfunktionen',     icon: '📊', desc: 'Wachstum, Zerfall, prozentuale Veränderung' },
+    { id: 'stochastik2', label: 'Baumdiagramme & Stochastik',icon: '🌳', desc: 'Mehrstufige Experimente, Wahrscheinlichkeit' },
+    { id: 'parabeln2',   label: 'Parabeln im Kontext',       icon: '∩',  desc: 'Scheitelform, Funktionsgleichung bestimmen' },
+    { id: 'dreiecke',    label: 'Dreiecke & Trigonometrie',  icon: '△',  desc: 'Pythagoras, sin/cos/tan, Winkelberechnung' },
+    { id: 'terme',       label: 'Terme & Muster',            icon: '🔷', desc: 'Allgemeine Terme, Summenformeln, Muster' },
+  ]
+};
+
+const TASKS = {
+  zahlen: [
+    {
+      aufgabe: "Berechne ohne Hilfsmittel:\na) 0,6 · 10⁴\nb) √49\nc) (−2)³",
+      hinweise: ["Denke bei 10⁴ daran, die Dezimalstelle um 4 Stellen nach rechts zu verschieben.", "Die Wurzel aus 49 ist eine ganze Zahl – welche Zahl ergibt mit sich selbst multipliziert 49?", "Bei (−2)³ musst du −2 dreimal miteinander multiplizieren. Achte auf das Vorzeichen: Minus mal Minus ergibt Plus."],
+      loesung_kurz: "a) 6000  b) 7  c) −8",
+      musterloesung: "a) 0,6 · 10⁴ = 0,6 · 10.000 = 6.000\nb) √49 = 7, da 7 · 7 = 49\nc) (−2)³ = (−2) · (−2) · (−2) = 4 · (−2) = −8\n\nErgebnis: a) 6000  b) 7  c) −8"
+    },
+    {
+      aufgabe: "Ordne die folgenden Zahlen der Größe nach. Beginne mit der kleinsten:\n−0,45     0,38     −2/5",
+      hinweise: ["Schreibe alle Zahlen als Dezimalzahlen um: −2/5 = ?", "Negative Zahlen sind kleiner als positive Zahlen.", "Unter den negativen Zahlen ist die dem Betrag nach größere Zahl kleiner."],
+      loesung_kurz: "−0,45 < −0,4 < 0,38",
+      musterloesung: "Umschreiben: −2/5 = −0,4\nVergleich: −0,45 und −0,4 und 0,38\n−0,45 < −0,4 < 0,38\n\nErgebnis: −0,45 < −2/5 < 0,38"
+    },
+    {
+      aufgabe: "Gib an, zwischen welchen zwei aufeinanderfolgenden ganzen Zahlen √20 liegt.\nBegründe deine Antwort.",
+      hinweise: ["Überlege: Welche Quadratzahlen liegen in der Nähe von 20?", "4² = 16 und 5² = 25 – was folgt daraus?", "√16 < √20 < √25, also ..."],
+      loesung_kurz: "4 < √20 < 5",
+      musterloesung: "Ansatz: Wir suchen ganze Zahlen n mit n² ≤ 20 ≤ (n+1)²\n4² = 16 < 20 und 5² = 25 > 20\nAlso gilt: 4 < √20 < 5\n\nErgebnis: √20 liegt zwischen 4 und 5."
+    },
+    {
+      aufgabe: "Entscheide jeweils, ob die Aussage richtig oder falsch ist:\na) 10⁻¹ > 10⁻²\nb) −4² = (−4)²\nc) 2² ist die Hälfte von 2⁴",
+      hinweise: ["10⁻¹ = 1/10 = 0,1 und 10⁻² = 1/100 = 0,01 – welche ist größer?", "Achte auf den Unterschied: Bei −4² wird zuerst quadriert, dann negiert. Bei (−4)² wird die ganze negative Zahl quadriert.", "Berechne beide Werte getrennt: 2² = ? und 2⁴ = ?"],
+      loesung_kurz: "a) richtig  b) falsch  c) falsch",
+      musterloesung: "a) 10⁻¹ = 0,1 > 0,01 = 10⁻² → richtig\nb) −4² = −16, aber (−4)² = +16 → nicht gleich → falsch\nc) 2² = 4 und 2⁴ = 16. Die Hälfte von 16 ist 8, nicht 4. → falsch\n\nErgebnis: a) richtig  b) falsch  c) falsch"
+    },
+    {
+      aufgabe: "Berechne:\na) (−5/2) · 3 · (−4/15)\nb) Gib den Wert des Terms an: −3² + (−1)³",
+      hinweise: ["Beim Multiplizieren mehrerer Faktoren: Zähler mit Zähler, Nenner mit Nenner multiplizieren. Achte auf die Vorzeichen.", "Zwei negative Faktoren ergeben ein positives Produkt.", "Bei −3² gilt Punkt-vor-Strich: erst quadrieren, dann negieren."],
+      loesung_kurz: "a) 2  b) −10",
+      musterloesung: "a) (−5/2) · 3 · (−4/15) = (−5 · 3 · (−4)) / (2 · 15) = 60/30 = 2\nb) −3² + (−1)³ = −9 + (−1) = −10\n\nErgebnis: a) 2  b) −10"
+    },
+    {
+      aufgabe: "Ordne der Größe nach (kleinste zuerst):\n−3/8     2/5     −2 1/6     0,2",
+      hinweise: ["Schreibe alle Zahlen als Dezimalzahlen: −3/8 = −0,375, −2 1/6 ≈ −2,167", "Negative Zahlen stehen links auf der Zahlengeraden – je größer der Betrag, desto kleiner die Zahl.", "Vergleiche dann die positiven Zahlen."],
+      loesung_kurz: "−2 1/6 < −3/8 < 0,2 < 2/5",
+      musterloesung: "Umschreiben: −2 1/6 ≈ −2,167 | −3/8 = −0,375 | 0,2 = 0,2 | 2/5 = 0,4\nReihenfolge: −2,167 < −0,375 < 0,2 < 0,4\n\nErgebnis: −2 1/6 < −3/8 < 0,2 < 2/5"
+    },
+  ],
+  gleichungen: [
+    {
+      aufgabe: "Löse das lineare Gleichungssystem. Notiere deinen Lösungsweg.\nI:   2x + 3y = 20\nII: −2x + 8y = 68",
+      hinweise: ["Additionsverfahren: Addiere Gleichung I und II, damit x wegfällt.", "Du erhältst eine Gleichung nur mit y – löse sie auf.", "Setze y in eine der ursprünglichen Gleichungen ein, um x zu berechnen."],
+      loesung_kurz: "x = −4, y = 9",
+      musterloesung: "Ansatz: Additionsverfahren\nI + II: (2x − 2x) + (3y + 8y) = 20 + 68\n11y = 88  →  y = 8\nEinsetzen in I: 2x + 3 · 8 = 20  →  2x = 20 − 24 = −4  →  x = −2\n\nErgebnis: x = −2, y = 8"
+    },
+    {
+      aufgabe: "Löse die Bruchgleichung und notiere deinen Lösungsweg:\n2 = (40x + 8) / (24x + 5)",
+      hinweise: ["Multipliziere beide Seiten mit dem Nenner (24x + 5), um den Bruch aufzulösen.", "Dann hast du eine lineare Gleichung – bringe alle x-Terme auf eine Seite.", "Löse nach x auf."],
+      loesung_kurz: "x = 0,125",
+      musterloesung: "Ansatz: Beide Seiten mit (24x + 5) multiplizieren\n2 · (24x + 5) = 40x + 8\n48x + 10 = 40x + 8\n8x = −2\nx = −1/4 = −0,25\n\nErgebnis: x = −0,25"
+    },
+    {
+      aufgabe: "Löse das lineare Gleichungssystem:\nI:   6x − 3y = 15\nII:  6x − 8y = 10",
+      hinweise: ["Subtrahiere Gleichung II von Gleichung I, um x zu eliminieren.", "Du erhältst eine einfache Gleichung für y.", "Setze y zurück in eine der Gleichungen ein."],
+      loesung_kurz: "x = 3, y = 1",
+      musterloesung: "Ansatz: I − II:\n(6x − 6x) + (−3y − (−8y)) = 15 − 10\n5y = 5  →  y = 1\nEinsetzen in I: 6x − 3 · 1 = 15  →  6x = 18  →  x = 3\n\nErgebnis: x = 3, y = 1"
+    },
+    {
+      aufgabe: "Löse die Bruchgleichung:\n(3x − 6) / (0,5x + 1) = 2",
+      hinweise: ["Multipliziere beide Seiten mit dem Nenner (0,5x + 1).", "Forme die entstandene lineare Gleichung um.", "Achte auf korrekte Klammerauflösung."],
+      loesung_kurz: "x = 4",
+      musterloesung: "Ansatz: Beide Seiten mit (0,5x + 1) multiplizieren\n3x − 6 = 2 · (0,5x + 1)\n3x − 6 = x + 2\n2x = 8\nx = 4\n\nErgebnis: x = 4"
+    },
+    {
+      aufgabe: "Ergänze die binomische Formel:\n(2x + ___)² = 4x² + ___ + 9y²",
+      hinweise: ["Die binomische Formel lautet: (a + b)² = a² + 2ab + b²", "Hier ist a = 2x. Welches b ergibt b² = 9y²?", "Der mittlere Term ist 2 · a · b."],
+      loesung_kurz: "3y und 12xy",
+      musterloesung: "Ansatz: (2x + b)² = 4x² + 2·2x·b + b²\nb² = 9y²  →  b = 3y\n2·2x·3y = 12xy\n\nErgebnis: (2x + 3y)² = 4x² + 12xy + 9y²"
+    },
+    {
+      aufgabe: "Löse die Gleichung und gib die Lösungsmenge an:\n5x − 3(2x − 4) = 2x + 8",
+      hinweise: ["Löse zuerst die Klammer auf: −3 · (2x − 4) = ?", "Fasse gleichartige Terme zusammen.", "Bringe alle x-Terme auf eine Seite, alle Zahlen auf die andere."],
+      loesung_kurz: "x = 4/3",
+      musterloesung: "Ansatz: Klammer auflösen\n5x − 6x + 12 = 2x + 8\n−x + 12 = 2x + 8\n4 = 3x\nx = 4/3\n\nErgebnis: x = 4/3"
+    },
+  ],
+  funktionen1: [
+    {
+      aufgabe: "Gegeben ist f(x) = 1,5x − 1.\na) Bestätige rechnerisch, dass P(4|5) auf dem Graphen von f liegt.\nb) Bestimme die Nullstelle von f.",
+      hinweise: ["Setze x = 4 in die Funktionsgleichung ein und prüfe, ob das Ergebnis 5 ist.", "Die Nullstelle findest du, indem du f(x) = 0 setzt und nach x auflöst.", "Forme die Gleichung 1,5x − 1 = 0 um."],
+      loesung_kurz: "a) f(4) = 5 ✓  b) x = 2/3",
+      musterloesung: "a) f(4) = 1,5 · 4 − 1 = 6 − 1 = 5 ✓  Punkt liegt auf dem Graphen.\nb) Nullstelle: 1,5x − 1 = 0  →  1,5x = 1  →  x = 1/1,5 = 2/3\n\nErgebnis: a) Bestätigt  b) x = 2/3"
+    },
+    {
+      aufgabe: "Gegeben ist der Graph einer linearen Funktion mit Steigung m = −0,5 und y-Achsenabschnitt b = 2.\na) Gib die Funktionsgleichung an.\nb) Berechne den Schnittpunkt mit der x-Achse.\nc) Berechne f(−4).",
+      hinweise: ["Die allgemeine Form ist f(x) = mx + b.", "Für den Schnittpunkt mit der x-Achse setzt du f(x) = 0.", "Setze x = −4 in deine Gleichung ein."],
+      loesung_kurz: "a) f(x) = −0,5x + 2  b) x = 4  c) f(−4) = 4",
+      musterloesung: "a) f(x) = −0,5x + 2\nb) −0,5x + 2 = 0  →  x = 4 → Schnittpunkt (4|0)\nc) f(−4) = −0,5 · (−4) + 2 = 2 + 2 = 4\n\nErgebnis: a) f(x) = −0,5x + 2  b) S(4|0)  c) 4"
+    },
+    {
+      aufgabe: "Zwei Geraden sind gegeben:\nf(x) = 2x − 1  und  g(x) = −x + 5\nBerechne den Schnittpunkt der beiden Geraden.",
+      hinweise: ["Setze f(x) = g(x), da sich die Geraden im Schnittpunkt schneiden.", "Löse die entstehende lineare Gleichung nach x auf.", "Setze x in eine der Gleichungen ein, um y zu berechnen."],
+      loesung_kurz: "S(2|3)",
+      musterloesung: "Ansatz: f(x) = g(x)\n2x − 1 = −x + 5\n3x = 6  →  x = 2\ny = f(2) = 2·2 − 1 = 3\n\nErgebnis: Schnittpunkt S(2|3)"
+    },
+    {
+      aufgabe: "Eine lineare Funktion verläuft durch die Punkte A(0|−3) und B(4|5).\na) Bestimme die Funktionsgleichung.\nb) Bei welchem y-Wert schneidet die Gerade die y-Achse?",
+      hinweise: ["Die Steigung berechnest du mit m = (y₂ − y₁) / (x₂ − x₁).", "Den y-Achsenabschnitt kannst du direkt aus dem Punkt A(0|−3) ablesen.", "Prüfe dein Ergebnis, indem du B in deine Gleichung einsetzt."],
+      loesung_kurz: "a) f(x) = 2x − 3  b) −3",
+      musterloesung: "Ansatz: Steigung berechnen\nm = (5 − (−3)) / (4 − 0) = 8/4 = 2\nb = −3 (aus A(0|−3))\nf(x) = 2x − 3\nProbe: f(4) = 8 − 3 = 5 ✓\n\nErgebnis: f(x) = 2x − 3, y-Achsenabschnitt: −3"
+    },
+    {
+      aufgabe: "Gegeben: f(x) = 0,5x + 3\na) Berechne f(0) und f(6).\nb) Liegt der Punkt Q(8|7) auf dem Graphen von f? Begründe.",
+      hinweise: ["Setze die x-Werte einfach in die Gleichung ein.", "Für Q prüfst du, ob f(8) = 7 gilt.", "Wenn f(8) ≠ 7, liegt Q nicht auf dem Graphen."],
+      loesung_kurz: "a) f(0) = 3, f(6) = 6  b) Nein, f(8) = 7 ✓ → Q liegt auf f",
+      musterloesung: "a) f(0) = 0,5·0 + 3 = 3\nf(6) = 0,5·6 + 3 = 3 + 3 = 6\nb) f(8) = 0,5·8 + 3 = 4 + 3 = 7 ✓\nDa f(8) = 7 = y-Koordinate von Q, liegt Q auf dem Graphen.\n\nErgebnis: a) 3 und 6  b) Q liegt auf f."
+    },
+    {
+      aufgabe: "Eine Taxifahrt kostet einen Grundpreis von 3 € und 1,50 € pro Kilometer.\na) Stelle eine Funktionsgleichung für den Preis P in Abhängigkeit von der Kilometerzahl k auf.\nb) Wie viel kostet eine Fahrt von 12 km?\nc) Wie weit kann man für 18 € fahren?",
+      hinweise: ["Der Grundpreis ist der y-Achsenabschnitt, der Preis pro km ist die Steigung.", "Setze k = 12 in deine Gleichung ein.", "Setze P = 18 und löse nach k auf."],
+      loesung_kurz: "a) P(k) = 1,5k + 3  b) 21 €  c) 10 km",
+      musterloesung: "a) P(k) = 1,5k + 3\nb) P(12) = 1,5 · 12 + 3 = 18 + 3 = 21 €\nc) 18 = 1,5k + 3  →  1,5k = 15  →  k = 10 km\n\nErgebnis: a) P(k) = 1,5k + 3  b) 21 €  c) 10 km"
+    },
+  ],
+  geometrie1: [
+    {
+      aufgabe: "Ein Parallelogramm hat die Seitenlängen 5 cm und 4 cm sowie den Winkel α = 70°.\na) Gib die Größe des Winkels β an.\nb) Ein Schüler behauptet: 'Das Parallelogramm hat einen Flächeninhalt von 20 cm².' Begründe, dass diese Aussage falsch ist.",
+      hinweise: ["Im Parallelogramm sind benachbarte Winkel Supplementwinkel – sie ergänzen sich zu 180°.", "Der Flächeninhalt eines Parallelogramms ist A = Grundseite · Höhe, nicht Grundseite · Seite.", "Die Höhe ist kleiner als die Seite, wenn der Winkel kein rechter Winkel ist."],
+      loesung_kurz: "a) β = 110°  b) A < 20 cm², da Höhe < 4 cm",
+      musterloesung: "a) Im Parallelogramm gilt: α + β = 180°\nβ = 180° − 70° = 110°\nb) A = g · h mit h = 4 · sin(70°) ≈ 3,76 cm\nA = 5 · 3,76 ≈ 18,8 cm² < 20 cm²\nDa der Winkel kein rechter Winkel ist, ist die Höhe kleiner als die Seite.\n\nErgebnis: a) 110°  b) Flächeninhalt ≈ 18,8 cm², nicht 20 cm²."
+    },
+    {
+      aufgabe: "Berechne den Flächeninhalt der äußeren schraffierten Fläche für a = 20 cm, b = 8 cm, c = 2 cm.\nDie Figur besteht aus einem großen Rechteck (Seiten a und b+c), aus dem ein kleineres Rechteck (Seiten a−c und b) ausgeschnitten ist.",
+      hinweise: ["Berechne zuerst die Fläche des großen Rechtecks.", "Berechne dann die Fläche des inneren weißen Rechtecks.", "Ziehe die innere Fläche von der äußeren ab."],
+      loesung_kurz: "44 cm²",
+      musterloesung: "Ansatz: Gesamtfläche minus innere Fläche\nAußen: a · (b + c) = 20 · (8 + 2) = 20 · 10 = 200 cm²\nInnen (weiß): (a − c) · b = (20 − 2) · 8 = 18 · 8 = 144 cm²\nSchraffiert: 200 − 144 = 56 cm²\n\nErgebnis: 56 cm²"
+    },
+    {
+      aufgabe: "Ein gleichschenkliges Dreieck ABC hat die Punkte A(−3|0), B(3|0) und C(0|4,5).\na) Berechne den Flächeninhalt des Dreiecks.\nb) Bestimme den Umfang des Dreiecks.",
+      hinweise: ["Die Grundseite AB kannst du direkt aus den Koordinaten ablesen.", "Die Höhe ist die y-Koordinate von C, da die Basis auf der x-Achse liegt.", "Für den Umfang brauchst du die Länge der Schenkel AC und BC – nutze den Satz des Pythagoras."],
+      loesung_kurz: "a) 13,5 cm²  b) ≈ 21 cm",
+      musterloesung: "a) Grundseite AB = 6 cm, Höhe h = 4,5 cm\nA = ½ · 6 · 4,5 = 13,5 cm²\nb) Schenkel AC: √(3² + 4,5²) = √(9 + 20,25) = √29,25 ≈ 5,41 cm\nUmfang = 6 + 2 · 5,41 ≈ 16,82 cm\n\nErgebnis: a) 13,5 cm²  b) ≈ 16,8 cm"
+    },
+    {
+      aufgabe: "Berechne das Volumen des Kartons mit den Maßen 50 cm × 40 cm × 30 cm.\nGib das Ergebnis in Litern an.",
+      hinweise: ["Das Volumen eines Quaders berechnet sich als V = Länge · Breite · Höhe.", "1 Liter = 1 dm³ = 1000 cm³", "Rechne erst in cm³, dann umrechnen."],
+      loesung_kurz: "60 Liter",
+      musterloesung: "Ansatz: V = l · b · h\nV = 50 · 40 · 30 = 60.000 cm³\nUmrechnung: 60.000 cm³ ÷ 1000 = 60 Liter\n\nErgebnis: 60 Liter"
+    },
+    {
+      aufgabe: "Ein regelmäßiges Sechseck hat die Seitenlänge a = 4 cm.\na) Begründe, dass alle 6 Dreiecke im Sechseck gleichseitig sind.\nb) Berechne den Flächeninhalt des Sechsecks mithilfe der Formel A = 6 · ½ · a · (√3/2 · a).",
+      hinweise: ["Im regelmäßigen Sechseck beträgt jeder Innenwinkel 120°. Wie groß sind dann die Winkel im Dreieck?", "In einem gleichseitigen Dreieck sind alle Seiten gleich lang.", "Setze a = 4 cm in die Formel ein und berechne schrittweise."],
+      loesung_kurz: "A ≈ 41,6 cm²",
+      musterloesung: "a) Das Sechseck lässt sich in 6 gleichseitige Dreiecke zerlegen. Jeder Mittelpunktswinkel beträgt 360°/6 = 60°. Da das Sechseck regelmäßig ist, sind alle Seiten gleich lang → alle Dreiecke sind gleichseitig.\nb) A = 6 · ½ · 4 · (√3/2 · 4) = 6 · ½ · 4 · 2√3 = 6 · 4√3 = 24√3 ≈ 41,57 cm²\n\nErgebnis: A ≈ 41,6 cm²"
+    },
+    {
+      aufgabe: "Ein Trapez hat die parallelen Seiten a = 10 cm und c = 6 cm sowie die Höhe h = 4 cm.\nBerechne den Flächeninhalt.",
+      hinweise: ["Die Flächenformel für ein Trapez lautet: A = ½ · (a + c) · h", "Addiere zuerst die parallelen Seiten.", "Multipliziere dann mit ½ und der Höhe."],
+      loesung_kurz: "32 cm²",
+      musterloesung: "Ansatz: A = ½ · (a + c) · h\nA = ½ · (10 + 6) · 4\nA = ½ · 16 · 4\nA = 32 cm²\n\nErgebnis: 32 cm²"
+    },
+  ],
+  stochastik1: [
+    {
+      aufgabe: "In einem Behälter befinden sich 3 weiße und 2 schwarze Kugeln.\na) Begründe, dass die Wahrscheinlichkeit, eine schwarze Kugel zu ziehen, p = 2/5 beträgt.\nb) Berechne die Wahrscheinlichkeit, bei zweimaligem Ziehen ohne Zurücklegen zwei weiße Kugeln zu ziehen.",
+      hinweise: ["Beim ersten Zug befinden sich 5 Kugeln im Behälter, davon 2 schwarze.", "Ohne Zurücklegen: nach dem ersten Zug befinden sich nur noch 4 Kugeln im Behälter.", "Multipliziere die Wahrscheinlichkeiten der beiden Züge."],
+      loesung_kurz: "a) 2/5  b) 3/10",
+      musterloesung: "a) Es gibt 5 Kugeln insgesamt, 2 davon schwarz.\np(schwarz) = 2/5\nb) 1. Zug: p(weiß) = 3/5\n2. Zug (nach weißer Kugel): noch 4 Kugeln, davon 2 weiße\np(weiß) = 2/4 = 1/2\np(beide weiß) = 3/5 · 1/2 = 3/10\n\nErgebnis: 3/10"
+    },
+    {
+      aufgabe: "Eine Klasse besteht aus 15 Mädchen und 10 Jungen. Es wird zufällig eine Person ausgewählt.\na) Wie groß ist die Wahrscheinlichkeit, dass ein Mädchen gewählt wird?\nb) Zwei Personen werden nacheinander ohne Zurücklegen ausgewählt. Berechne die Wahrscheinlichkeit, dass beide Mädchen sind.",
+      hinweise: ["Gesamtzahl der Personen: 15 + 10 = 25", "Beim zweiten Zug hat sich die Gesamtzahl verringert.", "Verwende die Multiplikationsregel."],
+      loesung_kurz: "a) 3/5  b) 21/50",
+      musterloesung: "a) p(Mädchen) = 15/25 = 3/5\nb) 1. Zug: p(M) = 15/25 = 3/5\n2. Zug: p(M) = 14/24 = 7/12\np(beide M) = 3/5 · 7/12 = 21/60 = 7/20\n\nErgebnis: a) 3/5  b) 7/20"
+    },
+    {
+      aufgabe: "Ein Würfel wird zweimal geworfen.\na) Wie groß ist die Wahrscheinlichkeit, beim ersten Wurf eine 6 zu werfen?\nb) Wie groß ist die Wahrscheinlichkeit, zweimal hintereinander eine 6 zu werfen?\nc) Wie groß ist die Wahrscheinlichkeit, mindestens einmal eine 6 zu werfen?",
+      hinweise: ["Ein fairer Würfel hat 6 gleichwahrscheinliche Ergebnisse.", "Bei unabhängigen Ereignissen: Wahrscheinlichkeiten multiplizieren.", "Für 'mindestens einmal': Nutze die Gegenwahrscheinlichkeit."],
+      loesung_kurz: "a) 1/6  b) 1/36  c) 11/36",
+      musterloesung: "a) p(6) = 1/6\nb) p(6 und 6) = 1/6 · 1/6 = 1/36\nc) p(mindestens eine 6) = 1 − p(keine 6)\np(keine 6) = 5/6 · 5/6 = 25/36\np(mind. eine 6) = 1 − 25/36 = 11/36\n\nErgebnis: a) 1/6  b) 1/36  c) 11/36"
+    },
+    {
+      aufgabe: "In einer Lostrommel befinden sich 4 Gewinne und 6 Nieten.\na) Berechne die Wahrscheinlichkeit, beim einmaligen Ziehen zu gewinnen.\nb) Berechne die Wahrscheinlichkeit, bei zweimaligem Ziehen mit Zurücklegen zweimal zu gewinnen.",
+      hinweise: ["Gesamtzahl der Lose: 4 + 6 = 10", "Mit Zurücklegen: die Wahrscheinlichkeit ändert sich beim zweiten Zug nicht.", "Multipliziere die Einzelwahrscheinlichkeiten."],
+      loesung_kurz: "a) 2/5  b) 4/25",
+      musterloesung: "a) p(Gewinn) = 4/10 = 2/5\nb) Da mit Zurücklegen: p(Gewinn) bleibt 2/5\np(2 × Gewinn) = 2/5 · 2/5 = 4/25\n\nErgebnis: a) 2/5  b) 4/25"
+    },
+    {
+      aufgabe: "Ein Karton enthält 15 rote und 5 weiße Herzen.\na) Begründe, dass die Wahrscheinlichkeit für ein rotes Herz 3/4 beträgt.\nb) Zwei Herzen werden ohne Zurücklegen gezogen. Berechne die Wahrscheinlichkeit, dass ein rotes und ein weißes Herz gezogen wird.",
+      hinweise: ["Gesamtzahl: 15 + 5 = 20, davon 15 rote.", "Es gibt zwei Reihenfolgen: erst rot dann weiß, oder erst weiß dann rot.", "Addiere beide Wahrscheinlichkeiten."],
+      loesung_kurz: "a) 15/20 = 3/4  b) 15/38",
+      musterloesung: "a) p(rot) = 15/20 = 3/4 ✓\nb) Fall 1: rot dann weiß: 15/20 · 5/19 = 75/380\nFall 2: weiß dann rot: 5/20 · 15/19 = 75/380\np(verschiedene Farben) = 75/380 + 75/380 = 150/380 = 15/38\n\nErgebnis: 15/38"
+    },
+    {
+      aufgabe: "Bei einer Kontrolle erfüllen 98 % der Rösti die Gewichtsvorgabe. Von diesen erfüllen 99 % auch die Aussehens-vorgabe. Rösti, die eine Vorgabe nicht erfüllen, werden aussortiert.\nBerechne, wie viele Rösti von 10.000 kontrollierten Stück insgesamt aussortiert werden.",
+      hinweise: ["Berechne zuerst, wie viele das Gewicht nicht erfüllen (2 % von 10.000).", "Von den verbleibenden 98 % erfüllen 1 % das Aussehen nicht.", "Addiere beide Aussortiermengen."],
+      loesung_kurz: "ca. 298 Rösti",
+      musterloesung: "Aussortiert wegen Gewicht: 2% von 10.000 = 200\nVerbleibend: 9.800\nAussortiert wegen Aussehen: 1% von 9.800 = 98\nGesamt aussortiert: 200 + 98 = 298\n\nErgebnis: 298 Rösti"
+    },
+  ],
+  parabeln1: [
+    {
+      aufgabe: "Gegeben ist f(x) = −0,5x² + 5,5.\na) Bestätige, dass der Punkt A(3|1) auf dem Graphen liegt.\nb) Begründe, warum B(−3|1) ebenfalls auf dem Graphen liegt.\nc) Berechne die Nullstellen von f.",
+      hinweise: ["Setze x = 3 in die Gleichung ein und prüfe das Ergebnis.", "Überlege, welche Eigenschaft eine nach oben geöffnete/geschlossene Parabel hat – ist sie achsensymmetrisch?", "Für die Nullstellen setze f(x) = 0 und löse nach x auf."],
+      loesung_kurz: "a) f(3) = 1 ✓  b) Symmetrie zur y-Achse  c) x = ±√11 ≈ ±3,32",
+      musterloesung: "a) f(3) = −0,5·9 + 5,5 = −4,5 + 5,5 = 1 ✓\nb) Da f gerade ist (nur gerade Potenzen), gilt f(−3) = f(3) = 1 ✓\nc) −0,5x² + 5,5 = 0 → x² = 11 → x = ±√11 ≈ ±3,32\n\nErgebnis: Nullstellen bei x = ±√11"
+    },
+    {
+      aufgabe: "Bestimme die Scheitelpunktform der Parabel f(x) = x² − 6x + 5.\nGib auch die Koordinaten des Scheitelpunkts an.",
+      hinweise: ["Ergänze quadratisch: Schreibe x² − 6x als (x − 3)² − 9.", "Forme f(x) vollständig in die Scheitelform f(x) = (x − d)² + e um.", "Der Scheitelpunkt liegt bei S(d|e)."],
+      loesung_kurz: "f(x) = (x − 3)² − 4, S(3|−4)",
+      musterloesung: "Ansatz: Quadratische Ergänzung\nf(x) = x² − 6x + 5\n= (x² − 6x + 9) − 9 + 5\n= (x − 3)² − 4\nScheitelpunkt: S(3|−4)\n\nErgebnis: f(x) = (x − 3)² − 4, Scheitelpunkt S(3|−4)"
+    },
+    {
+      aufgabe: "Welche der Funktionsgleichungen passt zum abgebildeten Graphen mit Scheitelpunkt S(2|3), der nach oben geöffnet ist?\nf(x) = (x + 2)² − 3\nf(x) = −(x − 2)² + 3\nf(x) = (x − 2)² + 3\nBegründe deine Wahl.",
+      hinweise: ["Der Scheitelpunkt S(2|3) bedeutet: d = 2 und e = 3 in der Form f(x) = a(x − d)² + e.", "Ein nach oben geöffneter Graph hat a > 0.", "Welche der drei Gleichungen hat d = 2, e = 3 und a > 0?"],
+      loesung_kurz: "f(x) = (x − 2)² + 3",
+      musterloesung: "Der Scheitelpunkt S(2|3) und die Öffnung nach oben (a > 0) fordern:\nf(x) = a·(x − 2)² + 3 mit a > 0\nDie einzige passende Gleichung ist f(x) = (x − 2)² + 3.\n\nErgebnis: f(x) = (x − 2)² + 3"
+    },
+    {
+      aufgabe: "Gegeben ist die Parabel f(x) = a·(x + 3)·(x − 3).\na) Begründe, warum der Scheitelpunkt auf der y-Achse liegt.\nb) Bestimme a so, dass die Parabel durch den Punkt C(0|4,5) verläuft.\nc) Ist die Parabel nach oben oder unten geöffnet?",
+      hinweise: ["Die Nullstellen sind x = −3 und x = 3. Der Scheitelpunkt liegt stets in der Mitte der Nullstellen.", "Setze den Punkt C(0|4,5) in die Gleichung ein: f(0) = 4,5.", "Das Vorzeichen von a bestimmt die Öffnungsrichtung."],
+      loesung_kurz: "a) Mitte der Nullstellen bei x=0  b) a = −1/2  c) nach unten",
+      musterloesung: "a) Nullstellen bei x = ±3, Mitte: x = 0 → Scheitelpunkt liegt auf y-Achse.\nb) f(0) = a·3·(−3) = −9a = 4,5 → a = −0,5\nc) a = −0,5 < 0 → Parabel öffnet nach unten.\n\nErgebnis: a = −0,5, Parabel nach unten geöffnet."
+    },
+    {
+      aufgabe: "Berechne die Nullstellen der Funktion f(x) = 2x² − 8.\nGib die Lösungen exakt und als Dezimalzahl an.",
+      hinweise: ["Setze f(x) = 0 und forme nach x² um.", "Ziehe die Wurzel – achte auf ± (beide Lösungen!).", "√4 = 2."],
+      loesung_kurz: "x = ±2",
+      musterloesung: "Ansatz: 2x² − 8 = 0\n2x² = 8\nx² = 4\nx = ±√4 = ±2\n\nErgebnis: x₁ = 2 und x₂ = −2"
+    },
+    {
+      aufgabe: "Die Funktion u(x) = −x² + 4x + 11 beschreibt den Umfang von Rechtecken unter einer Parabel.\na) Bestimme den Scheitelpunkt von u.\nb) Erkläre die Bedeutung des Scheitelpunkts im Sachkontext.",
+      hinweise: ["Forme u in die Scheitelpunktform um: quadratische Ergänzung oder Scheitelformel x_S = −b/(2a).", "Berechne dann u(x_S) für den y-Wert des Scheitelpunkts.", "Der Scheitelpunkt gibt das Maximum oder Minimum des Umfangs an."],
+      loesung_kurz: "S(2|15)",
+      musterloesung: "Ansatz: x_S = −b/(2a) = −4/(2·(−1)) = 2\nu(2) = −4 + 8 + 11 = 15\nScheitelpunkt: S(2|15)\nBedeutung: Das Rechteck mit x-Koordinate 2 hat den größten Umfang von 15 cm.\n\nErgebnis: S(2|15) – maximaler Umfang beträgt 15 cm."
+    },
+  ],
+  volumen: [
+    {
+      aufgabe: "Lino misst den Umfang eines Luftballons: U = 55,8 cm.\na) Er betrachtet den Ballon als Kugel. Zeige, dass das Kugelvolumen ca. 2950 cm³ beträgt.\nb) Das tatsächliche Volumen wird durch Wasserverdrängung bestimmt: Der Ballon verdrängt Wasser in einem Zylinder (Grundfläche 530 cm²) um 5,7 cm. Berechne das tatsächliche Volumen.",
+      hinweise: ["Aus dem Umfang U = 2πr kannst du den Radius berechnen.", "Die Kugelvolumenformel lautet V = 4/3 · π · r³.", "Das verdrängte Volumen berechnest du mit V = Grundfläche · Höhenanstieg."],
+      loesung_kurz: "a) r ≈ 8,88 cm, V ≈ 2950 cm³  b) V = 3021 cm³",
+      musterloesung: "a) U = 2πr → r = 55,8/(2π) ≈ 8,88 cm\nV = 4/3 · π · 8,88³ ≈ 4/3 · π · 699,6 ≈ 2950 cm³ ✓\nb) V = 530 · 5,7 = 3021 cm³\n\nErgebnis: a) ≈ 2950 cm³ ✓  b) ≈ 3021 cm³"
+    },
+    {
+      aufgabe: "Ein Rösti (Kartoffelgericht) soll 2 cm dick sein und ein Volumen von 81 cm³ haben.\na) Zeige, dass die zylindrische Form einen Durchmesser von ca. 7,2 cm haben muss.\nb) Ein Mini-Rösti hat ebenfalls 2 cm Höhe, aber nur das halbe Volumen. Stimmt die Aussage 'Wir brauchen eine Form mit halbem Durchmesser'?",
+      hinweise: ["Volumen des Zylinders: V = π · r² · h. Löse nach r auf.", "Der Durchmesser ist d = 2r.", "Beim Mini-Rösti: Wenn das Volumen halbiert wird, was passiert mit dem Radius?"],
+      loesung_kurz: "a) d ≈ 7,2 cm ✓  b) Nein, d wird um Faktor √2 kleiner",
+      musterloesung: "a) 81 = π · r² · 2 → r² = 81/(2π) ≈ 12,89 → r ≈ 3,59 cm → d ≈ 7,18 cm ≈ 7,2 cm ✓\nb) Halbes Volumen bei gleicher Höhe: r²_neu = r²/2 → r_neu = r/√2 ≈ 0,707r\nd_neu = d/√2 ≈ 5,09 cm (nicht d/2 = 3,6 cm)\nDie Aussage ist falsch.\n\nErgebnis: a) ✓  b) Nein, Durchmesser wird durch √2 geteilt."
+    },
+    {
+      aufgabe: "Eine Wassermelone hat einen Durchmesser von 25 cm.\na) Zeige, dass das Volumen ca. 8200 cm³ beträgt.\nb) Die Schale ist 1,5 cm dick. Berechne den prozentualen Anteil des Fruchtfleisches.",
+      hinweise: ["V = 4/3 · π · r³ mit r = 12,5 cm.", "Das Fruchtfleisch ist eine kleinere Kugel mit r = 12,5 − 1,5 = 11 cm.", "Prozentualer Anteil = V_Fruchtfleisch / V_gesamt · 100 %"],
+      loesung_kurz: "a) V ≈ 8181 cm³ ≈ 8200 cm³ ✓  b) ca. 79,1 %",
+      musterloesung: "a) r = 12,5 cm\nV = 4/3 · π · 12,5³ = 4/3 · π · 1953,1 ≈ 8181 cm³ ≈ 8200 cm³ ✓\nb) r_Fleisch = 11 cm\nV_Fleisch = 4/3 · π · 11³ ≈ 5575 cm³\nAnteil = 5575/8181 · 100% ≈ 68,1%\n\nErgebnis: a) ✓  b) ca. 68 %"
+    },
+    {
+      aufgabe: "Ein zylinderförmiger Lautsprecher (Modell Echo) hat einen Durchmesser von 8,8 cm und ein Volumen von ca. 906 cm³.\nBerechne die Höhe des Lautsprechers.",
+      hinweise: ["V = π · r² · h. Forme nach h um.", "Der Radius ist die Hälfte des Durchmessers.", "Runde das Ergebnis sinnvoll."],
+      loesung_kurz: "h ≈ 14,9 cm",
+      musterloesung: "Ansatz: V = π · r² · h\nr = 4,4 cm\n906 = π · 4,4² · h = π · 19,36 · h\nh = 906 / (π · 19,36) ≈ 906 / 60,82 ≈ 14,9 cm\n\nErgebnis: h ≈ 14,9 cm"
+    },
+    {
+      aufgabe: "Ein Karton soll mit Luftballons (V ≈ 3 Liter pro Ballon) gefüllt werden. Der Karton hat das Maß 60 cm × 40 cm × 50 cm.\nEin Schüler behauptet: 'Ich teile das Kartonvolumen durch 3 Liter und weiß genau, wie viele Ballons ich brauche.'\nWieso ist diese Aussage falsch – und braucht man mehr oder weniger Ballons als berechnet?",
+      hinweise: ["Berechne das Kartonvolumen in Litern.", "Runde Formen wie Kugeln können einen Quader nicht lückenlos ausfüllen.", "Gibt es Hohlräume zwischen den Ballons?"],
+      loesung_kurz: "Die Rechnung ergibt zu viele Ballons – da Hohlräume entstehen",
+      musterloesung: "V_Karton = 60 · 40 · 50 = 120.000 cm³ = 120 Liter\nBerechnete Anzahl = 120 / 3 = 40 Ballons\nDa runde Ballons nicht lückenlos einen Quader füllen, entstehen Lücken zwischen den Ballons.\nDaher passen tatsächlich weniger als 40 Ballons in den Karton.\nDie Berechnung ergibt also zu viele Ballons.\n\nErgebnis: Die Berechnung ergibt zu viele – man braucht weniger."
+    },
+    {
+      aufgabe: "Eine Kugel hat ein Volumen von 4189 cm³.\na) Berechne den Radius der Kugel.\nb) Berechne die Oberfläche der Kugel.",
+      hinweise: ["Forme V = 4/3 · π · r³ nach r³ um.", "Ziehe dann die dritte Wurzel.", "Oberfläche der Kugel: O = 4 · π · r²"],
+      loesung_kurz: "a) r = 10 cm  b) O ≈ 1257 cm²",
+      musterloesung: "a) r³ = V · 3 / (4π) = 4189 · 3 / (4π) ≈ 1000\nr = ∛1000 = 10 cm\nb) O = 4 · π · 10² = 400π ≈ 1256,6 cm²\n\nErgebnis: a) r = 10 cm  b) O ≈ 1257 cm²"
+    },
+  ],
+  exponential: [
+    {
+      aufgabe: "Jasmin beobachtet Fruchtfliegen. Startbestand: 10, tägliches Wachstum: 30 %.\nDie Funktion lautet f(x) = 10 · 1,3^x.\na) Zeige, dass der Bestand von Tag 0 auf Tag 1 um ca. 30 % wächst.\nb) Berechne den Bestand nach 30 Tagen.\nc) Nach wie vielen Tagen übersteigt der Bestand 100.000?",
+      hinweise: ["Für a): Berechne f(1) und prüfe den prozentualen Zuwachs gegenüber f(0).", "Für b): Setze x = 30 ein.", "Für c): Löse 10 · 1,3^x > 100.000 durch Probieren oder Logarithmus."],
+      loesung_kurz: "a) 30 % ✓  b) ≈ 26.200  c) nach 35 Tagen",
+      musterloesung: "a) f(0) = 10, f(1) = 13. Zuwachs: (13−10)/10 = 0,3 = 30% ✓\nb) f(30) = 10 · 1,3^30 ≈ 10 · 2620 ≈ 26.200\nc) 10 · 1,3^x = 100.000 → 1,3^x = 10.000\nx = log(10.000)/log(1,3) ≈ 35,3 → ab Tag 36\n\nErgebnis: a) ✓  b) ≈ 26.200  c) nach Tag 35"
+    },
+    {
+      aufgabe: "Die Varroa-Milbe verdoppelt sich alle 4 Wochen. Startbestand: 308 Milben.\nDie Funktion lautet f(x) = 308 · 1,19^x (x in Wochen).\na) Ergänze die Tabelle für Woche 4 und 8.\nb) Bestätige, dass nach 12 Wochen ca. 2500 Milben vorhanden sind.\nc) Ab wann überschreitet die Anzahl 10.000?",
+      hinweise: ["Für Woche 4 und 8: Einsetzen in f(x) oder Verdopplungsregel anwenden.", "f(12) = 308 · 1,19^12 berechnen.", "Für c): 308 · 1,19^x = 10.000 → nach x auflösen."],
+      loesung_kurz: "a) Woche 4: 616, Woche 8: 1232  b) f(12) ≈ 2497 ✓  c) ca. Woche 18",
+      musterloesung: "a) Woche 4: 308 · 2 = 616\nWoche 8: 616 · 2 = 1232\nb) f(12) = 308 · 1,19^12 ≈ 308 · 8,1 ≈ 2494 ≈ 2500 ✓\nc) 1,19^x = 10000/308 ≈ 32,47\nx ≈ log(32,47)/log(1,19) ≈ 19,8 → ab Woche 20\n\nErgebnis: a) 616 und 1232  b) ✓  c) ab ca. Woche 20"
+    },
+    {
+      aufgabe: "Eine Wassermelone wiegt zu Beginn 400 g und verdoppelt ihr Gewicht wöchentlich.\na) Stelle eine Funktionsgleichung W(t) auf.\nb) Wie viel wiegt die Melone nach 4 Wochen?\nc) Ist das Wachstum linear oder exponentiell? Begründe.",
+      hinweise: ["Exponentielles Wachstum: W(t) = Startwert · q^t", "Für Verdoppelung: q = 2", "Beim linearen Wachstum nimmt die Funktion immer um den gleichen Betrag zu – ist das hier der Fall?"],
+      loesung_kurz: "a) W(t) = 400 · 2^t  b) 6400 g  c) exponentiell",
+      musterloesung: "a) W(t) = 400 · 2^t\nb) W(4) = 400 · 2^4 = 400 · 16 = 6400 g\nc) Das Gewicht verdoppelt sich jede Woche – der Zuwachs nimmt zu, kein konstanter Anstieg → exponentiell, nicht linear.\n\nErgebnis: a) W(t) = 400 · 2^t  b) 6400 g  c) exponentiell"
+    },
+    {
+      aufgabe: "Eine Investition wächst jährlich um 5 %. Startkapital: 2000 €.\na) Stelle die Funktion K(t) auf.\nb) Wie groß ist das Kapital nach 10 Jahren?\nc) Nach wie vielen Jahren hat sich das Kapital verdoppelt?",
+      hinweise: ["Wachstumsfaktor q = 1 + p/100 bei p % Wachstum pro Periode.", "Einsetzen von t = 10.", "Für die Verdoppelung: K(t) = 4000 → 1,05^t = 2 → t durch Probieren bestimmen."],
+      loesung_kurz: "a) K(t) = 2000 · 1,05^t  b) ≈ 3258 €  c) nach ca. 15 Jahren",
+      musterloesung: "a) K(t) = 2000 · 1,05^t\nb) K(10) = 2000 · 1,05^10 ≈ 2000 · 1,629 ≈ 3258 €\nc) 2000 · 1,05^t = 4000 → 1,05^t = 2\nt = log(2)/log(1,05) ≈ 14,2 → nach 15 Jahren\n\nErgebnis: a) K(t) = 2000 · 1,05^t  b) ≈ 3258 €  c) ca. 15 Jahre"
+    },
+    {
+      aufgabe: "Ein radioaktives Material zerfällt so, dass alle 10 Jahre die Hälfte übrig bleibt. Startmenge: 800 g.\na) Stelle eine Funktion M(t) auf (t in Jahren).\nb) Wie viel ist nach 30 Jahren noch vorhanden?\nc) Wann sind weniger als 10 g übrig?",
+      hinweise: ["Zerfallsfaktor q = 0,5 bei Halbierung. In 10 Jahren halbiert sich die Menge: q^10 = 0,5 → q = 0,5^(1/10).", "Setze t = 30 ein.", "Für c): 800 · q^t < 10."],
+      loesung_kurz: "a) M(t) = 800 · 0,5^(t/10)  b) 100 g  c) nach ca. 63 Jahren",
+      musterloesung: "a) M(t) = 800 · 0,5^(t/10)\nb) M(30) = 800 · 0,5^3 = 800 · 0,125 = 100 g\nc) 800 · 0,5^(t/10) < 10 → 0,5^(t/10) < 1/80\nt/10 · log(0,5) < log(1/80)\nt > 10 · log(80)/log(2) ≈ 10 · 6,32 ≈ 63,2\n→ nach ca. 64 Jahren\n\nErgebnis: a) M(t) = 800 · 0,5^(t/10)  b) 100 g  c) nach ca. 64 Jahren"
+    },
+    {
+      aufgabe: "Zuchtbox B enthält 20 Fruchtfliegen und wächst laut g(x) = 20 · 1,13^x. Zuchtbox A mit f(x) = 10 · 1,3^x.\na) Begründe, warum g durch einen flacheren Graphen als f dargestellt wird.\nb) An welchem Tag haben beide Boxen etwa gleich viele Fliegen?",
+      hinweise: ["Vergleiche Startwert und Wachstumsfaktor beider Funktionen.", "Für b): Setze f(x) = g(x) und löse näherungsweise – probiere verschiedene x-Werte.", "Bei x = 0 hat Box B mehr Fliegen, bei größerem x wächst Box A schneller."],
+      loesung_kurz: "a) kleinerer Wachstumsfaktor 1,13 < 1,3  b) ca. Tag 8",
+      musterloesung: "a) g hat einen kleineren Wachstumsfaktor (1,13 < 1,3) → langsamereres Wachstum → flacherer Graph.\nb) f(x) = g(x): 10 · 1,3^x = 20 · 1,13^x\n(1,3/1,13)^x = 2 → 1,15^x = 2 → x ≈ log(2)/log(1,15) ≈ 5\nProbe: f(5) ≈ 37, g(5) ≈ 37 ✓\n\nErgebnis: a) Wachstumsfaktor kleiner  b) ca. Tag 5"
+    },
+  ],
+  stochastik2: [
+    {
+      aufgabe: "Eine Playlist enthält 3 Lieder von Ed Sheeran (ES), 5 von Mark Forster (MF) und 2 von Zoe Wees (ZW). Die Lieder werden zufällig abgespielt (jedes Lied genau einmal).\na) Erkläre, warum p(ES zuerst) = 3/10.\nb) Berechne die Wahrscheinlichkeit, dass die ersten zwei Lieder beide von Ed Sheeran stammen.",
+      hinweise: ["10 Lieder insgesamt, davon 3 von ES.", "Ohne Zurücklegen: nach dem ersten ES-Lied sind noch 9 Lieder übrig.", "Multipliziere die Einzelwahrscheinlichkeiten."],
+      loesung_kurz: "a) 3/10  b) 6/90 = 1/15",
+      musterloesung: "a) 10 Lieder gesamt, 3 davon von ES → p = 3/10\nb) 1. Lied ES: p = 3/10\n2. Lied ES: 9 Lieder übrig, 2 davon von ES → p = 2/9\np(beide ES) = 3/10 · 2/9 = 6/90 = 1/15\n\nErgebnis: a) 3/10  b) 1/15"
+    },
+    {
+      aufgabe: "In einem Karton sind 15 rote und 5 weiße Herzen. Zwei werden ohne Zurücklegen gezogen.\na) Begründe, dass die Wahrscheinlichkeit für rotes Herz beim ersten Zug 3/4 beträgt.\nb) Zeichne ein Baumdiagramm für die ersten zwei Züge (erste Ebene).\nc) Berechne p(mindestens ein weißes Herz).",
+      hinweise: ["15 von 20 Herzen sind rot → 15/20 = 3/4.", "Im Baumdiagramm: erste Ebene rot (3/4) und weiß (1/4).", "Für 'mindestens eines weiß': nutze Gegenwahrscheinlichkeit."],
+      loesung_kurz: "a) 15/20 = 3/4  c) p ≈ 0,408",
+      musterloesung: "a) 15/20 = 3/4 ✓\nc) p(kein Weißes) = p(rot, rot) = 15/20 · 14/19 = 210/380 ≈ 0,553\np(mind. 1 Weiß) = 1 − 210/380 = 170/380 ≈ 0,447\n\nErgebnis: p(mind. 1 weiß) ≈ 44,7 %"
+    },
+    {
+      aufgabe: "Zwei Personen spielen ein Spiel. Person A gewinnt mit Wahrscheinlichkeit 0,6, Person B mit 0,4. Das Spiel wird zweimal gespielt.\na) Zeichne ein vollständiges Baumdiagramm.\nb) Berechne p(A gewinnt beide Spiele).\nc) Berechne p(jeder gewinnt genau einmal).",
+      hinweise: ["Das Baumdiagramm hat zwei Ebenen mit je den Ästen A und B.", "Für b): Pfadregel – beide Äste zu A multiplizieren.", "Für c): Zwei Pfade: AB und BA."],
+      loesung_kurz: "b) 0,36  c) 0,48",
+      musterloesung: "b) p(A, A) = 0,6 · 0,6 = 0,36\nc) p(A, B) = 0,6 · 0,4 = 0,24\np(B, A) = 0,4 · 0,6 = 0,24\np(je einmal) = 0,24 + 0,24 = 0,48\n\nErgebnis: b) 0,36  c) 0,48"
+    },
+    {
+      aufgabe: "Bei einer Kontrolle erfüllen 98 % die Gewichtsvorgabe, von diesen 99 % die Aussehens-vorgabe.\na) Zeichne ein Baumdiagramm.\nb) Wie viele von 10.000 Stück werden insgesamt aussortiert?",
+      hinweise: ["Erste Ebene: Gewicht OK (0,98) und nicht OK (0,02).", "Zweite Ebene nach Gewicht OK: Aussehen OK (0,99) und nicht OK (0,01).", "Summiere alle aussortierten Pfade."],
+      loesung_kurz: "b) 298 Stück",
+      musterloesung: "Aussortiert Gewicht: 0,02 · 10000 = 200\nVon 9800 Stück mit OK-Gewicht: aussortiert Aussehen: 0,01 · 9800 = 98\nGesamt: 200 + 98 = 298\n\nErgebnis: 298 Stück"
+    },
+    {
+      aufgabe: "In einer Klasse mit 12 Mädchen und 8 Jungen soll eine Schülervertretung aus 2 Personen zufällig gewählt werden (ohne Zurücklegen).\na) Wie groß ist p(beide Mädchen)?\nb) Wie groß ist p(ein Mädchen und ein Junge)?",
+      hinweise: ["Gesamtzahl: 20 Personen.", "Für a): 1. Zug 12/20, 2. Zug 11/19.", "Für b): Zwei Reihenfolgen möglich: MJ und JM."],
+      loesung_kurz: "a) 132/380 = 33/95  b) 192/380 = 48/95",
+      musterloesung: "a) p(M,M) = 12/20 · 11/19 = 132/380 = 33/95\nb) p(M,J) = 12/20 · 8/19 = 96/380\np(J,M) = 8/20 · 12/19 = 96/380\np(gemischt) = 192/380 = 48/95\n\nErgebnis: a) 33/95 ≈ 34,7 %  b) 48/95 ≈ 50,5 %"
+    },
+    {
+      aufgabe: "Ein Baumdiagramm zeigt: Erstzug rot mit p = 3/4.\nBei Erstzug rot: p(rot) = 14/19, p(weiß) = 5/19.\nBei Erstzug weiß: p(rot) = 15/19, p(weiß) = 4/19.\nBerechne p(genau ein rotes Herz).",
+      hinweise: ["'Genau ein rotes' bedeutet: rot-weiß ODER weiß-rot.", "Berechne jeden Pfad separat (Pfadmultiplikation).", "Addiere anschließend beide Pfade."],
+      loesung_kurz: "p ≈ 0,395",
+      musterloesung: "p(rot, weiß) = 3/4 · 5/19 = 15/76\np(weiß, rot) = 1/4 · 15/19 = 15/76\np(genau 1 rot) = 15/76 + 15/76 = 30/76 = 15/38 ≈ 0,395\n\nErgebnis: p = 15/38 ≈ 39,5 %"
+    },
+  ],
+  parabeln2: [
+    {
+      aufgabe: "Meltem zeichnet das Dreieck ABC mit A(−3|0), B(3|0), C(0|4,5) und die Parabel f(x) = a·(x+3)·(x−3).\na) Begründe, dass die Funktionsgleichung zur Parabel passt.\nb) Bestimme den Faktor a mithilfe von C(0|4,5).\nc) Gib die Scheitelpunktform der Parabel an.",
+      hinweise: ["Die Parabel geht durch A und B, wenn f(−3) = 0 und f(3) = 0 gilt.", "Setze C(0|4,5) ein: f(0) = a · 3 · (−3) = 4,5.", "Der Scheitelpunkt liegt bei x = 0 (Symmetrie), berechne y_S = f(0)."],
+      loesung_kurz: "a) Nullstellen bei ±3 ✓  b) a = −0,5  c) f(x) = −0,5(x² − 9) = −0,5x² + 4,5",
+      musterloesung: "a) f(−3) = a·0·(−6) = 0 ✓ und f(3) = a·6·0 = 0 ✓\nb) f(0) = a·3·(−3) = −9a = 4,5 → a = −0,5\nc) f(x) = −0,5(x+3)(x−3) = −0,5(x²−9) = −0,5x² + 4,5\nScheitel: S(0|4,5)\n\nErgebnis: a = −0,5, f(x) = −0,5x² + 4,5"
+    },
+    {
+      aufgabe: "Julia betrachtet Rechtecke unter der Parabel f(x) = −0,5x² + 5,5.\nDer Umfang jedes Rechtecks wird durch u(x) = 2·2x + 2·(−0,5x² + 5,5) beschrieben.\na) Zeige, dass u(x) = −x² + 4x + 11.\nb) Bestimme den Scheitelpunkt von u und erkläre seine Bedeutung.",
+      hinweise: ["Multipliziere die Klammern aus und fasse zusammen.", "Für den Scheitelpunkt: quadratische Ergänzung oder x_S = −b/(2a).", "Was bedeutet der Scheitelpunkt für den Umfang der Rechtecke?"],
+      loesung_kurz: "a) vereinfacht zu −x² + 4x + 11 ✓  b) S(2|15) – maximaler Umfang",
+      musterloesung: "a) u(x) = 4x + 2·(−0,5x² + 5,5) = 4x − x² + 11 = −x² + 4x + 11 ✓\nb) x_S = −4/(2·(−1)) = 2\nu(2) = −4 + 8 + 11 = 15\nS(2|15): Das Rechteck mit x = 2 hat den maximalen Umfang von 15 cm.\n\nErgebnis: S(2|15)"
+    },
+    {
+      aufgabe: "Bestimme die Gleichung der Parabel durch die Punkte P₁(0|1), P₂(2|5) und P₃(−2|5).\nHinweis: Nutze die Form f(x) = ax² + bx + c.",
+      hinweise: ["Aus P₁(0|1) kannst du direkt c ablesen.", "Da P₂ und P₃ symmetrisch zur y-Achse liegen, gilt b = 0.", "Setze P₂ in f(x) = ax² + c ein, um a zu bestimmen."],
+      loesung_kurz: "f(x) = x² + 1",
+      musterloesung: "Aus P₁(0|1): c = 1\nAus Symmetrie P₂ und P₃: b = 0\nAus P₂(2|5): 5 = a·4 + 1 → 4a = 4 → a = 1\nf(x) = x² + 1\n\nErgebnis: f(x) = x² + 1"
+    },
+    {
+      aufgabe: "Gegeben ist die Parabel f(x) = −x² + 4x + 11.\nLöse die Gleichung f(x) = 14,75 und erkläre das Ergebnis im Kontext der Rechtecke.",
+      hinweise: ["Forme um zu: x² − 4x + 3,75 = 0.", "Verwende die Lösungsformel oder quadratische Ergänzung.", "Beide Lösungen sind sinnvoll, da x > 0."],
+      loesung_kurz: "x₁ = 1,5 und x₂ = 2,5",
+      musterloesung: "−x² + 4x + 11 = 14,75\nx² − 4x + 3,75 = 0\nx = (4 ± √(16−15)) / 2 = (4 ± 1) / 2\nx₁ = 2,5 und x₂ = 1,5\nBedeutung: Zwei verschiedene Rechtecke haben den Umfang 14,75 cm.\n\nErgebnis: x₁ = 1,5 und x₂ = 2,5"
+    },
+    {
+      aufgabe: "Eine Parabel hat die Nullstellen x = −2 und x = 4 sowie den Scheitelpunkt bei y = 9.\na) Bestimme die x-Koordinate des Scheitelpunkts.\nb) Stelle die Funktionsgleichung in Scheitelform auf.\nc) Berechne den y-Achsenabschnitt.",
+      hinweise: ["Der Scheitelpunkt liegt immer in der Mitte der Nullstellen.", "Scheitelform: f(x) = a(x − d)² + e", "Setze eine Nullstelle ein, um a zu berechnen."],
+      loesung_kurz: "a) x_S = 1  b) f(x) = −a(x−1)² + 9  c) y-Achse: 8",
+      musterloesung: "a) x_S = (−2 + 4)/2 = 1\nb) f(x) = a(x − 1)² + 9\nNullstelle x = 4: 0 = a(4−1)² + 9 = 9a + 9 → a = −1\nf(x) = −(x−1)² + 9\nc) f(0) = −1 + 9 = 8\n\nErgebnis: f(x) = −(x−1)² + 9, y-Achsenabschnitt: 8"
+    },
+    {
+      aufgabe: "Die Funktion f(x) = −5x² + 20 ist gegeben.\na) Berechne f(1).\nb) Berechne die Nullstellen.\nc) Bestimme den Scheitelpunkt.",
+      hinweise: ["Einsetzen von x = 1 für a).", "Nullstellen: f(x) = 0 → x² = 4.", "Der Scheitelpunkt liegt bei x = 0 (Parabel hat keine lineare Komponente)."],
+      loesung_kurz: "a) f(1) = 15  b) x = ±2  c) S(0|20)",
+      musterloesung: "a) f(1) = −5·1 + 20 = 15\nb) −5x² + 20 = 0 → x² = 4 → x = ±2\nc) Da kein bx-Term, liegt Scheitel bei x = 0: f(0) = 20 → S(0|20)\n\nErgebnis: a) 15  b) x = ±2  c) S(0|20)"
+    },
+  ],
+  dreiecke: [
+    {
+      aufgabe: "Im rechtwinkligen Dreieck ABC gilt: a = 6 cm, b = 8 cm, der rechte Winkel liegt bei C.\na) Zeige, dass der Flächeninhalt 24 cm² beträgt.\nb) Berechne die Hypotenuse c.\nc) Bestimme den Winkel α.",
+      hinweise: ["Flächeninhalt rechtwinkliges Dreieck: A = ½ · a · b", "Hypotenuse: Satz des Pythagoras, c² = a² + b²", "Winkel: tan(α) = Gegenkathete / Ankathete"],
+      loesung_kurz: "a) 24 cm² ✓  b) c = 10 cm  c) α ≈ 36,9°",
+      musterloesung: "a) A = ½ · 6 · 8 = 24 cm² ✓\nb) c² = 6² + 8² = 36 + 64 = 100 → c = 10 cm\nc) tan(α) = 6/8 = 0,75 → α = arctan(0,75) ≈ 36,9°\n\nErgebnis: a) 24 cm² ✓  b) c = 10 cm  c) α ≈ 36,9°"
+    },
+    {
+      aufgabe: "In einem Dreieck gilt: a = 22,4 cm, c = 25 cm, rechter Winkel bei B.\na) Berechne die Seite b.\nb) Berechne den Winkel α.",
+      hinweise: ["Satz des Pythagoras: b² = c² − a²", "sin(α) = Gegenkathete / Hypotenuse = a/c", "Achte auf die richtige Zuordnung der Seiten."],
+      loesung_kurz: "a) b ≈ 10,2 cm  b) α ≈ 63,7°",
+      musterloesung: "a) b² = 25² − 22,4² = 625 − 501,76 = 123,24 → b ≈ 11,1 cm\nb) sin(α) = a/c = 22,4/25 = 0,896 → α ≈ 63,6°\n\nErgebnis: a) b ≈ 11,1 cm  b) α ≈ 63,6°"
+    },
+    {
+      aufgabe: "Ein gleichschenkliges rechtwinkliges Dreieck hat die Basis c = 10 cm.\na) Skizziere das Dreieck.\nb) Berechne die Länge der Schenkel a und b.",
+      hinweise: ["Gleichschenklig und rechtwinklig: der rechte Winkel liegt an der Spitze, die Schenkel sind gleich lang.", "Mit dem Satz des Pythagoras: a² + a² = c² (da a = b).", "Löse nach a auf."],
+      loesung_kurz: "a = b = 5√2 ≈ 7,07 cm",
+      musterloesung: "Ansatz: a = b (gleichschenklig), a² + b² = c²\n2a² = 10² = 100 → a² = 50 → a = √50 = 5√2 ≈ 7,07 cm\n\nErgebnis: a = b ≈ 7,07 cm"
+    },
+    {
+      aufgabe: "Berechne für das Dreieck mit a = 7 cm, b = 24 cm, c = 25 cm:\na) Handelt es sich um ein rechtwinkliges Dreieck? Begründe.\nb) Berechne den Winkel γ gegenüber der längsten Seite.",
+      hinweise: ["Prüfe: a² + b² = c²? (Satz des Pythagoras rückwärts)", "Wenn ja: rechtwinklig, der rechte Winkel liegt gegenüber der längsten Seite.", "cos(γ) = (a² + b² − c²)/(2ab) (Kosinussatz, falls kein rechter Winkel)"],
+      loesung_kurz: "a) Ja: 7² + 24² = 625 = 25²  b) γ = 90°",
+      musterloesung: "a) 7² + 24² = 49 + 576 = 625 = 25² ✓ → rechtwinklig\nb) Der rechte Winkel liegt gegenüber c (der Hypotenuse) → γ = 90°\n\nErgebnis: a) Ja, rechtwinklig  b) γ = 90°"
+    },
+    {
+      aufgabe: "Eine Leiter (Länge 5 m) lehnt an einer Wand. Der Fuß der Leiter ist 1,5 m von der Wand entfernt.\na) Wie hoch reicht die Leiter an der Wand?\nb) Unter welchem Winkel steht die Leiter zur Erde?",
+      hinweise: ["Satz des Pythagoras: h² + 1,5² = 5²", "Für den Winkel: cos(α) = Ankathete/Hypotenuse = 1,5/5", "Runde auf eine Nachkommastelle."],
+      loesung_kurz: "a) h ≈ 4,77 m  b) α ≈ 72,5°",
+      musterloesung: "a) h² = 5² − 1,5² = 25 − 2,25 = 22,75\nh = √22,75 ≈ 4,77 m\nb) cos(α) = 1,5/5 = 0,3 → α = arccos(0,3) ≈ 72,5°\n\nErgebnis: a) ≈ 4,77 m  b) ≈ 72,5°"
+    },
+    {
+      aufgabe: "Konstruiere ein rechtwinkliges Dreieck mit der Hypotenuse c = 10 cm und der Höhe hc = 4 cm.\nBeschreibe dein Vorgehen mithilfe des Satzes von Thales.",
+      hinweise: ["Zeichne die Strecke AB = 10 cm als Hypotenuse.", "Konstruiere den Thaleskreis über AB (Mittelpunkt M, Radius 5 cm).", "Die Höhe hc = 4 cm bestimmt den Punkt C auf dem Thaleskreis."],
+      loesung_kurz: "C liegt auf dem Thaleskreis, mit senkrechtem Abstand 4 cm zu AB.",
+      musterloesung: "Konstruktion:\n1. Strecke AB = 10 cm zeichnen.\n2. Mittelpunkt M von AB bestimmen.\n3. Thaleskreis um M mit r = 5 cm zeichnen.\n4. Parallele zu AB im Abstand hc = 4 cm einzeichnen.\n5. Schnittpunkte dieser Parallele mit dem Thaleskreis → mögliche Punkte C.\n6. Dreieck ABC verbinden.\nErgebnis: Rechter Winkel bei C ist gewährleistet (Thales)."
+    },
+  ],
+  terme: [
+    {
+      aufgabe: "Merle addiert die Zahlen von 1 bis 30 mit dem Rechentrick: Sie bildet Zahlenpaare.\na) Erkläre, warum in der Formel die Faktoren 15 und 31 stehen.\nb) Berechne die Summe der Zahlen von 1 bis 40 mit der Formel S = ½·n·(n+1).",
+      hinweise: ["Bei 30 Zahlen gibt es 15 Paare (1+30, 2+29, ...).", "Jedes Paar hat den Wert 1 + 30 = 31.", "Setze n = 40 in S = ½·n·(n+1) ein."],
+      loesung_kurz: "a) 15 Paare à 31  b) S = 820",
+      musterloesung: "a) 30 Zahlen → 15 Paare. Jedes Paar: 1+30 = 2+29 = ... = 31.\nRechnung: 15 · 31 = 465 ✓\nb) S = ½ · 40 · 41 = 20 · 41 = 820\n\nErgebnis: a) 15 Paare à 31 = 465  b) S = 820"
+    },
+    {
+      aufgabe: "Die Anzahl der Zellen in einer Honigwabe mit n Ringen wird berechnet durch:\nsₙ = 1 + 3n + 3n²\na) Berechne s₃ (3 Ringe).\nb) Wie viele Zellen kommen von einer Wabe mit 5 Ringen zu einer mit 6 Ringen neu hinzu?",
+      hinweise: ["Setze n = 3 in die Formel ein.", "Berechne s₆ − s₅.", "Vereinfache den allgemeinen Zuwachsterm s_{n+1} − s_n."],
+      loesung_kurz: "a) s₃ = 37  b) 36 neue Zellen",
+      musterloesung: "a) s₃ = 1 + 3·3 + 3·9 = 1 + 9 + 27 = 37\nb) s₅ = 1 + 15 + 75 = 91\ns₆ = 1 + 18 + 108 = 127\nZuwachs = 127 − 91 = 36\n\nErgebnis: a) 37  b) 36 neue Zellen"
+    },
+    {
+      aufgabe: "Merle formt den Term S = ½n·(n+1) um zu S = ½n² + ½n.\nBerechne die Summe der Zahlen von 1 bis 100.",
+      hinweise: ["Setze n = 100 in S = ½n² + ½n ein.", "Berechne ½ · 100² und ½ · 100 separat.", "Addiere die Teilterme."],
+      loesung_kurz: "S = 5050",
+      musterloesung: "S = ½ · 100² + ½ · 100\n= ½ · 10.000 + ½ · 100\n= 5.000 + 50\n= 5.050\n\nErgebnis: S = 5050"
+    },
+    {
+      aufgabe: "Stelle einen allgemeinen Term auf für den Zuwachs an Zellen von einer Wabe mit n Ringen zu einer Wabe mit n+1 Ringen.\nVereinfache deinen Term so weit wie möglich.",
+      hinweise: ["Berechne sₙ₊₁ − sₙ mit sₙ = 1 + 3n + 3n².", "Setze (n+1) ein und multipliziere aus.", "Fasse gleichartige Terme zusammen."],
+      loesung_kurz: "Zuwachs = 6n + 6",
+      musterloesung: "sₙ₊₁ = 1 + 3(n+1) + 3(n+1)²\n= 1 + 3n + 3 + 3(n² + 2n + 1)\n= 1 + 3n + 3 + 3n² + 6n + 3\n= 3n² + 9n + 7\nZuwachs = sₙ₊₁ − sₙ = (3n² + 9n + 7) − (3n² + 3n + 1) = 6n + 6\n\nErgebnis: Zuwachs = 6(n + 1)"
+    },
+    {
+      aufgabe: "Löse die Gleichung ½n² + ½n = 2080.\na) Berechne beide Lösungen.\nb) Erkläre, warum nur eine Lösung sinnvoll ist.",
+      hinweise: ["Multipliziere mit 2: n² + n − 4160 = 0", "Verwende die Lösungsformel: n = (−1 ± √(1 + 4·4160)) / 2", "Welche Lösung ist negativ – und kann eine Anzahl von Zahlen negativ sein?"],
+      loesung_kurz: "n = 64 (positiv sinnvoll), n ≈ −65 (nicht sinnvoll)",
+      musterloesung: "n² + n − 4160 = 0\nn = (−1 ± √(1 + 16640)) / 2 = (−1 ± √16641) / 2 = (−1 ± 129) / 2\nn₁ = 128/2 = 64\nn₂ = −130/2 = −65\nb) n steht für die Anzahl an Zahlen → muss positiv sein → n = 64 ist die sinnvolle Lösung.\n\nErgebnis: n = 64"
+    },
+    {
+      aufgabe: "Silas zeigt: Für ungerade Zahlen u gilt die Summenformel S = ½(u−1)·u + u.\na) Zeige, dass dieser Term gleich ½u(u+1) ist.\nb) Berechne die Summe der Zahlen von 1 bis 15.",
+      hinweise: ["Forme ½(u−1)·u + u algebraisch um.", "Klammere u aus oder bringe auf gemeinsamen Nenner.", "Für b): n = 15 in die Formel einsetzen."],
+      loesung_kurz: "a) ½(u−1)u + u = ½u(u+1) ✓  b) S = 120",
+      musterloesung: "a) ½(u−1)u + u = ½u² − ½u + u = ½u² + ½u = ½u(u+1) ✓\nb) S = ½ · 15 · 16 = 120\n\nErgebnis: a) ✓  b) 120"
+    },
+  ],
+};
+
+let currentPart = 1;
+let currentTopic = null;
+let currentTaskIndex = 0;
+let usedIndices = [];
+let hintVisible = false;
+let solutionVisible = false;
+let checkVisible = false;
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function setBreadcrumb(text) {
+  document.getElementById('breadcrumb').innerHTML = text
+    ? `<span class="sep">›</span><span>${text}</span>` : '';
+}
+
+function selectPart(part) {
+  currentPart = part;
+  const badge = document.getElementById('part-badge');
+  badge.textContent = part === 1 ? 'Teil 1 – ohne Hilfsmittel' : 'Teil 2 – mit Hilfsmitteln';
+  badge.className = 'badge ' + (part === 1 ? 'badge-blue' : 'badge-green');
+  document.getElementById('topics-title').textContent =
+    part === 1 ? 'Thema wählen – Teil 1 (ohne Hilfsmittel)' : 'Thema wählen – Teil 2 (mit Hilfsmitteln)';
+  renderTopics(part);
+  setBreadcrumb(part === 1 ? 'Teil 1' : 'Teil 2');
+  showPage('topics-page');
+}
+
+function renderTopics(part) {
+  const list = document.getElementById('topics-list');
+  list.innerHTML = '';
+  TOPICS[part].forEach(t => {
+    const count = (TASKS[t.id] || []).length;
+    const btn = document.createElement('button');
+    btn.className = 'topic-btn';
+    btn.innerHTML = `
+      <span class="topic-icon">${t.icon}</span>
+      <span>
+        <span style="display:block;font-weight:500;">${t.label}</span>
+        <span style="display:block;font-size:12px;color:var(--text-tertiary);margin-top:2px;">${t.desc} · ${count} Aufgaben</span>
+      </span>
+      <span class="topic-arrow">›</span>`;
+    btn.onclick = () => openTopic(t);
+    list.appendChild(btn);
+  });
+}
+
+function openTopic(topic) {
+  currentTopic = topic;
+  usedIndices = [];
+  document.getElementById('task-topic-title').textContent = topic.label;
+  const tb = document.getElementById('task-badge');
+  tb.textContent = currentPart === 1 ? 'Teil 1' : 'Teil 2';
+  tb.className = 'badge ' + (currentPart === 1 ? 'badge-blue' : 'badge-green');
+  setBreadcrumb((currentPart === 1 ? 'Teil 1' : 'Teil 2') + ' › ' + topic.label);
+  showPage('task-page');
+  loadNewTask();
+}
+
+function getRandomTask() {
+  const pool = TASKS[currentTopic?.id] || [];
+  if (pool.length === 0) return null;
+  if (usedIndices.length >= pool.length) usedIndices = [];
+  let idx;
+  do { idx = Math.floor(Math.random() * pool.length); } while (usedIndices.includes(idx));
+  usedIndices.push(idx);
+  currentTaskIndex = idx;
+  return pool[idx];
+}
+
+function loadNewTask() {
+  hintVisible = false;
+  solutionVisible = false;
+  checkVisible = false;
+  document.getElementById('hint-section').style.display = 'none';
+  document.getElementById('hint-section').innerHTML = '';
+  document.getElementById('check-section').style.display = 'none';
+  document.getElementById('check-result').innerHTML = '';
+  if (document.getElementById('user-answer')) document.getElementById('user-answer').value = '';
+  document.getElementById('solution-section').style.display = 'none';
+  document.getElementById('solution-section').innerHTML = '';
+
+  const task = getRandomTask();
+  const pool = TASKS[currentTopic?.id] || [];
+  if (!task) {
+    document.getElementById('task-content').innerHTML = '<p>Keine Aufgaben gefunden.</p>';
+    return;
+  }
+
+  document.getElementById('task-content').innerHTML = `
+    <div class="task-box">
+      <div class="task-label">Aufgabe</div>
+      <div class="task-counter" style="color:var(--text-tertiary);font-size:12px;margin-bottom:0.5rem;">
+        Aufgabe ${usedIndices.length} von ${pool.length}
+      </div>
+      ${formatTask(task.aufgabe)}
+    </div>`;
+}
+
+function formatTask(text) {
+  return text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\n/g,'<br>')
+    .replace(/([a-c]\))/g, '<br><strong>$1</strong>');
+}
+
+function formatSolution(text) {
+  return text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\n/g,'<br>')
+    .replace(/Ansatz:/g,'<strong>Ansatz:</strong>')
+    .replace(/Ergebnis:/g,'<strong>Ergebnis:</strong>');
+}
+
+function toggleHint() {
+  const s = document.getElementById('hint-section');
+  hintVisible = !hintVisible;
+  if (!hintVisible) { s.style.display = 'none'; return; }
+  s.style.display = 'block';
+  const task = (TASKS[currentTopic?.id] || [])[currentTaskIndex];
+  if (!task) return;
+  s.innerHTML = `
+    <div class="hint-box">
+      <h3>💡 Hinweise zur Aufgabe</h3>
+      <ul>${(task.hinweise || []).map(h => `<li>${h}</li>`).join('')}</ul>
+    </div>`;
+}
+
+function toggleCheck() {
+  const s = document.getElementById('check-section');
+  checkVisible = !checkVisible;
+  s.style.display = checkVisible ? 'block' : 'none';
+  if (checkVisible) document.getElementById('user-answer')?.focus();
+}
+
+function checkAnswer() {
+  const task = (TASKS[currentTopic?.id] || [])[currentTaskIndex];
+  if (!task) return;
+  const answer = (document.getElementById('user-answer').value || '').trim().toLowerCase();
+  const correct = (task.loesung_kurz || '').toLowerCase();
+  const norm = s => s.replace(/\s/g,'').replace(',','.').replace('²','2').replace('≈','');
+  const a = norm(answer), c = norm(correct);
+  const isOk = a === c || c.includes(a) || a.length > 2 && c.replace(/[^0-9.,]/g,'').includes(a.replace(/[^0-9.,]/g,''));
+  document.getElementById('check-result').innerHTML = isOk
+    ? `<div class="result-correct">✓ Richtig! Ergebnis: ${task.loesung_kurz}</div>`
+    : `<div class="result-wrong">✗ Noch nicht ganz. Schau dir die Hinweise an oder öffne die Musterlösung.</div>`;
+}
+
+function toggleSolution() {
+  const s = document.getElementById('solution-section');
+  solutionVisible = !solutionVisible;
+  if (!solutionVisible) { s.style.display = 'none'; return; }
+  s.style.display = 'block';
+  const task = (TASKS[currentTopic?.id] || [])[currentTaskIndex];
+  if (!task) return;
+  s.innerHTML = `
+    <div class="solution-box">
+      <h3>📋 Musterlösung</h3>
+      <p>${formatSolution(task.musterloesung || '')}</p>
+      <div class="solution-result">Ergebnis: ${task.loesung_kurz}</div>
+    </div>`;
+}
+</script>
+</body>
+</html>
