@@ -154,7 +154,7 @@
     <div id="check-section" style="display:none;">
       <div class="check-box">
         <h3>Lösung überprüfen</h3>
-        <p>Gib dein Ergebnis ein (z.B. „x = 4" oder „27 cm²"):</p>
+        <p>Gib dein Ergebnis ein (z.B. >>x = 4" oder >>27 cm²"):</p>
         <div class="check-input-row">
           <input class="check-input" id="user-answer" placeholder="Deine Antwort…" onkeydown="if(event.key==='Enter') checkAnswer()" />
           <button class="btn btn-primary" onclick="checkAnswer()">Prüfen</button>
@@ -195,463 +195,780 @@ const TOPICS = {
 };
 
 const TASKS = {
-  zahlen: [
+  "zahlen": [
     {
-      aufgabe: "Berechne ohne Hilfsmittel:\na) 0,6 · 10⁴\nb) √49\nc) (−2)³",
-      hinweise: ["Denke bei 10⁴ daran, die Dezimalstelle um 4 Stellen nach rechts zu verschieben.", "Die Wurzel aus 49 ist eine ganze Zahl – welche Zahl ergibt mit sich selbst multipliziert 49?", "Bei (−2)³ musst du −2 dreimal miteinander multiplizieren. Achte auf das Vorzeichen: Minus mal Minus ergibt Plus."],
-      loesung_kurz: "a) 6000  b) 7  c) −8",
-      musterloesung: "a) 0,6 · 10⁴ = 0,6 · 10.000 = 6.000\nb) √49 = 7, da 7 · 7 = 49\nc) (−2)³ = (−2) · (−2) · (−2) = 4 · (−2) = −8\n\nErgebnis: a) 6000  b) 7  c) −8"
+      "aufgabe": "Berechne ohne Hilfsmittel:\na) 0,6 mal 10 hoch 4\nb) Wurzel aus 49\nc) (minus 2) hoch 3",
+      "hinweise": [
+        "Verschiebe bei 10 hoch 4 das Komma um 4 Stellen nach rechts.",
+        "Die Wurzel aus 49 ist eine ganze Zahl: Welche Zahl ergibt mit sich selbst multipliziert 49?",
+        "Bei (minus 2) hoch 3 multiplizierst du minus 2 dreimal. Achte auf das Vorzeichen."
+      ],
+      "loesung_kurz": "a) 6000  b) 7  c) minus 8",
+      "musterloesung": "a) 0,6 mal 10000 = 6000\nb) Wurzel aus 49 = 7, da 7 mal 7 = 49\nc) (minus 2) hoch 3 = (minus 2) mal (minus 2) mal (minus 2) = 4 mal (minus 2) = minus 8\n\nErgebnis: a) 6000  b) 7  c) minus 8"
     },
     {
-      aufgabe: "Ordne die folgenden Zahlen der Größe nach. Beginne mit der kleinsten:\n−0,45     0,38     −2/5",
-      hinweise: ["Schreibe alle Zahlen als Dezimalzahlen um: −2/5 = ?", "Negative Zahlen sind kleiner als positive Zahlen.", "Unter den negativen Zahlen ist die dem Betrag nach größere Zahl kleiner."],
-      loesung_kurz: "−0,45 < −0,4 < 0,38",
-      musterloesung: "Umschreiben: −2/5 = −0,4\nVergleich: −0,45 und −0,4 und 0,38\n−0,45 < −0,4 < 0,38\n\nErgebnis: −0,45 < −2/5 < 0,38"
+      "aufgabe": "Ordne die folgenden Zahlen der Groesse nach. Beginne mit der kleinsten:\nminus 0,45     0,38     minus 2/5",
+      "hinweise": [
+        "Schreibe alle Zahlen als Dezimalzahlen um: minus 2/5 = minus 0,4",
+        "Negative Zahlen sind kleiner als positive Zahlen.",
+        "Unter den negativen Zahlen ist die dem Betrag nach groessere Zahl die kleinere Zahl."
+      ],
+      "loesung_kurz": "minus 0,45 kleiner minus 0,4 kleiner 0,38",
+      "musterloesung": "Umschreiben: minus 2/5 = minus 0,4\nVergleich: minus 0,45 und minus 0,4 und 0,38\nReihenfolge: minus 0,45 < minus 0,4 < 0,38\n\nErgebnis: minus 0,45 < minus 2/5 < 0,38"
     },
     {
-      aufgabe: "Gib an, zwischen welchen zwei aufeinanderfolgenden ganzen Zahlen √20 liegt.\nBegründe deine Antwort.",
-      hinweise: ["Überlege: Welche Quadratzahlen liegen in der Nähe von 20?", "4² = 16 und 5² = 25 – was folgt daraus?", "√16 < √20 < √25, also ..."],
-      loesung_kurz: "4 < √20 < 5",
-      musterloesung: "Ansatz: Wir suchen ganze Zahlen n mit n² ≤ 20 ≤ (n+1)²\n4² = 16 < 20 und 5² = 25 > 20\nAlso gilt: 4 < √20 < 5\n\nErgebnis: √20 liegt zwischen 4 und 5."
+      "aufgabe": "Gib an, zwischen welchen zwei aufeinanderfolgenden ganzen Zahlen die Wurzel aus 20 liegt.\nBegruende deine Antwort.",
+      "hinweise": [
+        "Uberlege: Welche Quadratzahlen liegen in der Naehe von 20?",
+        "4 hoch 2 = 16 und 5 hoch 2 = 25. Was folgt daraus?",
+        "Wurzel aus 16 < Wurzel aus 20 < Wurzel aus 25, also ..."
+      ],
+      "loesung_kurz": "4 < Wurzel aus 20 < 5",
+      "musterloesung": "Ansatz: Wir suchen ganze Zahlen n mit n hoch 2 kleiner gleich 20.\n4 hoch 2 = 16 < 20 und 5 hoch 2 = 25 > 20\nAlso gilt: 4 < Wurzel aus 20 < 5\n\nErgebnis: Die Wurzel aus 20 liegt zwischen 4 und 5."
     },
     {
-      aufgabe: "Entscheide jeweils, ob die Aussage richtig oder falsch ist:\na) 10⁻¹ > 10⁻²\nb) −4² = (−4)²\nc) 2² ist die Hälfte von 2⁴",
-      hinweise: ["10⁻¹ = 1/10 = 0,1 und 10⁻² = 1/100 = 0,01 – welche ist größer?", "Achte auf den Unterschied: Bei −4² wird zuerst quadriert, dann negiert. Bei (−4)² wird die ganze negative Zahl quadriert.", "Berechne beide Werte getrennt: 2² = ? und 2⁴ = ?"],
-      loesung_kurz: "a) richtig  b) falsch  c) falsch",
-      musterloesung: "a) 10⁻¹ = 0,1 > 0,01 = 10⁻² → richtig\nb) −4² = −16, aber (−4)² = +16 → nicht gleich → falsch\nc) 2² = 4 und 2⁴ = 16. Die Hälfte von 16 ist 8, nicht 4. → falsch\n\nErgebnis: a) richtig  b) falsch  c) falsch"
+      "aufgabe": "Entscheide, ob die Aussage richtig oder falsch ist:\na) 10 hoch minus 1 ist groesser als 10 hoch minus 2\nb) minus 4 hoch 2 = (minus 4) hoch 2\nc) 2 hoch 2 ist die Haelfte von 2 hoch 4",
+      "hinweise": [
+        "10 hoch minus 1 = 1/10 = 0,1 und 10 hoch minus 2 = 1/100 = 0,01. Welche ist groesser?",
+        "Bei minus 4 hoch 2 wird zuerst quadriert, dann negiert. Bei (minus 4) hoch 2 wird die ganze negative Zahl quadriert.",
+        "Berechne beide Werte getrennt: 2 hoch 2 = ? und 2 hoch 4 = ?"
+      ],
+      "loesung_kurz": "a) richtig  b) falsch  c) falsch",
+      "musterloesung": "a) 10 hoch minus 1 = 0,1 > 0,01 = 10 hoch minus 2 -> richtig\nb) minus 4 hoch 2 = minus 16, aber (minus 4) hoch 2 = plus 16 -> nicht gleich -> falsch\nc) 2 hoch 2 = 4 und 2 hoch 4 = 16. Die Haelfte von 16 ist 8, nicht 4 -> falsch\n\nErgebnis: a) richtig  b) falsch  c) falsch"
     },
     {
-      aufgabe: "Berechne:\na) (−5/2) · 3 · (−4/15)\nb) Gib den Wert des Terms an: −3² + (−1)³",
-      hinweise: ["Beim Multiplizieren mehrerer Faktoren: Zähler mit Zähler, Nenner mit Nenner multiplizieren. Achte auf die Vorzeichen.", "Zwei negative Faktoren ergeben ein positives Produkt.", "Bei −3² gilt Punkt-vor-Strich: erst quadrieren, dann negieren."],
-      loesung_kurz: "a) 2  b) −10",
-      musterloesung: "a) (−5/2) · 3 · (−4/15) = (−5 · 3 · (−4)) / (2 · 15) = 60/30 = 2\nb) −3² + (−1)³ = −9 + (−1) = −10\n\nErgebnis: a) 2  b) −10"
+      "aufgabe": "Berechne:\na) (minus 5/2) mal 3 mal (minus 4/15)\nb) Gib den Wert des Terms an: minus 3 hoch 2 + (minus 1) hoch 3",
+      "hinweise": [
+        "Beim Multiplizieren: Zaehler mal Zaehler, Nenner mal Nenner. Zwei negative Faktoren ergeben ein positives Produkt.",
+        "Bei minus 3 hoch 2 gilt Punkt-vor-Strich: erst quadrieren, dann negieren.",
+        "Berechne die Terme einzeln und addiere dann."
+      ],
+      "loesung_kurz": "a) 2  b) minus 10",
+      "musterloesung": "a) (minus 5/2) mal 3 mal (minus 4/15) = (5 mal 3 mal 4) / (2 mal 15) = 60/30 = 2\nb) minus 3 hoch 2 + (minus 1) hoch 3 = minus 9 + (minus 1) = minus 10\n\nErgebnis: a) 2  b) minus 10"
     },
     {
-      aufgabe: "Ordne der Größe nach (kleinste zuerst):\n−3/8     2/5     −2 1/6     0,2",
-      hinweise: ["Schreibe alle Zahlen als Dezimalzahlen: −3/8 = −0,375, −2 1/6 ≈ −2,167", "Negative Zahlen stehen links auf der Zahlengeraden – je größer der Betrag, desto kleiner die Zahl.", "Vergleiche dann die positiven Zahlen."],
-      loesung_kurz: "−2 1/6 < −3/8 < 0,2 < 2/5",
-      musterloesung: "Umschreiben: −2 1/6 ≈ −2,167 | −3/8 = −0,375 | 0,2 = 0,2 | 2/5 = 0,4\nReihenfolge: −2,167 < −0,375 < 0,2 < 0,4\n\nErgebnis: −2 1/6 < −3/8 < 0,2 < 2/5"
-    },
+      "aufgabe": "Ordne der Groesse nach (kleinste zuerst):\nminus 3/8     2/5     minus 2 ganz 1/6     0,2",
+      "hinweise": [
+        "Schreibe alle als Dezimalzahlen: minus 3/8 = minus 0,375 und minus 2 ganz 1/6 ca. minus 2,167",
+        "Negative Zahlen stehen links auf der Zahlengeraden.",
+        "Vergleiche dann die positiven Zahlen."
+      ],
+      "loesung_kurz": "minus 2 1/6 < minus 3/8 < 0,2 < 2/5",
+      "musterloesung": "Umschreiben: minus 2 1/6 ca. minus 2,167 | minus 3/8 = minus 0,375 | 0,2 | 2/5 = 0,4\nReihenfolge: minus 2,167 < minus 0,375 < 0,2 < 0,4\n\nErgebnis: minus 2 1/6 < minus 3/8 < 0,2 < 2/5"
+    }
   ],
-  gleichungen: [
+  "gleichungen": [
     {
-      aufgabe: "Löse das lineare Gleichungssystem. Notiere deinen Lösungsweg.\nI:   2x + 3y = 20\nII: −2x + 8y = 68",
-      hinweise: ["Additionsverfahren: Addiere Gleichung I und II, damit x wegfällt.", "Du erhältst eine Gleichung nur mit y – löse sie auf.", "Setze y in eine der ursprünglichen Gleichungen ein, um x zu berechnen."],
-      loesung_kurz: "x = −4, y = 9",
-      musterloesung: "Ansatz: Additionsverfahren\nI + II: (2x − 2x) + (3y + 8y) = 20 + 68\n11y = 88  →  y = 8\nEinsetzen in I: 2x + 3 · 8 = 20  →  2x = 20 − 24 = −4  →  x = −2\n\nErgebnis: x = −2, y = 8"
+      "aufgabe": "Loese das lineare Gleichungssystem. Notiere deinen Loesungsweg.\nI:   2x + 3y = 20\nII: minus 2x + 8y = 68",
+      "hinweise": [
+        "Additionsverfahren: Addiere Gleichung I und II, damit x wegfaellt.",
+        "Du erhaeltst eine Gleichung nur mit y - loese sie auf.",
+        "Setze y in eine der urspruenglichen Gleichungen ein, um x zu berechnen."
+      ],
+      "loesung_kurz": "x = minus 2, y = 8",
+      "musterloesung": "Ansatz: Additionsverfahren\nI + II: 11y = 88 -> y = 8\nEinsetzen in I: 2x + 24 = 20 -> 2x = minus 4 -> x = minus 2\n\nErgebnis: x = minus 2, y = 8"
     },
     {
-      aufgabe: "Löse die Bruchgleichung und notiere deinen Lösungsweg:\n2 = (40x + 8) / (24x + 5)",
-      hinweise: ["Multipliziere beide Seiten mit dem Nenner (24x + 5), um den Bruch aufzulösen.", "Dann hast du eine lineare Gleichung – bringe alle x-Terme auf eine Seite.", "Löse nach x auf."],
-      loesung_kurz: "x = 0,125",
-      musterloesung: "Ansatz: Beide Seiten mit (24x + 5) multiplizieren\n2 · (24x + 5) = 40x + 8\n48x + 10 = 40x + 8\n8x = −2\nx = −1/4 = −0,25\n\nErgebnis: x = −0,25"
+      "aufgabe": "Loese die Bruchgleichung und notiere deinen Loesungsweg:\n2 = (40x + 8) / (24x + 5)",
+      "hinweise": [
+        "Multipliziere beide Seiten mit dem Nenner (24x + 5).",
+        "Forme die entstandene lineare Gleichung um.",
+        "Bringe alle x-Terme auf eine Seite."
+      ],
+      "loesung_kurz": "x = minus 0,25",
+      "musterloesung": "Ansatz: Beide Seiten mit (24x + 5) multiplizieren\n2(24x + 5) = 40x + 8\n48x + 10 = 40x + 8\n8x = minus 2\nx = minus 0,25\n\nErgebnis: x = minus 0,25"
     },
     {
-      aufgabe: "Löse das lineare Gleichungssystem:\nI:   6x − 3y = 15\nII:  6x − 8y = 10",
-      hinweise: ["Subtrahiere Gleichung II von Gleichung I, um x zu eliminieren.", "Du erhältst eine einfache Gleichung für y.", "Setze y zurück in eine der Gleichungen ein."],
-      loesung_kurz: "x = 3, y = 1",
-      musterloesung: "Ansatz: I − II:\n(6x − 6x) + (−3y − (−8y)) = 15 − 10\n5y = 5  →  y = 1\nEinsetzen in I: 6x − 3 · 1 = 15  →  6x = 18  →  x = 3\n\nErgebnis: x = 3, y = 1"
+      "aufgabe": "Loese das lineare Gleichungssystem:\nI:   6x minus 3y = 15\nII:  6x minus 8y = 10",
+      "hinweise": [
+        "Subtrahiere Gleichung II von Gleichung I, um x zu eliminieren.",
+        "Du erhaeltst eine einfache Gleichung fuer y.",
+        "Setze y zurueck in eine der Gleichungen ein."
+      ],
+      "loesung_kurz": "x = 3, y = 1",
+      "musterloesung": "Ansatz: I minus II:\n5y = 5 -> y = 1\nEinsetzen in I: 6x minus 3 = 15 -> 6x = 18 -> x = 3\n\nErgebnis: x = 3, y = 1"
     },
     {
-      aufgabe: "Löse die Bruchgleichung:\n(3x − 6) / (0,5x + 1) = 2",
-      hinweise: ["Multipliziere beide Seiten mit dem Nenner (0,5x + 1).", "Forme die entstandene lineare Gleichung um.", "Achte auf korrekte Klammerauflösung."],
-      loesung_kurz: "x = 4",
-      musterloesung: "Ansatz: Beide Seiten mit (0,5x + 1) multiplizieren\n3x − 6 = 2 · (0,5x + 1)\n3x − 6 = x + 2\n2x = 8\nx = 4\n\nErgebnis: x = 4"
+      "aufgabe": "Loese die Bruchgleichung:\n(3x minus 6) / (0,5x + 1) = 2",
+      "hinweise": [
+        "Multipliziere beide Seiten mit dem Nenner (0,5x + 1).",
+        "Forme die entstandene lineare Gleichung um.",
+        "Achte auf korrekte Klammeraufloesung."
+      ],
+      "loesung_kurz": "x = 4",
+      "musterloesung": "Ansatz: Beide Seiten mit (0,5x + 1) multiplizieren\n3x minus 6 = 2(0,5x + 1)\n3x minus 6 = x + 2\n2x = 8\nx = 4\n\nErgebnis: x = 4"
     },
     {
-      aufgabe: "Ergänze die binomische Formel:\n(2x + ___)² = 4x² + ___ + 9y²",
-      hinweise: ["Die binomische Formel lautet: (a + b)² = a² + 2ab + b²", "Hier ist a = 2x. Welches b ergibt b² = 9y²?", "Der mittlere Term ist 2 · a · b."],
-      loesung_kurz: "3y und 12xy",
-      musterloesung: "Ansatz: (2x + b)² = 4x² + 2·2x·b + b²\nb² = 9y²  →  b = 3y\n2·2x·3y = 12xy\n\nErgebnis: (2x + 3y)² = 4x² + 12xy + 9y²"
+      "aufgabe": "Ergaenze die binomische Formel:\n(2x + ___)² = 4x² + ___ + 9y²",
+      "hinweise": [
+        "Die binomische Formel lautet: (a + b)² = a² + 2ab + b²",
+        "Hier ist a = 2x. Welches b ergibt b² = 9y²?",
+        "Der mittlere Term ist 2 mal a mal b."
+      ],
+      "loesung_kurz": "3y und 12xy",
+      "musterloesung": "Ansatz: (2x + b)² = 4x² + 2 mal 2x mal b + b²\nb² = 9y² -> b = 3y\n2 mal 2x mal 3y = 12xy\n\nErgebnis: (2x + 3y)² = 4x² + 12xy + 9y²"
     },
     {
-      aufgabe: "Löse die Gleichung und gib die Lösungsmenge an:\n5x − 3(2x − 4) = 2x + 8",
-      hinweise: ["Löse zuerst die Klammer auf: −3 · (2x − 4) = ?", "Fasse gleichartige Terme zusammen.", "Bringe alle x-Terme auf eine Seite, alle Zahlen auf die andere."],
-      loesung_kurz: "x = 4/3",
-      musterloesung: "Ansatz: Klammer auflösen\n5x − 6x + 12 = 2x + 8\n−x + 12 = 2x + 8\n4 = 3x\nx = 4/3\n\nErgebnis: x = 4/3"
-    },
+      "aufgabe": "Loese die Gleichung und gib die Loesungsmenge an:\n5x minus 3(2x minus 4) = 2x + 8",
+      "hinweise": [
+        "Loese zuerst die Klammer auf: minus 3 mal (2x minus 4) = ?",
+        "Fasse gleichartige Terme zusammen.",
+        "Bringe alle x-Terme auf eine Seite, alle Zahlen auf die andere."
+      ],
+      "loesung_kurz": "x = 4/3",
+      "musterloesung": "Ansatz: Klammer aufloesen\n5x minus 6x + 12 = 2x + 8\nminus x + 12 = 2x + 8\n4 = 3x\nx = 4/3\n\nErgebnis: x = 4/3"
+    }
   ],
-  funktionen1: [
+  "funktionen1": [
     {
-      aufgabe: "Gegeben ist f(x) = 1,5x − 1.\na) Bestätige rechnerisch, dass P(4|5) auf dem Graphen von f liegt.\nb) Bestimme die Nullstelle von f.",
-      hinweise: ["Setze x = 4 in die Funktionsgleichung ein und prüfe, ob das Ergebnis 5 ist.", "Die Nullstelle findest du, indem du f(x) = 0 setzt und nach x auflöst.", "Forme die Gleichung 1,5x − 1 = 0 um."],
-      loesung_kurz: "a) f(4) = 5 ✓  b) x = 2/3",
-      musterloesung: "a) f(4) = 1,5 · 4 − 1 = 6 − 1 = 5 ✓  Punkt liegt auf dem Graphen.\nb) Nullstelle: 1,5x − 1 = 0  →  1,5x = 1  →  x = 1/1,5 = 2/3\n\nErgebnis: a) Bestätigt  b) x = 2/3"
+      "aufgabe": "Gegeben ist f(x) = 1,5x minus 1.\na) Bestatige rechnerisch, dass P(4|5) auf dem Graphen von f liegt.\nb) Bestimme die Nullstelle von f.",
+      "hinweise": [
+        "Setze x = 4 in die Funktionsgleichung ein und pruefe, ob das Ergebnis 5 ist.",
+        "Die Nullstelle findest du, indem du f(x) = 0 setzt und nach x aufloest.",
+        "Forme die Gleichung 1,5x minus 1 = 0 um."
+      ],
+      "loesung_kurz": "a) f(4) = 5 bestaetigt  b) x = 2/3",
+      "musterloesung": "a) f(4) = 1,5 mal 4 minus 1 = 6 minus 1 = 5. Punkt liegt auf dem Graphen.\nb) Nullstelle: 1,5x minus 1 = 0 -> 1,5x = 1 -> x = 2/3\n\nErgebnis: a) Bestaetigt  b) x = 2/3"
     },
     {
-      aufgabe: "Gegeben ist der Graph einer linearen Funktion mit Steigung m = −0,5 und y-Achsenabschnitt b = 2.\na) Gib die Funktionsgleichung an.\nb) Berechne den Schnittpunkt mit der x-Achse.\nc) Berechne f(−4).",
-      hinweise: ["Die allgemeine Form ist f(x) = mx + b.", "Für den Schnittpunkt mit der x-Achse setzt du f(x) = 0.", "Setze x = −4 in deine Gleichung ein."],
-      loesung_kurz: "a) f(x) = −0,5x + 2  b) x = 4  c) f(−4) = 4",
-      musterloesung: "a) f(x) = −0,5x + 2\nb) −0,5x + 2 = 0  →  x = 4 → Schnittpunkt (4|0)\nc) f(−4) = −0,5 · (−4) + 2 = 2 + 2 = 4\n\nErgebnis: a) f(x) = −0,5x + 2  b) S(4|0)  c) 4"
+      "aufgabe": "Eine lineare Funktion hat die Steigung m = minus 0,5 und den y-Achsenabschnitt b = 2.\na) Gib die Funktionsgleichung an.\nb) Berechne den Schnittpunkt mit der x-Achse.\nc) Berechne f(minus 4).",
+      "hinweise": [
+        "Die allgemeine Form ist f(x) = mx + b.",
+        "Fuer den Schnittpunkt mit der x-Achse setzt du f(x) = 0.",
+        "Setze x = minus 4 in deine Gleichung ein."
+      ],
+      "loesung_kurz": "a) f(x) = minus 0,5x + 2  b) x = 4  c) f(minus 4) = 4",
+      "musterloesung": "a) f(x) = minus 0,5x + 2\nb) minus 0,5x + 2 = 0 -> x = 4. Schnittpunkt S(4|0)\nc) f(minus 4) = minus 0,5 mal (minus 4) + 2 = 2 + 2 = 4\n\nErgebnis: a) f(x) = minus 0,5x + 2  b) S(4|0)  c) 4"
     },
     {
-      aufgabe: "Zwei Geraden sind gegeben:\nf(x) = 2x − 1  und  g(x) = −x + 5\nBerechne den Schnittpunkt der beiden Geraden.",
-      hinweise: ["Setze f(x) = g(x), da sich die Geraden im Schnittpunkt schneiden.", "Löse die entstehende lineare Gleichung nach x auf.", "Setze x in eine der Gleichungen ein, um y zu berechnen."],
-      loesung_kurz: "S(2|3)",
-      musterloesung: "Ansatz: f(x) = g(x)\n2x − 1 = −x + 5\n3x = 6  →  x = 2\ny = f(2) = 2·2 − 1 = 3\n\nErgebnis: Schnittpunkt S(2|3)"
+      "aufgabe": "Zwei Geraden sind gegeben:\nf(x) = 2x minus 1  und  g(x) = minus x + 5\nBerechne den Schnittpunkt der beiden Geraden.",
+      "hinweise": [
+        "Setze f(x) = g(x), da sich die Geraden im Schnittpunkt schneiden.",
+        "Loese die entstehende lineare Gleichung nach x auf.",
+        "Setze x in eine der Gleichungen ein, um y zu berechnen."
+      ],
+      "loesung_kurz": "S(2|3)",
+      "musterloesung": "Ansatz: f(x) = g(x)\n2x minus 1 = minus x + 5\n3x = 6 -> x = 2\ny = f(2) = 4 minus 1 = 3\n\nErgebnis: Schnittpunkt S(2|3)"
     },
     {
-      aufgabe: "Eine lineare Funktion verläuft durch die Punkte A(0|−3) und B(4|5).\na) Bestimme die Funktionsgleichung.\nb) Bei welchem y-Wert schneidet die Gerade die y-Achse?",
-      hinweise: ["Die Steigung berechnest du mit m = (y₂ − y₁) / (x₂ − x₁).", "Den y-Achsenabschnitt kannst du direkt aus dem Punkt A(0|−3) ablesen.", "Prüfe dein Ergebnis, indem du B in deine Gleichung einsetzt."],
-      loesung_kurz: "a) f(x) = 2x − 3  b) −3",
-      musterloesung: "Ansatz: Steigung berechnen\nm = (5 − (−3)) / (4 − 0) = 8/4 = 2\nb = −3 (aus A(0|−3))\nf(x) = 2x − 3\nProbe: f(4) = 8 − 3 = 5 ✓\n\nErgebnis: f(x) = 2x − 3, y-Achsenabschnitt: −3"
+      "aufgabe": "Eine lineare Funktion verlaeuft durch A(0|minus 3) und B(4|5).\na) Bestimme die Funktionsgleichung.\nb) Pruefe, ob Q(8|13) auf dem Graphen liegt.",
+      "hinweise": [
+        "Die Steigung: m = (y2 minus y1) / (x2 minus x1)",
+        "Den y-Achsenabschnitt kannst du aus A(0|minus 3) ablesen.",
+        "Pruefe Q: Berechne f(8) und vergleiche mit 13."
+      ],
+      "loesung_kurz": "a) f(x) = 2x minus 3  b) Ja, f(8) = 13",
+      "musterloesung": "a) m = (5 minus (minus 3)) / (4 minus 0) = 8/4 = 2\nb = minus 3\nf(x) = 2x minus 3\nb) f(8) = 16 minus 3 = 13. Ja, Q liegt auf dem Graphen.\n\nErgebnis: a) f(x) = 2x minus 3  b) Ja"
     },
     {
-      aufgabe: "Gegeben: f(x) = 0,5x + 3\na) Berechne f(0) und f(6).\nb) Liegt der Punkt Q(8|7) auf dem Graphen von f? Begründe.",
-      hinweise: ["Setze die x-Werte einfach in die Gleichung ein.", "Für Q prüfst du, ob f(8) = 7 gilt.", "Wenn f(8) ≠ 7, liegt Q nicht auf dem Graphen."],
-      loesung_kurz: "a) f(0) = 3, f(6) = 6  b) Nein, f(8) = 7 ✓ → Q liegt auf f",
-      musterloesung: "a) f(0) = 0,5·0 + 3 = 3\nf(6) = 0,5·6 + 3 = 3 + 3 = 6\nb) f(8) = 0,5·8 + 3 = 4 + 3 = 7 ✓\nDa f(8) = 7 = y-Koordinate von Q, liegt Q auf dem Graphen.\n\nErgebnis: a) 3 und 6  b) Q liegt auf f."
+      "aufgabe": "Gegeben: f(x) = 0,5x + 3\na) Berechne f(0) und f(6).\nb) Liegt der Punkt Q(8|7) auf dem Graphen von f? Begruende.",
+      "hinweise": [
+        "Setze die x-Werte einfach in die Gleichung ein.",
+        "Fuer Q pruefst du, ob f(8) = 7 gilt.",
+        "Wenn f(8) ungleich 7, liegt Q nicht auf dem Graphen."
+      ],
+      "loesung_kurz": "a) f(0) = 3, f(6) = 6  b) Ja, f(8) = 7",
+      "musterloesung": "a) f(0) = 0,5 mal 0 + 3 = 3\nf(6) = 0,5 mal 6 + 3 = 6\nb) f(8) = 0,5 mal 8 + 3 = 7. Q liegt auf f.\n\nErgebnis: a) 3 und 6  b) Q liegt auf f."
     },
     {
-      aufgabe: "Eine Taxifahrt kostet einen Grundpreis von 3 € und 1,50 € pro Kilometer.\na) Stelle eine Funktionsgleichung für den Preis P in Abhängigkeit von der Kilometerzahl k auf.\nb) Wie viel kostet eine Fahrt von 12 km?\nc) Wie weit kann man für 18 € fahren?",
-      hinweise: ["Der Grundpreis ist der y-Achsenabschnitt, der Preis pro km ist die Steigung.", "Setze k = 12 in deine Gleichung ein.", "Setze P = 18 und löse nach k auf."],
-      loesung_kurz: "a) P(k) = 1,5k + 3  b) 21 €  c) 10 km",
-      musterloesung: "a) P(k) = 1,5k + 3\nb) P(12) = 1,5 · 12 + 3 = 18 + 3 = 21 €\nc) 18 = 1,5k + 3  →  1,5k = 15  →  k = 10 km\n\nErgebnis: a) P(k) = 1,5k + 3  b) 21 €  c) 10 km"
-    },
+      "aufgabe": "Eine Taxifahrt kostet einen Grundpreis von 3 Euro und 1,50 Euro pro Kilometer.\na) Stelle eine Funktionsgleichung P(k) auf.\nb) Wie viel kostet eine Fahrt von 12 km?\nc) Wie weit kann man fuer 18 Euro fahren?",
+      "hinweise": [
+        "Der Grundpreis ist der y-Achsenabschnitt, der Preis pro km ist die Steigung.",
+        "Setze k = 12 in deine Gleichung ein.",
+        "Setze P = 18 und loese nach k auf."
+      ],
+      "loesung_kurz": "a) P(k) = 1,5k + 3  b) 21 Euro  c) 10 km",
+      "musterloesung": "a) P(k) = 1,5k + 3\nb) P(12) = 18 + 3 = 21 Euro\nc) 18 = 1,5k + 3 -> k = 10 km\n\nErgebnis: a) P(k) = 1,5k + 3  b) 21 Euro  c) 10 km"
+    }
   ],
-  geometrie1: [
+  "geometrie1": [
     {
-      aufgabe: "Ein Parallelogramm hat die Seitenlängen 5 cm und 4 cm sowie den Winkel α = 70°.\na) Gib die Größe des Winkels β an.\nb) Ein Schüler behauptet: 'Das Parallelogramm hat einen Flächeninhalt von 20 cm².' Begründe, dass diese Aussage falsch ist.",
-      hinweise: ["Im Parallelogramm sind benachbarte Winkel Supplementwinkel – sie ergänzen sich zu 180°.", "Der Flächeninhalt eines Parallelogramms ist A = Grundseite · Höhe, nicht Grundseite · Seite.", "Die Höhe ist kleiner als die Seite, wenn der Winkel kein rechter Winkel ist."],
-      loesung_kurz: "a) β = 110°  b) A < 20 cm², da Höhe < 4 cm",
-      musterloesung: "a) Im Parallelogramm gilt: α + β = 180°\nβ = 180° − 70° = 110°\nb) A = g · h mit h = 4 · sin(70°) ≈ 3,76 cm\nA = 5 · 3,76 ≈ 18,8 cm² < 20 cm²\nDa der Winkel kein rechter Winkel ist, ist die Höhe kleiner als die Seite.\n\nErgebnis: a) 110°  b) Flächeninhalt ≈ 18,8 cm², nicht 20 cm²."
+      "aufgabe": "Ein Parallelogramm hat die Seitenlaengen 5 cm und 4 cm sowie den Winkel alpha = 70 Grad.\na) Gib die Groesse des Winkels beta an.\nb) Begruende, dass der Flaecheninhalt nicht 20 cm² betragen kann.",
+      "hinweise": [
+        "Im Parallelogramm sind benachbarte Winkel Supplementwinkel: sie ergaenzen sich zu 180 Grad.",
+        "Der Flaecheninhalt eines Parallelogramms ist A = Grundseite mal Hoehe, nicht Grundseite mal Seite.",
+        "Die Hoehe ist kleiner als die Seite, wenn der Winkel kein rechter Winkel ist."
+      ],
+      "loesung_kurz": "a) beta = 110 Grad  b) Hoehe < 4 cm, daher A < 20 cm²",
+      "musterloesung": "a) alpha + beta = 180 Grad -> beta = 110 Grad\nb) Die Hoehe h = 4 mal sin(70 Grad) ca. 3,76 cm\nA = 5 mal 3,76 ca. 18,8 cm² < 20 cm²\n\nErgebnis: a) 110 Grad  b) Flaecheninhalt ca. 18,8 cm², nicht 20 cm²"
     },
     {
-      aufgabe: "Berechne den Flächeninhalt der äußeren schraffierten Fläche für a = 20 cm, b = 8 cm, c = 2 cm.\nDie Figur besteht aus einem großen Rechteck (Seiten a und b+c), aus dem ein kleineres Rechteck (Seiten a−c und b) ausgeschnitten ist.",
-      hinweise: ["Berechne zuerst die Fläche des großen Rechtecks.", "Berechne dann die Fläche des inneren weißen Rechtecks.", "Ziehe die innere Fläche von der äußeren ab."],
-      loesung_kurz: "44 cm²",
-      musterloesung: "Ansatz: Gesamtfläche minus innere Fläche\nAußen: a · (b + c) = 20 · (8 + 2) = 20 · 10 = 200 cm²\nInnen (weiß): (a − c) · b = (20 − 2) · 8 = 18 · 8 = 144 cm²\nSchraffiert: 200 − 144 = 56 cm²\n\nErgebnis: 56 cm²"
+      "aufgabe": "Berechne den Flaecheninhalt der aesseren schraffierten Flaeche fuer a = 20 cm, b = 8 cm, c = 2 cm.\nDie Figur besteht aus einem grossen Rechteck (Seiten a und b+c), aus dem ein kleineres Rechteck (Seiten a minus c und b) ausgeschnitten ist.",
+      "hinweise": [
+        "Berechne zuerst die Flaeche des grossen Rechtecks.",
+        "Berechne dann die Flaeche des inneren weissen Rechtecks.",
+        "Ziehe die innere Flaeche von der aeusseren ab."
+      ],
+      "loesung_kurz": "56 cm²",
+      "musterloesung": "Aussen: a mal (b + c) = 20 mal 10 = 200 cm²\nInnen: (a minus c) mal b = 18 mal 8 = 144 cm²\nSchraffiert: 200 minus 144 = 56 cm²\n\nErgebnis: 56 cm²"
     },
     {
-      aufgabe: "Ein gleichschenkliges Dreieck ABC hat die Punkte A(−3|0), B(3|0) und C(0|4,5).\na) Berechne den Flächeninhalt des Dreiecks.\nb) Bestimme den Umfang des Dreiecks.",
-      hinweise: ["Die Grundseite AB kannst du direkt aus den Koordinaten ablesen.", "Die Höhe ist die y-Koordinate von C, da die Basis auf der x-Achse liegt.", "Für den Umfang brauchst du die Länge der Schenkel AC und BC – nutze den Satz des Pythagoras."],
-      loesung_kurz: "a) 13,5 cm²  b) ≈ 21 cm",
-      musterloesung: "a) Grundseite AB = 6 cm, Höhe h = 4,5 cm\nA = ½ · 6 · 4,5 = 13,5 cm²\nb) Schenkel AC: √(3² + 4,5²) = √(9 + 20,25) = √29,25 ≈ 5,41 cm\nUmfang = 6 + 2 · 5,41 ≈ 16,82 cm\n\nErgebnis: a) 13,5 cm²  b) ≈ 16,8 cm"
+      "aufgabe": "Ein gleichschenkliges Dreieck ABC hat die Punkte A(minus 3|0), B(3|0) und C(0|4,5).\na) Berechne den Flaecheninhalt des Dreiecks.\nb) Bestimme den Umfang des Dreiecks.",
+      "hinweise": [
+        "Die Grundseite AB kannst du direkt aus den Koordinaten ablesen.",
+        "Die Hoehe ist die y-Koordinate von C, da die Basis auf der x-Achse liegt.",
+        "Fuer den Umfang nutze den Satz des Pythagoras fuer die Schenkellaenge."
+      ],
+      "loesung_kurz": "a) 13,5 cm²  b) ca. 16,8 cm",
+      "musterloesung": "a) Grundseite AB = 6 cm, Hoehe h = 4,5 cm\nA = 1/2 mal 6 mal 4,5 = 13,5 cm²\nb) Schenkel AC = Wurzel aus (9 + 20,25) = Wurzel aus 29,25 ca. 5,41 cm\nUmfang = 6 + 2 mal 5,41 ca. 16,82 cm\n\nErgebnis: a) 13,5 cm²  b) ca. 16,8 cm"
     },
     {
-      aufgabe: "Berechne das Volumen des Kartons mit den Maßen 50 cm × 40 cm × 30 cm.\nGib das Ergebnis in Litern an.",
-      hinweise: ["Das Volumen eines Quaders berechnet sich als V = Länge · Breite · Höhe.", "1 Liter = 1 dm³ = 1000 cm³", "Rechne erst in cm³, dann umrechnen."],
-      loesung_kurz: "60 Liter",
-      musterloesung: "Ansatz: V = l · b · h\nV = 50 · 40 · 30 = 60.000 cm³\nUmrechnung: 60.000 cm³ ÷ 1000 = 60 Liter\n\nErgebnis: 60 Liter"
+      "aufgabe": "Berechne das Volumen des Kartons mit den Massen 50 cm x 40 cm x 30 cm.\nGib das Ergebnis in Litern an.",
+      "hinweise": [
+        "V = Laenge mal Breite mal Hoehe",
+        "1 Liter = 1 dm³ = 1000 cm³",
+        "Rechne erst in cm³, dann umrechnen."
+      ],
+      "loesung_kurz": "60 Liter",
+      "musterloesung": "V = 50 mal 40 mal 30 = 60.000 cm³\nUmrechnung: 60.000 / 1000 = 60 Liter\n\nErgebnis: 60 Liter"
     },
     {
-      aufgabe: "Ein regelmäßiges Sechseck hat die Seitenlänge a = 4 cm.\na) Begründe, dass alle 6 Dreiecke im Sechseck gleichseitig sind.\nb) Berechne den Flächeninhalt des Sechsecks mithilfe der Formel A = 6 · ½ · a · (√3/2 · a).",
-      hinweise: ["Im regelmäßigen Sechseck beträgt jeder Innenwinkel 120°. Wie groß sind dann die Winkel im Dreieck?", "In einem gleichseitigen Dreieck sind alle Seiten gleich lang.", "Setze a = 4 cm in die Formel ein und berechne schrittweise."],
-      loesung_kurz: "A ≈ 41,6 cm²",
-      musterloesung: "a) Das Sechseck lässt sich in 6 gleichseitige Dreiecke zerlegen. Jeder Mittelpunktswinkel beträgt 360°/6 = 60°. Da das Sechseck regelmäßig ist, sind alle Seiten gleich lang → alle Dreiecke sind gleichseitig.\nb) A = 6 · ½ · 4 · (√3/2 · 4) = 6 · ½ · 4 · 2√3 = 6 · 4√3 = 24√3 ≈ 41,57 cm²\n\nErgebnis: A ≈ 41,6 cm²"
+      "aufgabe": "Ein regulaeres Sechseck hat die Seitenlaenge a = 4 cm.\na) Begruende, dass alle 6 Dreiecke im Sechseck gleichseitig sind.\nb) Berechne den Flaecheninhalt mit der Formel A = 6 mal 1/2 mal a mal (Wurzel aus 3 / 2 mal a).",
+      "hinweise": [
+        "Jeder Mittelpunktswinkel betraegt 360 Grad / 6 = 60 Grad.",
+        "In einem gleichseitigen Dreieck sind alle Seiten gleich lang.",
+        "Setze a = 4 cm in die Formel ein."
+      ],
+      "loesung_kurz": "A ca. 41,6 cm²",
+      "musterloesung": "a) Jeder Mittelpunktswinkel = 60 Grad, alle Seiten gleich -> gleichseitig\nb) A = 6 mal 1/2 mal 4 mal (Wurzel aus 3 / 2 mal 4) = 24 mal Wurzel aus 3 ca. 41,6 cm²\n\nErgebnis: A ca. 41,6 cm²"
     },
     {
-      aufgabe: "Ein Trapez hat die parallelen Seiten a = 10 cm und c = 6 cm sowie die Höhe h = 4 cm.\nBerechne den Flächeninhalt.",
-      hinweise: ["Die Flächenformel für ein Trapez lautet: A = ½ · (a + c) · h", "Addiere zuerst die parallelen Seiten.", "Multipliziere dann mit ½ und der Höhe."],
-      loesung_kurz: "32 cm²",
-      musterloesung: "Ansatz: A = ½ · (a + c) · h\nA = ½ · (10 + 6) · 4\nA = ½ · 16 · 4\nA = 32 cm²\n\nErgebnis: 32 cm²"
-    },
+      "aufgabe": "Ein Trapez hat die parallelen Seiten a = 10 cm und c = 6 cm sowie die Hoehe h = 4 cm.\nBerechne den Flaecheninhalt.",
+      "hinweise": [
+        "Flaechenformel Trapez: A = 1/2 mal (a + c) mal h",
+        "Addiere zuerst die parallelen Seiten.",
+        "Multipliziere dann mit 1/2 und der Hoehe."
+      ],
+      "loesung_kurz": "32 cm²",
+      "musterloesung": "A = 1/2 mal (10 + 6) mal 4 = 1/2 mal 16 mal 4 = 32 cm²\n\nErgebnis: 32 cm²"
+    }
   ],
-  stochastik1: [
+  "stochastik1": [
     {
-      aufgabe: "In einem Behälter befinden sich 3 weiße und 2 schwarze Kugeln.\na) Begründe, dass die Wahrscheinlichkeit, eine schwarze Kugel zu ziehen, p = 2/5 beträgt.\nb) Berechne die Wahrscheinlichkeit, bei zweimaligem Ziehen ohne Zurücklegen zwei weiße Kugeln zu ziehen.",
-      hinweise: ["Beim ersten Zug befinden sich 5 Kugeln im Behälter, davon 2 schwarze.", "Ohne Zurücklegen: nach dem ersten Zug befinden sich nur noch 4 Kugeln im Behälter.", "Multipliziere die Wahrscheinlichkeiten der beiden Züge."],
-      loesung_kurz: "a) 2/5  b) 3/10",
-      musterloesung: "a) Es gibt 5 Kugeln insgesamt, 2 davon schwarz.\np(schwarz) = 2/5\nb) 1. Zug: p(weiß) = 3/5\n2. Zug (nach weißer Kugel): noch 4 Kugeln, davon 2 weiße\np(weiß) = 2/4 = 1/2\np(beide weiß) = 3/5 · 1/2 = 3/10\n\nErgebnis: 3/10"
+      "aufgabe": "In einem Behaelter befinden sich 3 weisse und 2 schwarze Kugeln.\na) Begruende, dass die Wahrscheinlichkeit fuer eine schwarze Kugel p = 2/5 betraegt.\nb) Berechne die Wahrscheinlichkeit, bei zweimaligem Ziehen ohne Zuruecklegen zwei weisse Kugeln zu ziehen.",
+      "hinweise": [
+        "Beim ersten Zug: 5 Kugeln insgesamt, davon 2 schwarze.",
+        "Ohne Zuruecklegen: nach dem ersten Zug sind noch 4 Kugeln im Behaelter.",
+        "Multipliziere die Wahrscheinlichkeiten der beiden Zuege."
+      ],
+      "loesung_kurz": "a) 2/5  b) 3/10",
+      "musterloesung": "a) 5 Kugeln gesamt, 2 davon schwarz -> p = 2/5\nb) 1. Zug: p(weiss) = 3/5\n2. Zug: noch 4 Kugeln, davon 2 weisse -> p = 2/4 = 1/2\np(beide weiss) = 3/5 mal 1/2 = 3/10\n\nErgebnis: a) 2/5  b) 3/10"
     },
     {
-      aufgabe: "Eine Klasse besteht aus 15 Mädchen und 10 Jungen. Es wird zufällig eine Person ausgewählt.\na) Wie groß ist die Wahrscheinlichkeit, dass ein Mädchen gewählt wird?\nb) Zwei Personen werden nacheinander ohne Zurücklegen ausgewählt. Berechne die Wahrscheinlichkeit, dass beide Mädchen sind.",
-      hinweise: ["Gesamtzahl der Personen: 15 + 10 = 25", "Beim zweiten Zug hat sich die Gesamtzahl verringert.", "Verwende die Multiplikationsregel."],
-      loesung_kurz: "a) 3/5  b) 21/50",
-      musterloesung: "a) p(Mädchen) = 15/25 = 3/5\nb) 1. Zug: p(M) = 15/25 = 3/5\n2. Zug: p(M) = 14/24 = 7/12\np(beide M) = 3/5 · 7/12 = 21/60 = 7/20\n\nErgebnis: a) 3/5  b) 7/20"
+      "aufgabe": "Eine Klasse besteht aus 15 Maedchen und 10 Jungen. Eine Person wird zufaellig ausgewaehlt.\na) Wie gross ist die Wahrscheinlichkeit, dass ein Maedchen gewaehlt wird?\nb) Zwei Personen werden nacheinander ohne Zuruecklegen ausgewaehlt. Berechne p(beide Maedchen).",
+      "hinweise": [
+        "Gesamtzahl: 15 + 10 = 25",
+        "Beim zweiten Zug hat sich die Gesamtzahl verringert.",
+        "Verwende die Multiplikationsregel."
+      ],
+      "loesung_kurz": "a) 3/5  b) 7/20",
+      "musterloesung": "a) p(Maedchen) = 15/25 = 3/5\nb) 1. Zug: 15/25 = 3/5\n2. Zug: 14/24 = 7/12\np(beide M) = 3/5 mal 7/12 = 21/60 = 7/20\n\nErgebnis: a) 3/5  b) 7/20"
     },
     {
-      aufgabe: "Ein Würfel wird zweimal geworfen.\na) Wie groß ist die Wahrscheinlichkeit, beim ersten Wurf eine 6 zu werfen?\nb) Wie groß ist die Wahrscheinlichkeit, zweimal hintereinander eine 6 zu werfen?\nc) Wie groß ist die Wahrscheinlichkeit, mindestens einmal eine 6 zu werfen?",
-      hinweise: ["Ein fairer Würfel hat 6 gleichwahrscheinliche Ergebnisse.", "Bei unabhängigen Ereignissen: Wahrscheinlichkeiten multiplizieren.", "Für 'mindestens einmal': Nutze die Gegenwahrscheinlichkeit."],
-      loesung_kurz: "a) 1/6  b) 1/36  c) 11/36",
-      musterloesung: "a) p(6) = 1/6\nb) p(6 und 6) = 1/6 · 1/6 = 1/36\nc) p(mindestens eine 6) = 1 − p(keine 6)\np(keine 6) = 5/6 · 5/6 = 25/36\np(mind. eine 6) = 1 − 25/36 = 11/36\n\nErgebnis: a) 1/6  b) 1/36  c) 11/36"
+      "aufgabe": "Ein Wuerfel wird zweimal geworfen.\na) Wie gross ist p(erste Wurf zeigt 6)?\nb) Wie gross ist p(beide Male 6)?\nc) Wie gross ist p(mindestens einmal 6)?",
+      "hinweise": [
+        "Ein fairer Wuerfel hat 6 gleichwahrscheinliche Ergebnisse.",
+        "Bei unabhaengigen Ereignissen: Wahrscheinlichkeiten multiplizieren.",
+        "Fuer mindestens einmal: Nutze die Gegenwahrscheinlichkeit."
+      ],
+      "loesung_kurz": "a) 1/6  b) 1/36  c) 11/36",
+      "musterloesung": "a) p(6) = 1/6\nb) p(6 und 6) = 1/6 mal 1/6 = 1/36\nc) p(keine 6) = 5/6 mal 5/6 = 25/36\np(mind. eine 6) = 1 minus 25/36 = 11/36\n\nErgebnis: a) 1/6  b) 1/36  c) 11/36"
     },
     {
-      aufgabe: "In einer Lostrommel befinden sich 4 Gewinne und 6 Nieten.\na) Berechne die Wahrscheinlichkeit, beim einmaligen Ziehen zu gewinnen.\nb) Berechne die Wahrscheinlichkeit, bei zweimaligem Ziehen mit Zurücklegen zweimal zu gewinnen.",
-      hinweise: ["Gesamtzahl der Lose: 4 + 6 = 10", "Mit Zurücklegen: die Wahrscheinlichkeit ändert sich beim zweiten Zug nicht.", "Multipliziere die Einzelwahrscheinlichkeiten."],
-      loesung_kurz: "a) 2/5  b) 4/25",
-      musterloesung: "a) p(Gewinn) = 4/10 = 2/5\nb) Da mit Zurücklegen: p(Gewinn) bleibt 2/5\np(2 × Gewinn) = 2/5 · 2/5 = 4/25\n\nErgebnis: a) 2/5  b) 4/25"
+      "aufgabe": "In einer Lostrommel: 4 Gewinne und 6 Nieten.\na) Berechne p(Gewinn beim einmaligen Ziehen).\nb) Berechne p(zweimal Gewinn) beim Ziehen mit Zuruecklegen.",
+      "hinweise": [
+        "Gesamtzahl: 4 + 6 = 10",
+        "Mit Zuruecklegen: die Wahrscheinlichkeit aendert sich nicht.",
+        "Multipliziere die Einzelwahrscheinlichkeiten."
+      ],
+      "loesung_kurz": "a) 2/5  b) 4/25",
+      "musterloesung": "a) p(Gewinn) = 4/10 = 2/5\nb) p(2 x Gewinn) = 2/5 mal 2/5 = 4/25\n\nErgebnis: a) 2/5  b) 4/25"
     },
     {
-      aufgabe: "Ein Karton enthält 15 rote und 5 weiße Herzen.\na) Begründe, dass die Wahrscheinlichkeit für ein rotes Herz 3/4 beträgt.\nb) Zwei Herzen werden ohne Zurücklegen gezogen. Berechne die Wahrscheinlichkeit, dass ein rotes und ein weißes Herz gezogen wird.",
-      hinweise: ["Gesamtzahl: 15 + 5 = 20, davon 15 rote.", "Es gibt zwei Reihenfolgen: erst rot dann weiß, oder erst weiß dann rot.", "Addiere beide Wahrscheinlichkeiten."],
-      loesung_kurz: "a) 15/20 = 3/4  b) 15/38",
-      musterloesung: "a) p(rot) = 15/20 = 3/4 ✓\nb) Fall 1: rot dann weiß: 15/20 · 5/19 = 75/380\nFall 2: weiß dann rot: 5/20 · 15/19 = 75/380\np(verschiedene Farben) = 75/380 + 75/380 = 150/380 = 15/38\n\nErgebnis: 15/38"
+      "aufgabe": "Ein Karton enthaelt 15 rote und 5 weisse Herzen.\na) Begruende, dass p(rot) = 3/4.\nb) Zwei Herzen werden ohne Zuruecklegen gezogen. Berechne p(ein rotes und ein weisses Herz).",
+      "hinweise": [
+        "Gesamtzahl: 15 + 5 = 20, davon 15 rote.",
+        "Es gibt zwei Reihenfolgen: erst rot dann weiss, oder erst weiss dann rot.",
+        "Addiere beide Wahrscheinlichkeiten."
+      ],
+      "loesung_kurz": "a) 15/20 = 3/4  b) 15/38",
+      "musterloesung": "a) p(rot) = 15/20 = 3/4\nb) p(rot, weiss) = 15/20 mal 5/19 = 75/380\np(weiss, rot) = 5/20 mal 15/19 = 75/380\np(verschieden) = 150/380 = 15/38\n\nErgebnis: a) 3/4  b) 15/38"
     },
     {
-      aufgabe: "Bei einer Kontrolle erfüllen 98 % der Rösti die Gewichtsvorgabe. Von diesen erfüllen 99 % auch die Aussehens-vorgabe. Rösti, die eine Vorgabe nicht erfüllen, werden aussortiert.\nBerechne, wie viele Rösti von 10.000 kontrollierten Stück insgesamt aussortiert werden.",
-      hinweise: ["Berechne zuerst, wie viele das Gewicht nicht erfüllen (2 % von 10.000).", "Von den verbleibenden 98 % erfüllen 1 % das Aussehen nicht.", "Addiere beide Aussortiermengen."],
-      loesung_kurz: "ca. 298 Rösti",
-      musterloesung: "Aussortiert wegen Gewicht: 2% von 10.000 = 200\nVerbleibend: 9.800\nAussortiert wegen Aussehen: 1% von 9.800 = 98\nGesamt aussortiert: 200 + 98 = 298\n\nErgebnis: 298 Rösti"
-    },
+      "aufgabe": "Bei einer Kontrolle erfuellen 98% der Roesti die Gewichtsvorgabe. Von diesen erfuellen 99% die Aussehens-vorgabe. Roesti, die eine Vorgabe nicht erfuellen, werden aussortiert.\nBerechne, wie viele von 10.000 Roesti insgesamt aussortiert werden.",
+      "hinweise": [
+        "Berechne zuerst, wie viele das Gewicht nicht erfuellen (2% von 10.000).",
+        "Von den verbleibenden 98% erfuellen 1% das Aussehen nicht.",
+        "Addiere beide Aussortiermengen."
+      ],
+      "loesung_kurz": "298 Roesti",
+      "musterloesung": "Aussortiert Gewicht: 2% von 10.000 = 200\nVerbleibend: 9.800\nAussortiert Aussehen: 1% von 9.800 = 98\nGesamt: 200 + 98 = 298\n\nErgebnis: 298 Roesti"
+    }
   ],
-  parabeln1: [
+  "parabeln1": [
     {
-      aufgabe: "Gegeben ist f(x) = −0,5x² + 5,5.\na) Bestätige, dass der Punkt A(3|1) auf dem Graphen liegt.\nb) Begründe, warum B(−3|1) ebenfalls auf dem Graphen liegt.\nc) Berechne die Nullstellen von f.",
-      hinweise: ["Setze x = 3 in die Gleichung ein und prüfe das Ergebnis.", "Überlege, welche Eigenschaft eine nach oben geöffnete/geschlossene Parabel hat – ist sie achsensymmetrisch?", "Für die Nullstellen setze f(x) = 0 und löse nach x auf."],
-      loesung_kurz: "a) f(3) = 1 ✓  b) Symmetrie zur y-Achse  c) x = ±√11 ≈ ±3,32",
-      musterloesung: "a) f(3) = −0,5·9 + 5,5 = −4,5 + 5,5 = 1 ✓\nb) Da f gerade ist (nur gerade Potenzen), gilt f(−3) = f(3) = 1 ✓\nc) −0,5x² + 5,5 = 0 → x² = 11 → x = ±√11 ≈ ±3,32\n\nErgebnis: Nullstellen bei x = ±√11"
+      "aufgabe": "Gegeben ist f(x) = minus 0,5x² + 5,5.\na) Bestatige, dass A(3|1) auf dem Graphen liegt.\nb) Begruende, warum B(minus 3|1) ebenfalls auf dem Graphen liegt.\nc) Berechne die Nullstellen von f.",
+      "hinweise": [
+        "Setze x = 3 in die Gleichung ein und pruefe das Ergebnis.",
+        "Die Parabel ist achsensymmetrisch zur y-Achse (nur gerade Potenzen).",
+        "Fuer die Nullstellen setze f(x) = 0 und loese nach x auf."
+      ],
+      "loesung_kurz": "a) f(3) = 1 bestaetigt  b) Symmetrie zur y-Achse  c) x = plus/minus Wurzel aus 11 ca. plus/minus 3,32",
+      "musterloesung": "a) f(3) = minus 0,5 mal 9 + 5,5 = minus 4,5 + 5,5 = 1. Punkt liegt auf dem Graphen.\nb) Da f gerade ist, gilt f(minus 3) = f(3) = 1.\nc) minus 0,5x² + 5,5 = 0 -> x² = 11 -> x = plus/minus Wurzel aus 11 ca. plus/minus 3,32\n\nErgebnis: c) x = plus/minus Wurzel aus 11"
     },
     {
-      aufgabe: "Bestimme die Scheitelpunktform der Parabel f(x) = x² − 6x + 5.\nGib auch die Koordinaten des Scheitelpunkts an.",
-      hinweise: ["Ergänze quadratisch: Schreibe x² − 6x als (x − 3)² − 9.", "Forme f(x) vollständig in die Scheitelform f(x) = (x − d)² + e um.", "Der Scheitelpunkt liegt bei S(d|e)."],
-      loesung_kurz: "f(x) = (x − 3)² − 4, S(3|−4)",
-      musterloesung: "Ansatz: Quadratische Ergänzung\nf(x) = x² − 6x + 5\n= (x² − 6x + 9) − 9 + 5\n= (x − 3)² − 4\nScheitelpunkt: S(3|−4)\n\nErgebnis: f(x) = (x − 3)² − 4, Scheitelpunkt S(3|−4)"
+      "aufgabe": "Bestimme die Scheitelpunktform von f(x) = x² minus 6x + 5.\nGib auch die Koordinaten des Scheitelpunkts an.",
+      "hinweise": [
+        "Ergaenze quadratisch: Schreibe x² minus 6x als (x minus 3)² minus 9.",
+        "Forme vollstaendig in die Scheitelform um.",
+        "Der Scheitelpunkt liegt bei S(d|e) in f(x) = (x minus d)² + e."
+      ],
+      "loesung_kurz": "f(x) = (x minus 3)² minus 4, S(3|minus 4)",
+      "musterloesung": "f(x) = x² minus 6x + 5\n= (x² minus 6x + 9) minus 9 + 5\n= (x minus 3)² minus 4\nScheitelpunkt: S(3|minus 4)\n\nErgebnis: f(x) = (x minus 3)² minus 4, Scheitelpunkt S(3|minus 4)"
     },
     {
-      aufgabe: "Welche der Funktionsgleichungen passt zum abgebildeten Graphen mit Scheitelpunkt S(2|3), der nach oben geöffnet ist?\nf(x) = (x + 2)² − 3\nf(x) = −(x − 2)² + 3\nf(x) = (x − 2)² + 3\nBegründe deine Wahl.",
-      hinweise: ["Der Scheitelpunkt S(2|3) bedeutet: d = 2 und e = 3 in der Form f(x) = a(x − d)² + e.", "Ein nach oben geöffneter Graph hat a > 0.", "Welche der drei Gleichungen hat d = 2, e = 3 und a > 0?"],
-      loesung_kurz: "f(x) = (x − 2)² + 3",
-      musterloesung: "Der Scheitelpunkt S(2|3) und die Öffnung nach oben (a > 0) fordern:\nf(x) = a·(x − 2)² + 3 mit a > 0\nDie einzige passende Gleichung ist f(x) = (x − 2)² + 3.\n\nErgebnis: f(x) = (x − 2)² + 3"
+      "aufgabe": "Welche Funktionsgleichung passt zum Graphen mit Scheitelpunkt S(2|3), der nach oben geoeffnet ist?\nf(x) = (x + 2)² minus 3\nf(x) = minus(x minus 2)² + 3\nf(x) = (x minus 2)² + 3\nBegruende deine Wahl.",
+      "hinweise": [
+        "Scheitelpunkt S(2|3) bedeutet d = 2 und e = 3 in f(x) = a(x minus d)² + e.",
+        "Nach oben geoeffnet: a > 0.",
+        "Welche der drei Gleichungen hat d = 2, e = 3 und a > 0?"
+      ],
+      "loesung_kurz": "f(x) = (x minus 2)² + 3",
+      "musterloesung": "Scheitelpunkt S(2|3) und Oeffnung nach oben (a > 0) fordern:\nf(x) = (x minus 2)² + 3\n\nErgebnis: f(x) = (x minus 2)² + 3"
     },
     {
-      aufgabe: "Gegeben ist die Parabel f(x) = a·(x + 3)·(x − 3).\na) Begründe, warum der Scheitelpunkt auf der y-Achse liegt.\nb) Bestimme a so, dass die Parabel durch den Punkt C(0|4,5) verläuft.\nc) Ist die Parabel nach oben oder unten geöffnet?",
-      hinweise: ["Die Nullstellen sind x = −3 und x = 3. Der Scheitelpunkt liegt stets in der Mitte der Nullstellen.", "Setze den Punkt C(0|4,5) in die Gleichung ein: f(0) = 4,5.", "Das Vorzeichen von a bestimmt die Öffnungsrichtung."],
-      loesung_kurz: "a) Mitte der Nullstellen bei x=0  b) a = −1/2  c) nach unten",
-      musterloesung: "a) Nullstellen bei x = ±3, Mitte: x = 0 → Scheitelpunkt liegt auf y-Achse.\nb) f(0) = a·3·(−3) = −9a = 4,5 → a = −0,5\nc) a = −0,5 < 0 → Parabel öffnet nach unten.\n\nErgebnis: a = −0,5, Parabel nach unten geöffnet."
+      "aufgabe": "Gegeben ist f(x) = a mal (x + 3) mal (x minus 3).\na) Begruende, warum der Scheitelpunkt auf der y-Achse liegt.\nb) Bestimme a, sodass die Parabel durch C(0|4,5) verlaeuft.\nc) Ist die Parabel nach oben oder unten geoeffnet?",
+      "hinweise": [
+        "Die Nullstellen sind x = minus 3 und x = 3. Der Scheitelpunkt liegt in der Mitte.",
+        "Setze C(0|4,5) ein: f(0) = a mal 3 mal (minus 3) = 4,5",
+        "Das Vorzeichen von a bestimmt die Oeffnungsrichtung."
+      ],
+      "loesung_kurz": "a) Mitte der Nullstellen bei x = 0  b) a = minus 0,5  c) nach unten",
+      "musterloesung": "a) Nullstellen bei x = plus/minus 3, Mitte: x = 0 -> Scheitelpunkt auf y-Achse\nb) f(0) = a mal (minus 9) = 4,5 -> a = minus 0,5\nc) a < 0 -> Parabel oeffnet nach unten\n\nErgebnis: a = minus 0,5, Parabel nach unten geoeffnet"
     },
     {
-      aufgabe: "Berechne die Nullstellen der Funktion f(x) = 2x² − 8.\nGib die Lösungen exakt und als Dezimalzahl an.",
-      hinweise: ["Setze f(x) = 0 und forme nach x² um.", "Ziehe die Wurzel – achte auf ± (beide Lösungen!).", "√4 = 2."],
-      loesung_kurz: "x = ±2",
-      musterloesung: "Ansatz: 2x² − 8 = 0\n2x² = 8\nx² = 4\nx = ±√4 = ±2\n\nErgebnis: x₁ = 2 und x₂ = −2"
+      "aufgabe": "Berechne die Nullstellen von f(x) = 2x² minus 8.\nGib die Loesungen exakt an.",
+      "hinweise": [
+        "Setze f(x) = 0 und forme nach x² um.",
+        "Ziehe die Wurzel - achte auf plus/minus.",
+        "Wurzel aus 4 = 2."
+      ],
+      "loesung_kurz": "x = plus/minus 2",
+      "musterloesung": "2x² minus 8 = 0\n2x² = 8\nx² = 4\nx = plus/minus 2\n\nErgebnis: x1 = 2 und x2 = minus 2"
     },
     {
-      aufgabe: "Die Funktion u(x) = −x² + 4x + 11 beschreibt den Umfang von Rechtecken unter einer Parabel.\na) Bestimme den Scheitelpunkt von u.\nb) Erkläre die Bedeutung des Scheitelpunkts im Sachkontext.",
-      hinweise: ["Forme u in die Scheitelpunktform um: quadratische Ergänzung oder Scheitelformel x_S = −b/(2a).", "Berechne dann u(x_S) für den y-Wert des Scheitelpunkts.", "Der Scheitelpunkt gibt das Maximum oder Minimum des Umfangs an."],
-      loesung_kurz: "S(2|15)",
-      musterloesung: "Ansatz: x_S = −b/(2a) = −4/(2·(−1)) = 2\nu(2) = −4 + 8 + 11 = 15\nScheitelpunkt: S(2|15)\nBedeutung: Das Rechteck mit x-Koordinate 2 hat den größten Umfang von 15 cm.\n\nErgebnis: S(2|15) – maximaler Umfang beträgt 15 cm."
-    },
+      "aufgabe": "Die Funktion u(x) = minus x² + 4x + 11 beschreibt den Umfang von Rechtecken unter einer Parabel.\na) Bestimme den Scheitelpunkt von u.\nb) Erklaere die Bedeutung des Scheitelpunkts im Sachkontext.",
+      "hinweise": [
+        "Forme u in die Scheitelpunktform um: x_S = minus b / (2a)",
+        "Berechne dann u(x_S) fuer den y-Wert.",
+        "Der Scheitelpunkt gibt das Maximum des Umfangs an."
+      ],
+      "loesung_kurz": "S(2|15)",
+      "musterloesung": "x_S = minus 4 / (2 mal (minus 1)) = 2\nu(2) = minus 4 + 8 + 11 = 15\nScheitelpunkt: S(2|15)\nBedeutung: Das Rechteck bei x = 2 hat den groessten Umfang von 15 cm.\n\nErgebnis: S(2|15)"
+    }
   ],
-  volumen: [
+  "volumen": [
     {
-      aufgabe: "Aufgabe: Aufgeblasen\nLino möchte das Volumen eines Luftballons bestimmen. Er misst bei einem aufgepumpten Luftballon einen Umfang von 55,8 cm. Lino betrachtet den Ballon vereinfacht als Kugel.\n\na) Zeige rechnerisch, dass er so das Volumen des Ballons mit ca. 2950 cm³ abschätzen kann.\nb) Begründe, warum das tatsächliche Volumen des Luftballons größer sein muss als diese Kugelabschätzung.\n\nLino möchte das Volumen genauer bestimmen. Er verwendet einen Glaszylinder mit einer Grundfläche von 530 cm² und füllt 8 Liter Wasser hinein. Er taucht den Ballon vollständig unter – der Wasserstand steigt dabei um 5,7 cm.\n\nc) Berechne die Höhe des Wasserstands im Zylinder vor dem Eintauchen.\nd) Zeige, dass der Luftballon ein Volumen von ca. 3020 cm³ hat.\ne) Berechne, um wie viel Prozent das durch eine Kugel abgeschätzte Volumen von 2950 cm³ kleiner ist als das durch Eintauchen bestimmte Volumen von 3020 cm³.",
-      hinweise: ["Für a): Berechne aus dem Umfang U = 2πr zunächst den Radius r. Setze r dann in V = 4/3 · π · r³ ein.", "Für b): Überlege, welche Form ein Luftballon wirklich hat – ist er eine perfekte Kugel? Wo könnte das Volumen größer sein?", "Für d): Das verdrängte Wasservolumen entspricht dem Ballonvolumen. V = Grundfläche · Höhenanstieg.", "Für e): Berechne die prozentuale Abweichung: (Differenz / größerer Wert) · 100 %."],
-      loesung_kurz: "a) r ≈ 8,88 cm → V ≈ 2950 cm³ ✓  c) h ≈ 15,1 cm  d) V = 3021 cm³  e) ca. 2,3 %",
-      musterloesung: "a) Ansatz: U = 2πr → r = 55,8 / (2π) ≈ 8,88 cm\nV = 4/3 · π · 8,88³ ≈ 4/3 · π · 699,6 ≈ 2950 cm³ ✓\nb) Ein Luftballon ist nicht perfekt kugelförmig – er hat oben und unten ausgeprägtere Wölbungen und einen Knoten. Das tatsächliche Volumen ist daher größer als das der einbeschriebenen Kugel.\nc) V_Wasser = 8 Liter = 8000 cm³\nh = 8000 / 530 ≈ 15,09 cm\nd) V_Ballon = Grundfläche · Höhenanstieg = 530 · 5,7 = 3021 cm³ ≈ 3020 cm³ ✓\ne) Differenz: 3020 − 2950 = 70 cm³\nProzent: 70 / 3020 · 100 % ≈ 2,3 %\n\nErgebnis: Das Kugelvolumen ist ca. 2,3 % kleiner als das durch Eintauchen bestimmte Volumen."
+      "aufgabe": "Aufgabe: Aufgeblasen\nLino moechte das Volumen eines Luftballons bestimmen. Er misst einen Umfang von 55,8 cm. Lino betrachtet den Ballon vereinfacht als Kugel.\n\na) Zeige rechnerisch, dass er so das Volumen mit ca. 2950 cm³ abschaetzen kann.\nb) Begruende, warum das tatsaechliche Volumen groesser sein muss als diese Kugelabschaetzung.\n\nLino verwendet einen Glaszylinder mit einer Grundflaeche von 530 cm² und fuellt 8 Liter Wasser hinein. Er taucht den Ballon vollstaendig unter - der Wasserstand steigt um 5,7 cm.\n\nc) Berechne die Hoehe des Wasserstands vor dem Eintauchen.\nd) Zeige, dass der Luftballon ein Volumen von ca. 3020 cm³ hat.\ne) Berechne, um wie viel Prozent das Kugelvolumen von 2950 cm³ kleiner ist als das durch Eintauchen bestimmte Volumen von 3020 cm³.",
+      "hinweise": [
+        "Fuer a): Berechne aus dem Umfang U = 2 mal pi mal r den Radius r. Setze r dann in V = 4/3 mal pi mal r³ ein.",
+        "Fuer b): Ist ein Luftballon eine perfekte Kugel? Wo koennte mehr Volumen sein?",
+        "Fuer d): V = Grundflaeche mal Hoehenzunahme = 530 mal 5,7",
+        "Fuer e): Differenz durch den groesseren Wert mal 100%"
+      ],
+      "loesung_kurz": "a) r ca. 8,88 cm, V ca. 2950 cm³  c) ca. 15,1 cm  d) V = 3021 cm³  e) ca. 2,3%",
+      "musterloesung": "a) r = 55,8 / (2 mal pi) ca. 8,88 cm\nV = 4/3 mal pi mal 8,88³ ca. 2950 cm³\nb) Ein Luftballon ist nicht perfekt kugelfoermig, er hat oben und unten Woelbungen. Das Volumen ist groesser.\nc) V_Wasser = 8000 cm³; h = 8000 / 530 ca. 15,1 cm\nd) V_Ballon = 530 mal 5,7 = 3021 cm³ ca. 3020 cm³\ne) Differenz: 70 cm³; 70 / 3020 mal 100% ca. 2,3%\n\nErgebnis: a) ca. 2950 cm³  c) ca. 15,1 cm  d) 3021 cm³  e) ca. 2,3%"
     },
     {
-      aufgabe: "Aufgabe: Rösti\nEin Unternehmen stellt aus Kartoffeln sogenannte Rösti her. Der Teig wird in eine zylindrische Form gegossen und anschließend gebacken. Für ein Rösti benötigt man 100 g Teig. 100 g Teig haben ein Volumen von 81 cm³.\n\na) Berechne, wie viel Gramm ein Kubikzentimeter Teig wiegt.\nb) Ein Rösti soll 2 cm dick sein und ein Volumen von 81 cm³ haben. Zeige, dass die zylindrische Form einen Durchmesser von ca. 7,2 cm haben muss.\nc) Das Unternehmen möchte zusätzlich Mini-Rösti herstellen. Ein Mini-Rösti soll ebenfalls 2 cm dick sein, aber nur das halbe Volumen haben. Ein Mitarbeiter behauptet: „Für ein Mini-Rösti brauchen wir eine Form mit halbem Durchmesser!" Hat er recht? Begründe deine Entscheidung.\n\nBevor die Rösti verpackt werden, wird zuerst das Gewicht und dann das Aussehen kontrolliert. Bei der Gewichtskontrolle erfüllen 98 % die Vorgabe. Die anderen werden direkt aussortiert. Bei der anschließenden Kontrolle des Aussehens erfüllen 99 % die Vorgabe. Erneut werden die restlichen aussortiert.\n\nd) Bei einer Kontrolle werden insgesamt 447 Rösti aussortiert. Berechne, wie viele Rösti vermutlich insgesamt kontrolliert wurden.",
-      hinweise: ["Für b): V = π · r² · h. Stelle die Formel nach r um, dann d = 2r.", "Für c): Wenn das Volumen halbiert wird, halbiert sich dann auch der Radius? Überlege: V ~ r², also was passiert mit r bei halbem V?", "Für d): Der Anteil der aussortierten Rösti ergibt sich aus: 2 % (Gewicht) + 1 % von 98 % (Aussehen). Berechne den Gesamtprozentsatz, dann die Grundmenge."],
-      loesung_kurz: "a) ca. 1,23 g/cm³  b) d ≈ 7,2 cm ✓  c) Nein, d wird durch √2 geteilt  d) ca. 22.350 Rösti",
-      musterloesung: "a) 100 g / 81 cm³ ≈ 1,23 g/cm³\nb) 81 = π · r² · 2 → r² = 81/(2π) ≈ 12,89 → r ≈ 3,59 cm → d = 7,18 cm ≈ 7,2 cm ✓\nc) Bei halbem Volumen und gleicher Höhe: π · r²_neu · 2 = 40,5 → r²_neu = 40,5/(2π) ≈ 6,44 → r_neu ≈ 2,54 cm\nd_neu ≈ 5,08 cm ≠ 3,6 cm (halber Durchmesser). Der Mitarbeiter hat nicht recht.\nd) Aussortiert gesamt: 2 % + 0,98 % = 2,98 % von n = 447\nn = 447 / 0,0298 ≈ 15.000 Rösti\n\nErgebnis: a) 1,23 g/cm³  b) ✓  c) Nein  d) ca. 15.000 Rösti"
+      "aufgabe": "Aufgabe: Roesti\nEin Unternehmen stellt aus Kartoffeln Roesti her. Der Teig wird in eine zylindrische Form gegossen. Fuer ein Roesti benoetigt man 100 g Teig. 100 g Teig haben ein Volumen von 81 cm³.\n\na) Berechne, wie viel Gramm ein Kubikzentimeter Teig wiegt.\nb) Ein Roesti soll 2 cm dick und 81 cm³ gross sein. Zeige, dass die Form einen Durchmesser von ca. 7,2 cm braucht.\nc) Ein Mini-Roesti soll auch 2 cm dick sein, aber nur das halbe Volumen haben. Ein Mitarbeiter behauptet: Fuer ein Mini-Roesti brauchen wir eine Form mit halbem Durchmesser! Hat er recht? Begruende.\n\nBei der Gewichtskontrolle erfuellen 98% die Vorgabe, bei der Aussehenskontrolle danach 99%.\n\nd) Bei einer Kontrolle werden 447 Roesti aussortiert. Berechne, wie viele vermutlich kontrolliert wurden.",
+      "hinweise": [
+        "Fuer b): V = pi mal r² mal h, nach r umstellen, dann d = 2r.",
+        "Fuer c): Bei halbem Volumen und gleicher Hoehe: was passiert mit r? V ist proportional zu r², nicht zu r.",
+        "Fuer d): Anteil aussortiert = 2% + 1% von 98% = 2,98%. Berechne die Grundmenge."
+      ],
+      "loesung_kurz": "a) ca. 1,23 g/cm³  b) d ca. 7,2 cm  c) Nein, d wird durch Wurzel aus 2 geteilt  d) ca. 15.000 Roesti",
+      "musterloesung": "a) 100 / 81 ca. 1,23 g/cm³\nb) 81 = pi mal r² mal 2 -> r² ca. 12,89 -> r ca. 3,59 cm -> d ca. 7,18 cm ca. 7,2 cm\nc) Bei halbem Volumen: r_neu = r / Wurzel aus 2, also d_neu ca. 5,09 cm, nicht d/2 = 3,6 cm. Mitarbeiter hat nicht recht.\nd) 2% + 0,98% = 2,98%; n = 447 / 0,0298 ca. 15.000\n\nErgebnis: a) 1,23 g/cm³  b) d ca. 7,2 cm  c) Nein  d) ca. 15.000"
     },
     {
-      aufgabe: "Aufgabe: Wassermelonen\nFür ein Schulprojekt beschäftigt sich Sinja mit der Form und dem Wachstum von Wassermelonen. Sie kauft eine nahezu kugelförmige Wassermelone mit einem Durchmesser von ca. 25 cm.\n\na) Zeige rechnerisch, dass diese Wassermelone ein Volumen von V ≈ 8200 cm³ hat.\nb) Die Schale der Wassermelone hat eine Dicke von 1,5 cm. Berechne den prozentualen Anteil des Fruchtfleisches am Gesamtvolumen.\n\nSinja entdeckt würfelförmige Wassermelonen aus Japan.\n\nc) Eine würfelförmige Wassermelone hat ebenfalls ein Volumen von V = 8200 cm³. Bestätige durch eine Rechnung, dass diese Wassermelone eine Kantenlänge von ca. 20,2 cm hat.\nd) Entscheide durch eine Rechnung, ob die kugelförmige oder die würfelförmige Wassermelone eine größere Oberfläche hat.\n\nWassermelonen verdoppeln ihr Gewicht pro Woche unter idealen Wachstumsbedingungen. Sinja betrachtet eine Wassermelone, die zu Beginn der Beobachtung 400 g wiegt.\n\ne) Berechne das Gewicht nach 4 Wochen.\nf) Sinja behauptet: „Der Wachstumsgraph ist eine Gerade." Hat Sinja recht? Begründe.",
-      hinweise: ["Für a): V = 4/3 · π · r³ mit r = 12,5 cm.", "Für b): Das Fruchtfleisch hat Radius r = 12,5 − 1,5 = 11 cm. Berechne sein Volumen und den prozentualen Anteil.", "Für c): Forme V = a³ nach a um: a = ∛V.", "Für f): Überlege, ob die Zunahme pro Woche immer gleich groß ist (linear) oder immer größer wird (exponentiell)."],
-      loesung_kurz: "a) ≈ 8181 cm³ ✓  b) ca. 67,4 %  c) a ≈ 20,2 cm ✓  d) Kugel hat kleinere Oberfläche  e) 6400 g  f) Nein, exponentiell",
-      musterloesung: "a) r = 12,5 cm; V = 4/3 · π · 12,5³ ≈ 8181 cm³ ≈ 8200 cm³ ✓\nb) r_Fleisch = 11 cm; V_Fleisch = 4/3 · π · 11³ ≈ 5575 cm³\nAnteil = 5575 / 8181 · 100 % ≈ 68,1 %\nc) a = ∛8200 ≈ 20,17 cm ≈ 20,2 cm ✓\nd) O_Kugel = 4π · 12,5² ≈ 1963 cm²\nO_Würfel = 6 · 20,2² ≈ 2448 cm² → Würfel hat größere Oberfläche\ne) W(4) = 400 · 2⁴ = 400 · 16 = 6400 g\nf) Nein. Die Zunahme wird jede Woche größer (Woche 1: +400 g, Woche 2: +800 g usw.) → kein lineares, sondern exponentielles Wachstum.\n\nErgebnis: a)–f) siehe oben."
+      "aufgabe": "Aufgabe: Wassermelonen\nSinja beschaeftigt sich mit Wassermelonen. Sie kauft eine kugelfoermige Wassermelone mit einem Durchmesser von ca. 25 cm.\n\na) Zeige rechnerisch, dass diese Wassermelone ein Volumen von V ca. 8200 cm³ hat.\nb) Die Schale ist 1,5 cm dick. Berechne den prozentualen Anteil des Fruchtfleisches.\n\nSinja entdeckt wuerfelfoermige Wassermelonen aus Japan.\n\nc) Eine wuerfelfoermige Wassermelone hat V = 8200 cm³. Bestatige, dass die Kantenlaenge ca. 20,2 cm betraegt.\nd) Entscheide, ob die kugelfoermige oder die wuerfelfoermige Wassermelone eine groessere Oberflaeche hat.\n\nWassermelonen verdoppeln ihr Gewicht pro Woche unter idealen Bedingungen. Startgewicht: 400 g.\n\ne) Berechne das Gewicht nach 4 Wochen.\nf) Sinja behauptet: Der Wachstumsgraph ist eine Gerade. Hat sie recht? Begruende.",
+      "hinweise": [
+        "Fuer a): V = 4/3 mal pi mal r³ mit r = 12,5 cm.",
+        "Fuer b): Fruchtfleisch-Radius = 12,5 minus 1,5 = 11 cm.",
+        "Fuer c): Forme V = a³ nach a um.",
+        "Fuer f): Bei linearem Wachstum waere die Zunahme pro Woche konstant. Ist das hier so?"
+      ],
+      "loesung_kurz": "a) ca. 8181 cm³  b) ca. 68%  c) a ca. 20,2 cm  d) Wuerfel hat groessere Oberflaeche  e) 6400 g  f) Nein, exponentiell",
+      "musterloesung": "a) V = 4/3 mal pi mal 12,5³ ca. 8181 cm³ ca. 8200 cm³\nb) V_Fleisch = 4/3 mal pi mal 11³ ca. 5575 cm³; Anteil = 5575/8181 ca. 68%\nc) a = Kubikwurzel aus 8200 ca. 20,17 cm ca. 20,2 cm\nd) O_Kugel = 4pi mal 12,5² ca. 1963 cm²; O_Wuerfel = 6 mal 20,2² ca. 2448 cm²: Wuerfel groesser\ne) W(4) = 400 mal 2⁴ = 6400 g\nf) Nein. Die Zunahme wird jede Woche groesser -> exponentiell, nicht linear.\n\nErgebnis: a) ca. 8200 cm³  b) ca. 68%  c) ca. 20,2 cm  d) Wuerfel  e) 6400 g  f) Nein"
     },
     {
-      aufgabe: "Aufgabe: Schwimmbecken\nDie Gemeinde Sonnenhausen plant den Bau eines neuen Freibades. Das Hauptbecken soll die Form eines Quaders haben: 50 m lang, 20 m breit und 1,8 m tief.\n\na) Berechne das Volumen des Beckens in Kubikmetern und in Litern.\nb) Eine Pumpe füllt das Becken mit 12.000 Litern pro Stunde. Wie viele Stunden werden benötigt, um das Becken vollständig zu füllen? Gib das Ergebnis in vollen Stunden an.\n\nNebenan soll ein kreisrundes Planschbecken für Kleinkinder entstehen. Es hat einen Durchmesser von 8 m und ist 0,4 m tief.\n\nc) Berechne das Volumen des Planschbeckens in Litern.\nd) Das Wasser des Planschbeckens soll täglich komplett ausgetauscht werden. In der Ferienzeit läuft das Becken 30 Tage lang täglich. Berechne, wie viele Kubikmeter Wasser insgesamt benötigt werden.\ne) Der Wasserpreis beträgt 2,35 € pro Kubikmeter. Berechne die Kosten für das Wasser im Planschbecken während der gesamten Ferienzeit.",
-      hinweise: ["Für a): V = l · b · h; 1 m³ = 1000 Liter.", "Für b): Teile das Gesamtvolumen in Litern durch die Pumpenleistung.", "Für c): V_Zylinder = π · r² · h mit r = 4 m.", "Für e): Multipliziere das Volumen mit dem Preis pro Kubikmeter."],
-      loesung_kurz: "a) 1800 m³ = 1.800.000 L  b) 150 h  c) ca. 20.106 L ≈ 20,1 m³  d) 603 m³  e) ca. 1417 €",
-      musterloesung: "a) V = 50 · 20 · 1,8 = 1800 m³ = 1.800.000 Liter\nb) t = 1.800.000 / 12.000 = 150 Stunden\nc) V = π · 4² · 0,4 = π · 16 · 0,4 ≈ 20,11 m³ = 20.110 Liter\nd) 30 · 20,11 m³ = 603,2 m³\ne) 603,2 · 2,35 € ≈ 1417,52 €\n\nErgebnis: a) 1800 m³  b) 150 h  c) ≈ 20.110 L  d) ≈ 603 m³  e) ≈ 1418 €"
+      "aufgabe": "Aufgabe: Schwimmbecken\nDie Gemeinde Sonnenhausen plant ein Freibad. Das Hauptbecken hat die Form eines Quaders: 50 m lang, 20 m breit, 1,8 m tief.\n\na) Berechne das Volumen in Kubikmetern und in Litern.\nb) Eine Pumpe fuellt das Becken mit 12.000 Litern pro Stunde. Wie viele Stunden werden benoetigt?\n\nNebenan soll ein kreisrundes Planschbecken entstehen: Durchmesser 8 m, Tiefe 0,4 m.\n\nc) Berechne das Volumen des Planschbeckens in Litern.\nd) Das Wasser wird taeglich gewechselt, 30 Tage lang. Berechne das benoetiate Gesamtvolumen in m³.\ne) Der Wasserpreis betraegt 2,35 Euro pro m³. Berechne die Kosten fuer die Ferienzeit.",
+      "hinweise": [
+        "Fuer a): V = l mal b mal h; 1 m³ = 1000 Liter",
+        "Fuer b): Teile das Gesamtvolumen in Litern durch die Pumpenleistung.",
+        "Fuer c): V_Zylinder = pi mal r² mal h mit r = 4 m",
+        "Fuer e): Multipliziere das Volumen mit dem Preis pro m³."
+      ],
+      "loesung_kurz": "a) 1800 m³ = 1.800.000 L  b) 150 h  c) ca. 20.110 L  d) ca. 603 m³  e) ca. 1418 Euro",
+      "musterloesung": "a) V = 50 mal 20 mal 1,8 = 1800 m³ = 1.800.000 Liter\nb) t = 1.800.000 / 12.000 = 150 Stunden\nc) V = pi mal 4² mal 0,4 ca. 20,11 m³ = 20.110 Liter\nd) 30 mal 20,11 = 603,3 m³\ne) 603,3 mal 2,35 ca. 1418 Euro\n\nErgebnis: a) 1800 m³  b) 150 h  c) ca. 20.110 L  d) ca. 603 m³  e) ca. 1418 Euro"
     },
     {
-      aufgabe: "Aufgabe: Trinkflasche\nEine Schülerin möchte eine nachhaltige Trinkflasche kaufen. Sie vergleicht zwei Modelle:\nModell A ist zylinderförmig mit einem Durchmesser von 7 cm und einer Höhe von 22 cm.\nModell B ist ebenfalls zylinderförmig, hat aber einen Durchmesser von 8 cm und eine Höhe von 18 cm.\n\na) Berechne das Volumen beider Flaschen in cm³ und in Millilitern.\nb) Modell A kostet 18,99 €, Modell B kostet 22,50 €. Berechne jeweils den Preis pro 100 ml und entscheide, welches Modell das bessere Preis-Volumen-Verhältnis hat.\n\nModell A hat einen zylinderförmigen Deckel mit einem Außendurchmesser von 7 cm und einer Höhe von 3 cm. Der Deckel ist aus Kunststoff und hat eine Wandstärke von 0,3 cm (Boden und Seiten gleich stark).\n\nc) Berechne das Volumen des Hohlraums im Deckel (also das Innenvolumen).\nd) Die Schülerin behauptet: „Wenn ich eine zweite Flasche von Typ A kaufe, haben beide zusammen mehr als 1,5 Liter Fassungsvermögen." Überprüfe diese Behauptung rechnerisch.",
-      hinweise: ["Für a): V = π · r² · h; 1 cm³ = 1 ml.", "Für b): Preis pro ml = Preis / Volumen in ml, dann mal 100.", "Für c): Innenmaße: Innendurchmesser = 7 − 2·0,3 = 6,4 cm; Innenhöhe = 3 − 0,3 = 2,7 cm.", "Für d): Vergleiche 2 · V_A mit 1500 ml."],
-      loesung_kurz: "a) A: ≈ 846 ml, B: ≈ 905 ml  b) A: 2,24 €/100ml, B: 2,49 €/100ml → A günstiger  c) ≈ 86,8 cm³  d) Nein, 2·846 = 1692 ml > 1500 ml → Behauptung stimmt",
-      musterloesung: "a) V_A = π · 3,5² · 22 ≈ 846 cm³ = 846 ml\nV_B = π · 4² · 18 ≈ 905 cm³ = 905 ml\nb) A: 18,99 / 846 · 100 ≈ 2,24 €/100ml\nB: 22,50 / 905 · 100 ≈ 2,49 €/100ml → Modell A ist günstiger\nc) r_innen = 3,5 − 0,3 = 3,2 cm; h_innen = 3 − 0,3 = 2,7 cm\nV_innen = π · 3,2² · 2,7 ≈ 86,8 cm³\nd) 2 · 846 = 1692 ml > 1500 ml → Die Behauptung stimmt.\n\nErgebnis: a) 846 ml / 905 ml  b) Modell A  c) ≈ 87 cm³  d) Behauptung stimmt."
+      "aufgabe": "Aufgabe: Lautsprecher\nChris vergleicht zwei Lautsprecher-Modelle. Modell Echo ist zylinderfoermig (Durchmesser 8,8 cm) und hat ein Volumen von ca. 906 cm³.\n\na) Berechne die Hoehe des Lautsprechers.\n\nModell Dot ist nahezu kugelfoermig mit einem Durchmesser von 10 cm. Damit es stabil steht, hat der Hersteller unten ein Kugelsegment abgetrennt. Das Volumen des Segments berechnet sich mit:\nV_Segment = pi mal b² mal (r minus b/3)\nhierbei ist b = 1,1 cm die Hoehe des Segments und r der Kugelradius.\n\nb) Bestatige, dass das Volumen des abgetrennten Segments ca. 3% des Kugelvolumens betraegt.",
+      "hinweise": [
+        "Fuer a): V = pi mal r² mal h. Forme nach h um. r = 4,4 cm.",
+        "Fuer b): Berechne V_Kugel = 4/3 mal pi mal 5³ und V_Segment mit r = 5 cm, b = 1,1 cm.",
+        "Berechne dann den prozentualen Anteil: V_Segment / V_Kugel mal 100%."
+      ],
+      "loesung_kurz": "a) h ca. 14,9 cm  b) ca. 3,4% ca. 3%",
+      "musterloesung": "a) 906 = pi mal 4,4² mal h -> h = 906 / (pi mal 19,36) ca. 14,9 cm\nb) V_Kugel = 4/3 mal pi mal 125 ca. 523,6 cm³\nV_Segment = pi mal 1,21 mal (5 minus 1,1/3) ca. 17,6 cm³\nAnteil = 17,6 / 523,6 mal 100% ca. 3,4% ca. 3%\n\nErgebnis: a) ca. 14,9 cm  b) ca. 3%"
     },
     {
-      aufgabe: "Aufgabe: Campingkocher\nAuf einer Fahrradtour benutzt Finn einen Campingkocher mit einer kleinen Gaskartusche. Die Kartusche hat näherungsweise die Form eines Zylinders mit einem Durchmesser von 9 cm und einer Höhe von 12 cm. Oben ist ein halbkugelförmiger Abschluss mit dem gleichen Radius aufgesetzt.\n\na) Berechne das Gesamtvolumen der Kartusche (Zylinder + Halbkugel).\nb) Die Kartusche enthält 230 g Gas. Berechne, wie viel Gramm Gas in einem Kubikzentimeter der Kartusche stecken.\n\nFinn möchte Wasser kochen. Er gibt 0,6 Liter Wasser in einen zylinderförmigen Topf mit einem Innendurchmesser von 14 cm.\n\nc) Berechne die Wasserstandshöhe im Topf.\nd) Finn schätzt ab: „Der Topf fasst ungefähr 1,5 Liter." Der Topf hat eine Innenhöhe von 10 cm. Überprüfe Finns Schätzung.\ne) Finn behauptet: „Wenn ich nur halb so viel Wasser nehme wie im Topf, sinkt der Wasserstand auf die Hälfte." Hat er recht? Begründe.",
-      hinweise: ["Für a): V_Zylinder = π · r² · h; V_Halbkugel = 1/2 · 4/3 · π · r³. Addiere beide.", "Für b): Masse / Volumen ergibt die Dichte in g/cm³.", "Für c): V = π · r² · h, nach h umformen. r = 7 cm.", "Für e): Der Zusammenhang zwischen Wasservolumen und Wasserhöhe ist linear bei konstantem Querschnitt."],
-      loesung_kurz: "a) ≈ 1144 cm³  b) ≈ 0,20 g/cm³  c) ≈ 3,9 cm  d) ≈ 1539 ml ≈ 1,5 L ✓  e) Ja, weil Zylinder konstanten Querschnitt hat",
-      musterloesung: "a) r = 4,5 cm\nV_Zyl = π · 4,5² · 12 ≈ 763,4 cm³\nV_Halbkugel = 1/2 · 4/3 · π · 4,5³ ≈ 190,9 cm³\nV_gesamt ≈ 954,3 cm³\nb) 230 / 954,3 ≈ 0,241 g/cm³\nc) 0,6 L = 600 cm³; h = 600 / (π · 7²) ≈ 600 / 153,9 ≈ 3,9 cm\nd) V_max = π · 7² · 10 ≈ 1539 cm³ ≈ 1,54 L ≈ 1,5 L ✓\ne) Ja. Da der Topf zylinderförmig ist (konstante Grundfläche), ist V = A · h, also h proportional zu V. Halbiert man V, halbiert sich auch h.\n\nErgebnis: a) ≈ 954 cm³  b) ≈ 0,24 g/cm³  c) ≈ 3,9 cm  d) ✓  e) Ja."
-    },
+      "aufgabe": "Aufgabe: Campingkocher\nFinn benutzt auf einer Fahrradtour einen Campingkocher. Die Gaskartusche hat die Form eines Zylinders (Durchmesser 9 cm, Hoehe 12 cm) mit einem halbkugelfoermigen Abschluss oben (gleicher Radius).\n\na) Berechne das Gesamtvolumen der Kartusche (Zylinder + Halbkugel).\nb) Die Kartusche enthaelt 230 g Gas. Berechne die Dichte in g/cm³.\n\nFinn gibt 0,6 Liter Wasser in einen Topf mit Innendurchmesser 14 cm.\n\nc) Berechne die Wasserstandshoehe im Topf.\nd) Der Topf hat eine Innenhoehe von 10 cm. Ueberpruefe: Fasst er ca. 1,5 Liter?\ne) Finn behauptet: Wenn ich halb so viel Wasser nehme, sinkt der Wasserstand auf die Haelfte. Hat er recht? Begruende.",
+      "hinweise": [
+        "Fuer a): V_Zylinder = pi mal r² mal h; V_Halbkugel = 1/2 mal 4/3 mal pi mal r³. r = 4,5 cm.",
+        "Fuer c): V = pi mal r² mal h, nach h umstellen. r = 7 cm.",
+        "Fuer e): Der Zusammenhang zwischen Wasservolumen und Hoehe ist linear bei konstantem Querschnitt."
+      ],
+      "loesung_kurz": "a) ca. 954 cm³  b) ca. 0,24 g/cm³  c) ca. 3,9 cm  d) ca. 1539 ml = 1,5 L  e) Ja",
+      "musterloesung": "a) V_Zyl = pi mal 4,5² mal 12 ca. 763 cm³\nV_Halb = 1/2 mal 4/3 mal pi mal 4,5³ ca. 191 cm³\nGesamt ca. 954 cm³\nb) 230 / 954 ca. 0,241 g/cm³\nc) 600 cm³ = pi mal 7² mal h -> h = 600 / (pi mal 49) ca. 3,9 cm\nd) V_max = pi mal 49 mal 10 ca. 1539 cm³ = 1,54 L ca. 1,5 L\ne) Ja. Zylinder hat konstante Grundflaeche: V = A mal h, also h proportional zu V.\n\nErgebnis: a) ca. 954 cm³  b) ca. 0,24 g/cm³  c) ca. 3,9 cm  d) ca. 1,5 L  e) Ja"
+    }
   ],
-  exponential: [
+  "exponential": [
     {
-      aufgabe: "Aufgabe: Fruchtfliegen\nJasmin möchte für ein Biologieprojekt untersuchen, wie schnell sich Fruchtfliegen vermehren. Sie kauft drei Zuchtboxen (A, B und C). Zuchtbox A enthält anfänglich 10 Fruchtfliegen. Jasmin protokolliert die Anzahl der Tiere täglich:\n\nTag 0: 10 Fliegen | Tag 1: 13 Fliegen | Tag 2: 17 Fliegen | Tag 3: 22 Fliegen\n\nJasmin stellt die Funktion f(x) = 10 · 1,3^x auf.\n\na) Die Anzahl der Fliegen in Box A wächst täglich um ca. 30 %. Weise dies für den Übergang von Tag 0 auf Tag 1 nach.\nb) Bestimme die voraussichtliche Anzahl an Fruchtfliegen nach 30 Tagen.\nc) Bestimme, nach wie vielen Tagen die Anzahl erstmals größer als 100.000 sein müsste.\n\nZuchtbox B enthält anfänglich 20 Fruchtfliegen und wird im kühleren Keller aufbewahrt. Die Funktion g(x) = 20 · 1,13^x beschreibt ihre Entwicklung.\n\nd) Begründe, warum f durch einen steileren Graphen dargestellt wird als g.\ne) Bestimme mithilfe einer Wertetabelle (x = 0, 5, 10, 15) den Tag, an dem beide Boxen etwa gleich viele Fliegen enthalten.",
-      hinweise: ["Für a): f(1) = 10 · 1,3 = 13. Prozentualer Zuwachs: (f(1) − f(0)) / f(0) · 100 %.", "Für b): Setze x = 30 in f(x) ein.", "Für c): Löse 10 · 1,3^x = 100.000 durch schrittweises Probieren.", "Für d): Vergleiche die Wachstumsfaktoren 1,3 und 1,13 sowie die Startwerte.", "Für e): Berechne f und g für x = 0, 5, 10, 15 und achte auf den Schnittpunkt."],
-      loesung_kurz: "a) 30 % ✓  b) ≈ 262.000  c) ab Tag 36  d) größerer Wachstumsfaktor  e) ca. Tag 10",
-      musterloesung: "a) f(0) = 10, f(1) = 13. Zuwachs: (13−10)/10 · 100% = 30% ✓\nb) f(30) = 10 · 1,3^30 ≈ 262.000\nc) 10 · 1,3^x = 100.000 → 1,3^x = 10.000 → Probieren: 1,3^35 ≈ 9727, 1,3^36 ≈ 12.645 → ab Tag 36\nd) f hat Wachstumsfaktor 1,3 > 1,13 von g → f wächst schneller → steilerer Graph. Startwert von g ist größer, aber der Wachstumsfaktor entscheidet langfristig.\ne) Wertetabelle:\nx=0: f=10, g=20 | x=5: f≈37, g≈37 | x=10: f≈138, g≈68\nBei ca. x=5 sind beide Boxen gleich (≈37 Fliegen).\n\nErgebnis: a) ✓  b) ≈ 262.000  c) Tag 36  d) Wachstumsfaktor größer  e) ca. Tag 5"
+      "aufgabe": "Aufgabe: Fruchtfliegen\nJasmin untersucht Fruchtfliegen. Zuchtbox A enthaelt anfaenglich 10 Fliegen. Tagesprotokoll: Tag 0: 10, Tag 1: 13, Tag 2: 17, Tag 3: 22.\n\nJasmin stellt die Funktion f(x) = 10 mal 1,3 hoch x auf.\n\na) Die Fliegen wachsen taeglich um ca. 30%. Weise dies fuer Tag 0 auf Tag 1 nach.\nb) Bestimme die voraussichtliche Anzahl nach 30 Tagen.\nc) Nach wie vielen Tagen uebersteigt die Anzahl erstmals 100.000?\n\nZuchtbox B enthaelt 20 Fliegen und waechst laut g(x) = 20 mal 1,13 hoch x.\n\nd) Begruende, warum f durch einen steileren Graphen dargestellt wird als g.\ne) Erstelle eine Wertetabelle (x = 0, 5, 10) und bestimme, wann beide Boxen etwa gleich viele Fliegen enthalten.",
+      "hinweise": [
+        "Fuer a): f(1) = 13. Prozentualer Zuwachs: (13 minus 10) / 10 mal 100%.",
+        "Fuer b): Setze x = 30 ein.",
+        "Fuer c): Probiere verschiedene x-Werte bis f(x) > 100.000.",
+        "Fuer d): Vergleiche die Wachstumsfaktoren 1,3 und 1,13."
+      ],
+      "loesung_kurz": "a) 30%  b) ca. 262.000  c) ab Tag 36  d) Wachstumsfaktor 1,3 > 1,13  e) ca. Tag 5",
+      "musterloesung": "a) f(0) = 10, f(1) = 13. Zuwachs: 3/10 = 30%\nb) f(30) = 10 mal 1,3 hoch 30 ca. 262.000\nc) Probieren: 1,3 hoch 35 ca. 9727, 1,3 hoch 36 ca. 12.645 -> ab Tag 36\nd) Wachstumsfaktor 1,3 > 1,13 -> f waechst schneller -> steilerer Graph\ne) x=0: f=10, g=20 | x=5: f ca.37, g ca.37 -> Schnitt ca. Tag 5\n\nErgebnis: a) 30%  b) ca. 262.000  c) Tag 36  d) groesserer Faktor  e) ca. Tag 5"
     },
     {
-      aufgabe: "Aufgabe: Varroa-Milbe\nDie Varroa-Milbe ist ein Schädling, der in jedem Bienenvolk lebt. Schülerinnen und Schüler der Bienen-AG ermitteln im Frühjahr die Anzahl der Milben: Es werden 308 Milben gezählt. Im Internet finden sie die Faustregel, dass sich die Anzahl der Milben alle vier Wochen etwa verdoppelt.\n\nSie beschreiben die Entwicklung mit der Funktion f(x) = 308 · 1,19^x, wobei x die Zeit in Wochen ab Beobachtungsbeginn ist.\n\na) Ergänze die Tabelle: Wie viele Milben gibt es voraussichtlich nach 4 und nach 8 Wochen? Nutze die Verdopplungsregel.\nb) Gib die Bedeutung der Werte 308 und 1,19 im Sachzusammenhang an.\nc) Bestätige mithilfe der Funktionsgleichung, dass nach 12 Wochen ca. 2500 Milben vorhanden sind.\nd) Bei einer Anzahl von ca. 10.000 Milben würde das Bienenvolk so großen Schaden nehmen, dass es nicht überleben kann. Bestimme, nach wie vielen Wochen diese Anzahl überschritten wird.\n\nNach 12 Wochen wird Ameisensäure eingesetzt, die die Milbenzahl einmalig um 90 % reduziert.\n\ne) Weise nach, dass durch diese Behandlung die Anzahl von 10.000 Milben 21 Wochen nach Beobachtungsbeginn nicht überschritten wird.",
-      hinweise: ["Für a): Verdopplung alle 4 Wochen: Woche 4 = 2 · 308, Woche 8 = 4 · 308.", "Für b): 308 ist der Anfangswert (x = 0). Was beschreibt 1,19?", "Für d): Löse 308 · 1,19^x = 10.000 durch Probieren.", "Für e): Nach Behandlung: 2500 · 0,1 = 250 Milben. Danach wächst die Population weiter mit f(x) = 250 · 1,19^(x−12)."],
-      loesung_kurz: "a) Woche 4: 616, Woche 8: 1232  b) 308 = Startbestand, 1,19 = wöchentlicher Wachstumsfaktor  c) f(12) ≈ 2494 ✓  d) ab Woche 20  e) f(9) = 250·1,19^9 ≈ 1307 < 10.000 ✓",
-      musterloesung: "a) Woche 4: 308 · 2 = 616; Woche 8: 308 · 4 = 1232\nb) 308: Anzahl der Milben zu Beobachtungsbeginn (x = 0). 1,19: Wachstumsfaktor pro Woche (19 % Zuwachs pro Woche).\nc) f(12) = 308 · 1,19^12 ≈ 308 · 8,10 ≈ 2494 ≈ 2500 ✓\nd) Probieren: f(19) ≈ 308 · 1,19^19 ≈ 8826, f(20) ≈ 10.503 → ab Woche 20\ne) Nach Behandlung: 2500 · 0,1 = 250 Milben (nach 12 Wochen)\nNoch 9 Wochen bis Woche 21: f = 250 · 1,19^9 ≈ 250 · 5,23 ≈ 1308 < 10.000 ✓\n\nErgebnis: a) 616 und 1232  b) Startbestand und Wachstumsfaktor  c) ✓  d) Woche 20  e) ✓"
+      "aufgabe": "Aufgabe: Varroa-Milbe\nDie Varroa-Milbe schaedigt Bienenvoelker. Im Fruehjahr werden 308 Milben gezaehlt. Die Bienen-AG beschreibt die Entwicklung mit f(x) = 308 mal 1,19 hoch x (x in Wochen).\n\na) Ergaenze: Woche 4 und Woche 8 (Verdopplungsregel anwenden).\nb) Gib die Bedeutung der Werte 308 und 1,19 im Sachzusammenhang an.\nc) Bestatige, dass nach 12 Wochen ca. 2500 Milben vorhanden sind.\nd) Ab wie vielen Wochen werden 10.000 Milben ueberschritten?\n\nNach 12 Wochen wird Ameisensaeure eingesetzt, die die Milbenzahl um 90% reduziert.\n\ne) Weise nach, dass 21 Wochen nach Beobachtungsbeginn die Anzahl von 10.000 noch nicht ueberschritten wird.",
+      "hinweise": [
+        "Fuer a): Verdopplung alle 4 Wochen: Woche 4 = 2 mal 308, Woche 8 = 4 mal 308.",
+        "Fuer d): Probiere x-Werte bis f(x) > 10.000.",
+        "Fuer e): Nach Behandlung: 2500 mal 0,1 = 250 Milben. Dann weiteres Wachstum fuer 9 Wochen."
+      ],
+      "loesung_kurz": "a) Woche 4: 616, Woche 8: 1232  b) 308 = Startbestand, 1,19 = woechentlicher Wachstumsfaktor  c) ca. 2494  d) ab Woche 20  e) ca. 1308 < 10.000",
+      "musterloesung": "a) Woche 4: 308 mal 2 = 616; Woche 8: 308 mal 4 = 1232\nb) 308: Anzahl Milben zu Beginn. 1,19: Wachstumsfaktor pro Woche (19% Zuwachs).\nc) f(12) = 308 mal 1,19 hoch 12 ca. 2494 ca. 2500\nd) f(19) ca. 8826, f(20) ca. 10.503 -> ab Woche 20\ne) Nach Behandlung: 250 Milben. Weiteres Wachstum 9 Wochen: 250 mal 1,19 hoch 9 ca. 1308 < 10.000\n\nErgebnis: a) 616 und 1232  b) Startbestand und Wachstumsfaktor  c) ca. 2500  d) Woche 20  e) ca. 1308 < 10.000"
     },
     {
-      aufgabe: "Aufgabe: Solaranlage\nHerr Müller installiert auf seinem Hausdach eine Solaranlage. Im ersten Betriebsjahr erzeugt die Anlage 4200 kWh Strom. Durch technische Alterung sinkt der jährliche Ertrag um 0,8 % pro Jahr.\n\na) Stelle eine Funktion E(t) auf, die den jährlichen Energieertrag in kWh in Abhängigkeit von der Zeit t (in Jahren nach Inbetriebnahme) beschreibt.\nb) Berechne den Ertrag nach 10 Jahren und nach 20 Jahren.\nc) Nach wie vielen Jahren sinkt der jährliche Ertrag erstmals unter 4000 kWh?\n\nDer erzeugte Strom wird zum Teil selbst genutzt (0,28 €/kWh gespart) und zum Teil ins Netz eingespeist (0,08 €/kWh Vergütung). Im ersten Jahr nutzt Herr Müller 40 % selbst und speist 60 % ein.\n\nd) Berechne die gesamten Einnahmen und Ersparnisse im ersten Betriebsjahr.\ne) Herr Müller behauptet: „Nach 5 Jahren habe ich durch die Anlage insgesamt mehr als 10.000 € eingenommen." Überprüfe diese Behauptung, indem du vereinfachend mit dem konstanten Jahresertrag von 4200 kWh rechnest.",
-      hinweise: ["Für a): Abnahme um 0,8 % pro Jahr → Faktor q = 1 − 0,008 = 0,992.", "Für c): Löse 4200 · 0,992^t = 4000 durch Probieren.", "Für d): Selbstnutzung: 40 % von 4200 kWh · 0,28 €; Einspeisung: 60 % · 0,08 €.", "Für e): Jahresertrag · 5 Jahre und dann den Gesamtbetrag berechnen."],
-      loesung_kurz: "a) E(t) = 4200 · 0,992^t  b) E(10) ≈ 3873 kWh, E(20) ≈ 3572 kWh  c) nach ca. 6 Jahren  d) 672 € gespart + 201,60 € Einspeisung = 873,60 €  e) 5 · 873,60 = 4368 € < 10.000 € → Nein",
-      musterloesung: "a) E(t) = 4200 · 0,992^t\nb) E(10) = 4200 · 0,992^10 ≈ 4200 · 0,923 ≈ 3875 kWh\nE(20) = 4200 · 0,992^20 ≈ 4200 · 0,852 ≈ 3578 kWh\nc) Probieren: t=5: ≈3967, t=6: ≈3935 < 4000 → nach 6 Jahren\nd) Selbstnutzung: 0,4 · 4200 · 0,28 = 470,40 €\nEinspeisung: 0,6 · 4200 · 0,08 = 201,60 €\nGesamt: 672 €\ne) 5 · 672 = 3360 € < 10.000 € → Behauptung ist falsch.\n\nErgebnis: a) E(t) = 4200 · 0,992^t  b) ≈ 3875 kWh / ≈ 3578 kWh  c) nach 6 Jahren  d) 672 €/Jahr  e) Nein"
+      "aufgabe": "Aufgabe: Solaranlage\nHerr Mueller installiert eine Solaranlage. Im ersten Jahr erzeugt sie 4200 kWh. Durch Alterung sinkt der Ertrag jaehlrich um 0,8%.\n\na) Stelle die Funktion E(t) auf.\nb) Berechne den Ertrag nach 10 und nach 20 Jahren.\nc) Nach wie vielen Jahren sinkt der Ertrag unter 4000 kWh?\n\nHerr Mueller nutzt 40% des Stroms selbst (spart 0,28 Euro/kWh) und speist 60% ein (erhaelt 0,08 Euro/kWh).\n\nd) Berechne die gesamten Einnahmen und Ersparnisse im ersten Betriebsjahr.\ne) Herr Mueller behauptet: Nach 5 Jahren habe ich mehr als 10.000 Euro eingenommen. Ueberpruefe mit konstantem Jahresbetrag.",
+      "hinweise": [
+        "Fuer a): Abnahme um 0,8% -> Faktor q = 1 minus 0,008 = 0,992.",
+        "Fuer c): Probiere t-Werte bis E(t) < 4000.",
+        "Fuer d): Selbstnutzung: 0,4 mal 4200 mal 0,28. Einspeisung: 0,6 mal 4200 mal 0,08.",
+        "Fuer e): Jahresbetrag mal 5 und mit 10.000 vergleichen."
+      ],
+      "loesung_kurz": "a) E(t) = 4200 mal 0,992 hoch t  b) ca. 3875 kWh / ca. 3578 kWh  c) nach 6 Jahren  d) ca. 672 Euro/Jahr  e) Nein, 5 mal 672 = 3360 Euro < 10.000",
+      "musterloesung": "a) E(t) = 4200 mal 0,992 hoch t\nb) E(10) ca. 3875 kWh; E(20) ca. 3578 kWh\nc) E(5) ca. 3968, E(6) ca. 3936 < 4000 -> nach 6 Jahren\nd) Selbst: 0,4 mal 4200 mal 0,28 = 470,40 Euro; Einspeisung: 0,6 mal 4200 mal 0,08 = 201,60 Euro; Gesamt = 672 Euro\ne) 5 mal 672 = 3360 Euro < 10.000 Euro. Behauptung ist falsch.\n\nErgebnis: a) E(t) = 4200 mal 0,992 hoch t  b) ca. 3875/3578 kWh  c) nach 6 J  d) 672 Euro  e) Nein"
     },
     {
-      aufgabe: "Aufgabe: Stadtbevölkerung\nDie Stadt Neuberg hatte im Jahr 2000 genau 85.000 Einwohner. Seitdem wächst die Bevölkerung jährlich um 1,5 %.\n\na) Stelle eine Funktion B(t) auf, die die Einwohnerzahl in Abhängigkeit von t (Jahren nach 2000) beschreibt.\nb) Berechne die voraussichtliche Einwohnerzahl für das Jahr 2025.\nc) In welchem Jahr überschreitet die Einwohnerzahl voraussichtlich 120.000?\n\nDie Nachbarstadt Altdorf hatte im Jahr 2000 noch 110.000 Einwohner, verliert aber jährlich 2 % seiner Bevölkerung.\n\nd) Stelle die Funktion A(t) für Altdorf auf.\ne) Zeige rechnerisch, dass beide Städte ca. im Jahr 2015 gleich viele Einwohner haben.\nf) Erkläre, was langfristig mit dem Einwohnerunterschied der beiden Städte passiert.",
-      hinweise: ["Für a): Wachstumsfaktor q = 1,015.", "Für c): Löse 85.000 · 1,015^t = 120.000 durch Probieren.", "Für d): Abnahme um 2 % → Faktor q = 0,98.", "Für e): Berechne B(15) und A(15) und vergleiche."],
-      loesung_kurz: "a) B(t) = 85.000 · 1,015^t  b) ≈ 122.600  c) ca. 2022  d) A(t) = 110.000 · 0,98^t  e) B(15) ≈ 106.000, A(15) ≈ 80.500 – Schnittpunkt liegt früher  f) Neuberg wächst weiter, Altdorf schrumpft",
-      musterloesung: "a) B(t) = 85.000 · 1,015^t\nb) B(25) = 85.000 · 1,015^25 ≈ 85.000 · 1,448 ≈ 123.000\nc) 1,015^t = 120.000/85.000 ≈ 1,412 → Probieren: t≈23 → Jahr 2023\nd) A(t) = 110.000 · 0,98^t\ne) B(15) = 85.000 · 1,015^15 ≈ 106.000\nA(15) = 110.000 · 0,98^15 ≈ 80.500\nNoch nicht gleich bei t=15; Schnittpunkt liegt früher, bei ca. t=5:\nB(5) ≈ 92.000, A(5) ≈ 99.500 → noch nicht\nBei t=8: B≈96.000, A≈93.000 → Schnittpunkt bei ca. t=7\nf) Neuberg wächst langfristig unbegrenzt, Altdorf nähert sich 0 → der Unterschied wird immer größer.\n\nErgebnis: a) B(t) = 85.000 · 1,015^t  b) ≈ 123.000  c) ca. 2023  d) A(t) = 110.000 · 0,98^t  e) Schnittpunkt bei ca. t = 7"
+      "aufgabe": "Aufgabe: Stadtbevoelkerung\nDie Stadt Neuberg hatte im Jahr 2000 genau 85.000 Einwohner und waechst seitdem jaehlrich um 1,5%.\n\na) Stelle die Funktion B(t) auf (t = Jahre nach 2000).\nb) Wie viele Einwohner hat die Stadt 2025?\nc) In welchem Jahr ueberschreitet die Stadt 120.000 Einwohner?\n\nDie Nachbarstadt Altdorf hatte 2000 noch 110.000 Einwohner, verliert aber jaehlrich 2%.\n\nd) Stelle A(t) fuer Altdorf auf.\ne) Berechne fuer t = 8 beide Bestaende und vergleiche.\nf) Was passiert langfristig mit dem Unterschied beider Staedte?",
+      "hinweise": [
+        "Fuer a): Wachstumsfaktor q = 1,015.",
+        "Fuer c): Probiere t-Werte bis B(t) > 120.000.",
+        "Fuer d): Abnahme 2% -> q = 0,98.",
+        "Fuer f): Eine Stadt waechst, die andere schrumpft - was passiert langfristig?"
+      ],
+      "loesung_kurz": "a) B(t) = 85.000 mal 1,015 hoch t  b) ca. 123.000  c) ca. 2023  d) A(t) = 110.000 mal 0,98 hoch t  e) B(8) ca. 96.000, A(8) ca. 93.000  f) Unterschied wird groesser",
+      "musterloesung": "a) B(t) = 85.000 mal 1,015 hoch t\nb) B(25) ca. 85.000 mal 1,448 ca. 123.000\nc) B(23) ca. 120.000 -> Jahr 2023\nd) A(t) = 110.000 mal 0,98 hoch t\ne) B(8) ca. 96.000; A(8) ca. 93.500 -> Neuberg hat jetzt mehr\nf) Neuberg waechst weiter, Altdorf schrumpft -> Unterschied wird immer groesser.\n\nErgebnis: a) B(t) = 85.000 mal 1,015 hoch t  b) ca. 123.000  c) ca. 2023  d) A(t) = 110.000 mal 0,98 hoch t"
     },
     {
-      aufgabe: "Aufgabe: Medikament im Blut\nNach einer Injektion befinden sich 500 mg eines Medikaments im Blut eines Patienten. Der Körper baut das Medikament ab: Nach jeder Stunde sind noch 75 % der vorherigen Menge im Blut.\n\na) Stelle eine Funktion M(t) auf (t in Stunden nach der Injektion).\nb) Berechne die Menge des Medikaments nach 4 Stunden und nach 8 Stunden.\nc) Nach wie vielen Stunden ist weniger als 50 mg im Blut? Bestimme den Wert durch Probieren.\nd) Erkläre, was die Werte 500 und 0,75 im Sachzusammenhang bedeuten.\n\nEine zweite Injektion mit 500 mg wird genau 6 Stunden nach der ersten gegeben.\n\ne) Berechne, wie viel Milligramm des Medikaments insgesamt 6 Stunden nach der ersten Injektion im Blut sind (unmittelbar nach der zweiten Injektion).\nf) Ist die Gesamtmenge nach der zweiten Injektion mehr oder weniger als doppelt so viel wie nach der ersten Injektion allein zum selben Zeitpunkt? Begründe.",
-      hinweise: ["Für a): Abnahme auf 75 % pro Stunde → q = 0,75.", "Für c): Löse M(t) < 50 durch Einsetzen verschiedener t-Werte.", "Für e): Berechne M(6) für die erste Injektion und addiere 500 mg.", "Für f): Vergleiche die Gesamtmenge mit dem Doppelten von M(6)."],
-      loesung_kurz: "a) M(t) = 500 · 0,75^t  b) M(4) ≈ 158 mg, M(8) ≈ 50 mg  c) nach ca. 8–9 h  d) 500 mg Startmenge, 75 % Restfraktion pro Stunde  e) M(6) + 500 ≈ 559 mg  f) Mehr als einfach, weniger als doppelt",
-      musterloesung: "a) M(t) = 500 · 0,75^t\nb) M(4) = 500 · 0,75^4 ≈ 500 · 0,316 ≈ 158 mg\nM(8) = 500 · 0,75^8 ≈ 500 · 0,100 ≈ 50 mg\nc) M(8) ≈ 50 mg (Grenze), M(9) ≈ 37,5 mg → nach 9 Stunden\nd) 500 mg: Menge direkt nach Injektion. 0,75: Jede Stunde verbleiben 75 % der vorherigen Menge.\ne) M(6) = 500 · 0,75^6 ≈ 500 · 0,178 ≈ 89 mg\nGesamt: 89 + 500 = 589 mg\nf) Doppelt wäre: 2 · 89 = 178 mg. Tatsächlich sind es 589 mg → viel mehr als doppelt, da 500 mg frisch dazukommen.\n\nErgebnis: a) M(t) = 500 · 0,75^t  b) ≈158 mg / ≈50 mg  c) nach 9 h  d) Startmenge / Abnahmefaktor  e) ≈589 mg  f) Viel mehr als doppelt"
+      "aufgabe": "Aufgabe: Medikament\nNach einer Injektion befinden sich 500 mg eines Medikaments im Blut. Pro Stunde verbleiben noch 75% der vorherigen Menge.\n\na) Stelle M(t) auf.\nb) Berechne M(4) und M(8).\nc) Nach wie vielen Stunden sind weniger als 50 mg im Blut?\nd) Erklaere die Bedeutung der Werte 500 und 0,75.\n\nEine zweite Injektion von 500 mg wird genau 6 Stunden nach der ersten gegeben.\n\ne) Wie viel mg sind insgesamt 6 Stunden nach der ersten Injektion im Blut?",
+      "hinweise": [
+        "Fuer a): q = 0,75 (Abnahme auf 75% pro Stunde).",
+        "Fuer c): Probiere t-Werte bis M(t) < 50.",
+        "Fuer e): Berechne M(6) fuer die erste Injektion, dann addiere 500 mg."
+      ],
+      "loesung_kurz": "a) M(t) = 500 mal 0,75 hoch t  b) M(4) ca. 158 mg, M(8) ca. 50 mg  c) nach 9 h  d) 500 mg Startmenge, 0,75 Abnahmefaktor  e) ca. 589 mg",
+      "musterloesung": "a) M(t) = 500 mal 0,75 hoch t\nb) M(4) = 500 mal 0,316 ca. 158 mg; M(8) = 500 mal 0,100 ca. 50 mg\nc) M(8) ca. 50 mg (Grenze), M(9) ca. 37,5 mg -> nach 9 Stunden\nd) 500 mg: Menge direkt nach Injektion. 0,75: Jede Stunde bleiben 75%.\ne) M(6) = 500 mal 0,178 ca. 89 mg; Gesamt: 89 + 500 = 589 mg\n\nErgebnis: a) M(t) = 500 mal 0,75 hoch t  b) ca. 158 / 50 mg  c) nach 9 h  e) ca. 589 mg"
     },
     {
-      aufgabe: "Aufgabe: Bonuszinsen\nMia erhält von ihrer Oma zum 10. Geburtstag 1000 € geschenkt und legt das Geld auf ein Sparkonto mit 2,5 % Zinsen pro Jahr.\n\na) Stelle eine Funktion K(t) auf, die das Guthaben nach t Jahren beschreibt.\nb) Wie viel Geld hat Mia auf dem Konto, wenn sie 18 Jahre alt ist (also nach 8 Jahren)?\nc) Wie alt ist Mia, wenn sich das Guthaben verdoppelt hat? Bestimme t durch Probieren.\n\nMias Bruder Tom bekommt ebenfalls 1000 € und legt sie bei einer anderen Bank zu 3,5 % Zinsen an.\n\nd) Vergleiche die Guthaben von Mia und Tom nach 20 Jahren. Wer hat mehr – und wie viel mehr?\ne) Tom behauptet: „Bei doppelten Zinsen hätte ich nach 20 Jahren auch doppelt so viel Geld." Hat Tom recht? Begründe mit einer Rechnung.",
-      hinweise: ["Für a): Zinsfaktor q = 1 + 0,025 = 1,025.", "Für b): Mia ist nach 8 Jahren 18 Jahre alt → K(8) berechnen.", "Für c): Löse K(t) = 2000 durch Probieren.", "Für e): Vergleiche K_Tom(20) mit 2 · K_Mia(20)."],
-      loesung_kurz: "a) K(t) = 1000 · 1,025^t  b) ≈ 1218 €  c) nach ca. 28 Jahren (Mia wäre 38)  d) Mia ≈ 1639 €, Tom ≈ 1990 € → Tom hat 351 € mehr  e) Nein, doppelte Zinsen ≠ doppeltes Kapital",
-      musterloesung: "a) K(t) = 1000 · 1,025^t\nb) K(8) = 1000 · 1,025^8 ≈ 1000 · 1,2184 ≈ 1218 €\nc) K(28) = 1000 · 1,025^28 ≈ 1000 · 1,996 ≈ 1996 ≈ 2000 → nach ca. 28 Jahren\nd) K_Mia(20) = 1000 · 1,025^20 ≈ 1639 €\nK_Tom(20) = 1000 · 1,035^20 ≈ 1990 €\nTom hat ca. 351 € mehr.\ne) 2 · K_Mia(20) = 3278 €, aber K_Tom(20) = 1990 € ≠ 3278 €\nTom hat nicht doppelt so viel, weil der Zinseszinseffekt nicht linear ist.\n\nErgebnis: a) K(t) = 1000 · 1,025^t  b) ≈ 1218 €  c) nach 28 Jahren  d) Tom hat 351 € mehr  e) Nein"
-    },
+      "aufgabe": "Aufgabe: Bonuszinsen\nMia legt zum 10. Geburtstag 1000 Euro auf ein Konto mit 2,5% Zinsen pro Jahr an.\n\na) Stelle K(t) auf.\nb) Wie viel Geld hat sie mit 18 Jahren (nach 8 Jahren)?\nc) Wann hat sich das Guthaben verdoppelt?\n\nMias Bruder Tom legt ebenfalls 1000 Euro an, aber zu 3,5% Zinsen.\n\nd) Vergleiche die Guthaben nach 20 Jahren. Wer hat mehr und wie viel mehr?\ne) Tom behauptet: Bei doppelten Zinsen haette ich nach 20 Jahren auch doppelt so viel. Hat er recht? Begruende.",
+      "hinweise": [
+        "Fuer a): Zinsfaktor q = 1,025.",
+        "Fuer c): Loese K(t) = 2000 durch Probieren.",
+        "Fuer d): Berechne K_Mia(20) und K_Tom(20) und vergleiche.",
+        "Fuer e): Vergleiche K_Tom(20) mit 2 mal K_Mia(20)."
+      ],
+      "loesung_kurz": "a) K(t) = 1000 mal 1,025 hoch t  b) ca. 1218 Euro  c) nach ca. 28 Jahren  d) Mia ca. 1639 Euro, Tom ca. 1990 Euro -> Tom hat ca. 351 Euro mehr  e) Nein",
+      "musterloesung": "a) K(t) = 1000 mal 1,025 hoch t\nb) K(8) ca. 1218 Euro\nc) K(28) ca. 1996 ca. 2000 -> nach ca. 28 Jahren\nd) K_Mia(20) ca. 1639 Euro; K_Tom(20) ca. 1990 Euro -> Tom ca. 351 Euro mehr\ne) 2 mal K_Mia(20) = 3278 Euro, aber K_Tom(20) = 1990 Euro. Tom hat nicht doppelt so viel - Zinseszins wirkt nichtlinear.\n\nErgebnis: a) K(t) = 1000 mal 1,025 hoch t  b) ca. 1218 Euro  c) ca. 28 Jahre  d) Tom hat 351 Euro mehr  e) Nein"
+    }
   ],
-  stochastik2: [
+  "stochastik2": [
     {
-      aufgabe: "Aufgabe: Herzförmige Dekoanhänger\nEine Firma produziert herzförmige Dekoanhänger in den Farben rot und weiß, die gemischt in Kartons verpackt werden. Beim Fabrikverkauf dürfen Kunden ohne hinzusehen nacheinander zwei Herzen aus einem Karton ziehen.\n\nIn einem Karton befinden sich 15 rote Herzen. Die Wahrscheinlichkeit, beim ersten Zug ein rotes Herz zu ziehen, beträgt 3/4.\n\na) Begründe, dass sich in dem Karton insgesamt 20 Herzen befinden.\nb) Gesucht ist die Wahrscheinlichkeit, dass zwei verschiedenfarbige Herzen gezogen werden.\n   (1) Ergänze für diesen Fall alle fehlenden Wahrscheinlichkeiten im Baumdiagramm (2 Ebenen, 1. Zug: rot 3/4, weiß 1/4).\n   (2) Berechne die gesuchte Wahrscheinlichkeit.\nc) Berechne die Wahrscheinlichkeit, dass beide Herzen die gleiche Farbe haben.\nd) Eine Kundin zieht nacheinander drei Herzen ohne Zurücklegen. Berechne die Wahrscheinlichkeit, dass alle drei Herzen rot sind.",
-      hinweise: ["Für a): Wenn 15 rote Herzen 3/4 entsprechen, wie groß ist dann die Gesamtzahl?", "Für b): Zwei verschiedene Farben bedeutet: erst rot dann weiß ODER erst weiß dann rot. Addiere beide Pfade.", "Beim zweiten Zug hat sich die Gesamtzahl um 1 verringert und auch die Anzahl der gezogenen Farbe.", "Für d): Berechne nacheinander die Wahrscheinlichkeiten für den 1., 2. und 3. roten Zug und multipliziere."],
-      loesung_kurz: "a) 20 Herzen  b) 30/76 = 15/38  c) 46/76 = 23/38  d) 91/380",
-      musterloesung: "a) 15 rote = 3/4 der Gesamtzahl → Gesamt = 15 · 4/3 = 20\nb) (1) 2. Ebene nach rot: rot 14/19, weiß 5/19; nach weiß: rot 15/19, weiß 4/19\n(2) p(rot, weiß) = 3/4 · 5/19 = 15/76\np(weiß, rot) = 1/4 · 15/19 = 15/76\np(verschieden) = 30/76 = 15/38 ≈ 0,395\nc) p(gleich) = 1 − 15/38 = 23/38 ≈ 0,605\nd) p(r,r,r) = 15/20 · 14/19 · 13/18 = 2730/6840 = 91/228\n\nErgebnis: a) 20  b) 15/38  c) 23/38  d) 91/228"
+      "aufgabe": "Aufgabe: Herzfoermige Dekohanhaenger\nEine Firma verkauft herzfoermige Anhaenger in rot und weiss. Kunden ziehen ohne hinzusehen nacheinander zwei Herzen aus einem Karton. Im Karton befinden sich 15 rote Herzen. Die Wahrscheinlichkeit fuer ein rotes Herz beim ersten Zug betraegt 3/4.\n\na) Begruende, dass sich insgesamt 20 Herzen im Karton befinden.\nb) Berechne die Wahrscheinlichkeit, zwei verschiedenfarbige Herzen zu ziehen.\nc) Berechne die Wahrscheinlichkeit, dass beide Herzen die gleiche Farbe haben.\nd) Drei Herzen werden ohne Zuruecklegen gezogen. Berechne p(alle drei rot).",
+      "hinweise": [
+        "Fuer a): Wenn 15 rote Herzen 3/4 entsprechen, wie gross ist dann die Gesamtzahl?",
+        "Fuer b): Zwei Farben = rot-weiss ODER weiss-rot. Addiere beide Pfade.",
+        "Beim zweiten Zug hat sich die Gesamtzahl um 1 verringert.",
+        "Fuer d): Multipliziere die Wahrscheinlichkeiten fuer 1., 2. und 3. roten Zug."
+      ],
+      "loesung_kurz": "a) 20 Herzen  b) 15/38  c) 23/38  d) ca. 0,4",
+      "musterloesung": "a) 15 = 3/4 mal n -> n = 20\nb) p(rot, weiss) = 15/20 mal 5/19 = 75/380\np(weiss, rot) = 5/20 mal 15/19 = 75/380\np(verschieden) = 150/380 = 15/38\nc) p(gleich) = 1 minus 15/38 = 23/38\nd) p(r,r,r) = 15/20 mal 14/19 mal 13/18 = 2730/6840 ca. 0,399\n\nErgebnis: a) 20  b) 15/38  c) 23/38  d) ca. 0,4"
     },
     {
-      aufgabe: "Aufgabe: Playlist\nChris hat sich einen Bluetooth-Lautsprecher gekauft und erstellt eine Playlist mit Liedern seiner drei Lieblingskünstler:\n– Ed Sheeran (ES): 3 Lieder\n– Mark Forster (MF): 5 Lieder\n– Zoe Wees (ZW): 2 Lieder\n\nDie Lieder werden in zufälliger Reihenfolge abgespielt (jedes Lied genau einmal).\n\na) Erkläre, warum die Wahrscheinlichkeit, als erstes ein Lied von Ed Sheeran zu hören, p = 3/10 beträgt.\nb) Ergänze alle sechs fehlenden Wahrscheinlichkeiten im Baumdiagramm für die ersten zwei abgespielten Lieder (gegeben ist nur p(ES nach ES) = 2/9).\nc) Berechne die Wahrscheinlichkeit, dass die ersten zwei Lieder beide von Ed Sheeran stammen.\nd) Bestimme die Wahrscheinlichkeit, dass die ersten drei abgespielten Lieder alle von der gleichen Person stammen.\ne) Berechne die Wahrscheinlichkeit, dass unter den ersten zwei Liedern kein Lied von Zoe Wees ist.",
-      hinweise: ["Für b): Nach einem ES-Lied bleiben 9 Lieder übrig (2 ES, 5 MF, 2 ZW).", "Für d): Berechne separat: p(3× ES), p(3× MF), p(3× ZW) und addiere.", "Für e): Kein ZW-Lied bedeutet: beide Lieder kommen von ES oder MF. Nutze die Gegenwahrscheinlichkeit oder addiere alle passenden Pfade.", "Achte darauf, dass ohne Zurücklegen nach jedem Lied die Gesamtzahl sinkt."],
-      loesung_kurz: "a) 3 von 10 Liedern  c) 6/90 = 1/15  d) 1/15 + 2/9 + 1/45  e) 56/90 = 28/45",
-      musterloesung: "a) 10 Lieder insgesamt, 3 davon von ES → p = 3/10\nb) Nach ES: p(ES)=2/9, p(MF)=5/9, p(ZW)=2/9\nNach MF: p(ES)=3/9, p(MF)=4/9, p(ZW)=2/9\nNach ZW: p(ES)=3/9, p(MF)=5/9, p(ZW)=1/9\nc) p(ES,ES) = 3/10 · 2/9 = 6/90 = 1/15\nd) p(3×ES) = 3/10·2/9·1/8 = 6/720 = 1/120\np(3×MF) = 5/10·4/9·3/8 = 60/720 = 1/12\np(3×ZW) = 2/10·1/9·0/8 = 0 (nur 2 ZW-Lieder)\np(alle gleich) = 1/120 + 1/12 ≈ 0,092\ne) p(kein ZW) = 1 − p(mind. 1 ZW)\np(ZW, _) = 2/10·9/9... oder direkt: p(beide aus ES+MF) = 8/10·7/9 = 56/90 = 28/45\n\nErgebnis: a) 3/10  c) 1/15  d) ≈ 0,092  e) 28/45"
+      "aufgabe": "Aufgabe: Playlist\nChris erstellt eine Playlist: Ed Sheeran (ES): 3 Lieder, Mark Forster (MF): 5 Lieder, Zoe Wees (ZW): 2 Lieder. Die Lieder werden zufaellig abgespielt.\n\na) Erklaere, warum p(ES zuerst) = 3/10.\nb) Berechne p(die ersten zwei Lieder stammen beide von ES).\nc) Bestimme p(die ersten drei Lieder alle von der gleichen Person).\nd) Berechne p(unter den ersten zwei Liedern ist kein Lied von Zoe Wees).",
+      "hinweise": [
+        "10 Lieder gesamt, 3 von ES.",
+        "Ohne Zuruecklegen: nach einem ES-Lied bleiben 9 Lieder uebrig, davon noch 2 von ES.",
+        "Fuer c): Berechne p(3xES), p(3xMF), p(3xZW) und addiere.",
+        "Fuer d): Beide Lieder kommen von ES oder MF. 8 von 10 sind kein ZW."
+      ],
+      "loesung_kurz": "a) 3 von 10 Liedern  b) 1/15  c) ca. 9,2%  d) 28/45",
+      "musterloesung": "a) 10 Lieder, 3 von ES -> p = 3/10\nb) p(ES, ES) = 3/10 mal 2/9 = 6/90 = 1/15\nc) p(3xES) = 3/10 mal 2/9 mal 1/8 = 6/720 = 1/120\np(3xMF) = 5/10 mal 4/9 mal 3/8 = 60/720 = 1/12\np(3xZW) = 0 (nur 2 ZW-Lieder)\np(alle gleich) = 1/120 + 1/12 ca. 0,092\nd) p(kein ZW) = 8/10 mal 7/9 = 56/90 = 28/45\n\nErgebnis: a) 3/10  b) 1/15  c) ca. 9,2%  d) 28/45"
     },
     {
-      aufgabe: "Aufgabe: Qualitätskontrolle in einer Bäckerei\nIn einer Bäckerei werden täglich frische Brötchen hergestellt. Bevor sie verkauft werden, durchlaufen sie zwei Kontrollstufen:\nKontrolle 1 (Gewicht): 97 % der Brötchen erfüllen die Vorgabe, die anderen werden aussortiert.\nKontrolle 2 (Aussehen): Von den verbliebenen Brötchen erfüllen 95 % die Vorgabe.\n\na) Zeichne ein vollständiges Baumdiagramm, das die Qualitätskontrolle darstellt.\nb) Berechne den Anteil der Brötchen, die beide Kontrollen bestehen.\nc) Berechne den Anteil der Brötchen, die insgesamt aussortiert werden.\nd) An einem Morgen werden 2400 Brötchen produziert. Berechne, wie viele Brötchen voraussichtlich verkauft werden können.\ne) Die Bäckerin behauptet: „Mehr als 95 % aller Brötchen werden verkauft." Hat sie recht? Begründe mit deiner Rechnung aus b).",
-      hinweise: ["Im Baumdiagramm: erste Ebene Gewicht (0,97 / 0,03), zweite Ebene Aussehen nur für den Ast 'Gewicht OK'.", "p(beide OK) = p(Gewicht OK) · p(Aussehen OK | Gewicht OK).", "Aussortiert = 1 − p(beide OK).", "Für e): Vergleiche dein Ergebnis aus b) mit 0,95."],
-      loesung_kurz: "b) 0,97 · 0,95 = 0,9215 = 92,15 %  c) 7,85 %  d) 2212 Brötchen  e) Nein, nur 92,15 % < 95 %",
-      musterloesung: "a) Baumdiagramm:\nGewicht OK (0,97) → Aussehen OK (0,95): 0,9215 | Aussehen nicht OK (0,05): 0,0485\nGewicht nicht OK (0,03): aussortiert\nb) p(beide OK) = 0,97 · 0,95 = 0,9215 = 92,15 %\nc) p(aussortiert) = 1 − 0,9215 = 0,0785 = 7,85 %\nd) 2400 · 0,9215 = 2211,6 ≈ 2212 Brötchen\ne) 92,15 % < 95 % → Die Bäckerin hat nicht recht.\n\nErgebnis: b) 92,15 %  c) 7,85 %  d) 2212 Brötchen  e) Nein"
+      "aufgabe": "Aufgabe: Qualitaetskontrolle in einer Baeckerei\nIn einer Baeckerei durchlaufen Broetchen zwei Kontrollstufen: Kontroelle 1 (Gewicht): 97% bestehen. Kontrolle 2 (Aussehen): Von den verbliebenen bestehen 95%.\n\na) Zeichne ein vollstaendiges Baumdiagramm.\nb) Berechne den Anteil, der beide Kontrollen besteht.\nc) Berechne den Anteil, der insgesamt aussortiert wird.\nd) An einem Morgen werden 2400 Broetchen produziert. Wie viele koennen verkauft werden?\ne) Die Baeckerin behauptet: Mehr als 95% aller Broetchen werden verkauft. Hat sie recht?",
+      "hinweise": [
+        "Baumdiagramm: erste Ebene Gewicht (0,97 / 0,03), zweite Ebene Aussehen nur nach bestanden.",
+        "p(beide OK) = 0,97 mal 0,95",
+        "Aussortiert = 1 minus p(beide OK)",
+        "Fuer e): Vergleiche Ergebnis aus b) mit 0,95."
+      ],
+      "loesung_kurz": "b) 92,15%  c) 7,85%  d) 2212 Broetchen  e) Nein, 92,15% < 95%",
+      "musterloesung": "a) Baumdiagramm: Gewicht OK (0,97) -> Aussehen OK (0,95): 0,9215 | nicht OK (0,05): 0,0485; Gewicht nicht OK (0,03): aussortiert\nb) 0,97 mal 0,95 = 0,9215 = 92,15%\nc) 1 minus 0,9215 = 7,85%\nd) 2400 mal 0,9215 = 2211,6 ca. 2212 Broetchen\ne) 92,15% < 95% -> Nein, die Baeckerin hat nicht recht.\n\nErgebnis: b) 92,15%  c) 7,85%  d) 2212  e) Nein"
     },
     {
-      aufgabe: "Aufgabe: Schülervertretung\nIn der Klasse 10b sitzen 12 Mädchen und 8 Jungen. Für die Schülervertretung werden durch Zufall nacheinander zwei Personen als Vertreterin und Stellvertreter ausgewählt (ohne Zurücklegen).\n\na) Berechne die Wahrscheinlichkeit, dass die Vertreterin ein Mädchen und der Stellvertreter ein Junge ist.\nb) Berechne die Wahrscheinlichkeit, dass beide gewählten Personen das gleiche Geschlecht haben.\nc) Berechne die Wahrscheinlichkeit, dass mindestens eine Junge gewählt wird.\nd) Die Klasse 10a hat ebenfalls 20 Schülerinnen und Schüler, jedoch im Verhältnis 1:1 (10 Mädchen, 10 Jungen). Vergleiche die Wahrscheinlichkeiten für „beide Mädchen" in beiden Klassen und erkläre den Unterschied.",
-      hinweise: ["Für a): p(Mädchen zuerst) = 12/20, dann p(Junge) = 8/19.", "Für b): p(gleich) = p(M,M) + p(J,J). Berechne beide Pfade.", "Für c): Gegenwahrscheinlichkeit: 1 − p(keine Jungen) = 1 − p(M,M).", "Für d): Berechne p(M,M) für Klasse 10a und vergleiche."],
-      loesung_kurz: "a) 96/380 = 24/95  b) 188/380 = 47/95  c) 192/380 = 48/95  d) 10a: 90/380, 10b: 132/380 – 10b wahrscheinlicher",
-      musterloesung: "a) p(M, J) = 12/20 · 8/19 = 96/380 = 24/95\nb) p(M,M) = 12/20 · 11/19 = 132/380\np(J,J) = 8/20 · 7/19 = 56/380\np(gleich) = 188/380 = 47/95\nc) p(mind. 1 Junge) = 1 − p(M,M) = 1 − 132/380 = 248/380 = 62/95\nd) 10a: p(M,M) = 10/20 · 9/19 = 90/380\n10b: p(M,M) = 132/380 > 90/380\nIn 10b ist es wahrscheinlicher, da der Mädchenanteil höher ist.\n\nErgebnis: a) 24/95  b) 47/95  c) 62/95  d) 10b wahrscheinlicher"
+      "aufgabe": "Aufgabe: Schuelervertretung\nIn der Klasse 10b sitzen 12 Maedchen und 8 Jungen. Zwei Personen werden nacheinander zufaellig ausgewaehlt (ohne Zuruecklegen).\n\na) Berechne p(Maedchen und Junge - in dieser Reihenfolge).\nb) Berechne p(beide Personen haben das gleiche Geschlecht).\nc) Berechne p(mindestens ein Junge wird gewaehlt).\nd) Klasse 10a hat 10 Maedchen und 10 Jungen (20 Personen). Vergleiche p(beide Maedchen) fuer beide Klassen.",
+      "hinweise": [
+        "Fuer a): p(M, J) = 12/20 mal 8/19.",
+        "Fuer b): p(gleich) = p(M,M) + p(J,J).",
+        "Fuer c): Gegenwahrscheinlichkeit: 1 minus p(beide Maedchen).",
+        "Fuer d): Berechne p(M,M) fuer 10a und vergleiche."
+      ],
+      "loesung_kurz": "a) 24/95  b) 47/95  c) 62/95  d) 10b: 33/95 > 10a: 9/38",
+      "musterloesung": "a) p(M, J) = 12/20 mal 8/19 = 96/380 = 24/95\nb) p(M,M) = 12/20 mal 11/19 = 132/380; p(J,J) = 8/20 mal 7/19 = 56/380\np(gleich) = 188/380 = 47/95\nc) p(mind. 1 J) = 1 minus p(M,M) = 1 minus 132/380 = 248/380 = 62/95\nd) 10a: p(M,M) = 10/20 mal 9/19 = 90/380 = 9/38\n10b: 132/380 = 33/95 > 9/38, weil Maedchenanteil in 10b hoeher.\n\nErgebnis: a) 24/95  b) 47/95  c) 62/95  d) 10b hat hoehere Wahrscheinlichkeit"
     },
     {
-      aufgabe: "Aufgabe: Ampelschaltung\nAn einer vielbefahrenen Kreuzung sind zwei Ampeln hintereinander. Die erste Ampel zeigt mit einer Wahrscheinlichkeit von 0,6 grün. Die zweite Ampel ist unabhängig von der ersten und zeigt mit einer Wahrscheinlichkeit von 0,7 grün.\n\na) Zeichne ein vollständiges Baumdiagramm für beide Ampeln.\nb) Mit welcher Wahrscheinlichkeit zeigen beide Ampeln grün?\nc) Mit welcher Wahrscheinlichkeit muss ein Autofahrer an mindestens einer Ampel halten (= rot)?\nd) Der Stadtplaner möchte, dass die Wahrscheinlichkeit für „beide grün" auf über 50 % steigt. Die erste Ampel soll auf p = 0,7 grün eingestellt werden. Berechne die benötigte Wahrscheinlichkeit der zweiten Ampel.\ne) Ein Fahrer fährt die Strecke täglich. Berechne, an wie vielen von 20 Arbeitstagen er voraussichtlich an beiden Ampeln grün hat.",
-      hinweise: ["Für b): Unabhängige Ereignisse → Wahrscheinlichkeiten multiplizieren.", "Für c): Mindestens einmal rot = Gegenwahrscheinlichkeit zu 'beide grün'.", "Für d): 0,7 · p₂ > 0,5 → p₂ > ?", "Für e): Erwartungswert = Anzahl Versuche · Wahrscheinlichkeit."],
-      loesung_kurz: "b) 0,42  c) 0,58  d) p₂ > 5/7 ≈ 0,714  e) ca. 8 Tage",
-      musterloesung: "a) Baumdiagramm: Ebene 1: grün (0,6), rot (0,4); Ebene 2 jeweils: grün (0,7), rot (0,3)\nb) p(grün, grün) = 0,6 · 0,7 = 0,42\nc) p(mind. 1 rot) = 1 − 0,42 = 0,58\nd) 0,7 · p₂ > 0,5 → p₂ > 5/7 ≈ 0,714\ne) E = 20 · 0,42 = 8,4 ≈ 8 Tage\n\nErgebnis: b) 0,42  c) 0,58  d) p₂ > 0,714  e) ca. 8 Tage"
+      "aufgabe": "Aufgabe: Ampelschaltung\nAn einer Kreuzung gibt es zwei unabhaengige Ampeln. Erste Ampel zeigt mit p = 0,6 gruen, zweite mit p = 0,7 gruen.\n\na) Zeichne ein vollstaendiges Baumdiagramm.\nb) Berechne p(beide gruen).\nc) Berechne p(mindestens eine Ampel zeigt rot).\nd) Damit p(beide gruen) ueber 50% steigt, soll die erste Ampel auf p = 0,7 gesetzt werden. Berechne die noetige Wahrscheinlichkeit der zweiten Ampel.\ne) Ein Fahrer faehrt 20 Arbeitstage diese Strecke. An wie vielen Tagen hat er voraussichtlich beide Ampeln gruen?",
+      "hinweise": [
+        "Unabhaengige Ereignisse: Wahrscheinlichkeiten multiplizieren.",
+        "Fuer c): Gegenwahrscheinlichkeit zu beide gruen.",
+        "Fuer d): 0,7 mal p2 > 0,5 -> p2 > ?",
+        "Fuer e): Erwartungswert = Anzahl mal Wahrscheinlichkeit."
+      ],
+      "loesung_kurz": "b) 0,42  c) 0,58  d) p2 > 5/7 ca. 0,714  e) ca. 8 Tage",
+      "musterloesung": "a) Ebene 1: gruen (0,6), rot (0,4); Ebene 2 jeweils: gruen (0,7), rot (0,3)\nb) 0,6 mal 0,7 = 0,42\nc) 1 minus 0,42 = 0,58\nd) 0,7 mal p2 > 0,5 -> p2 > 5/7 ca. 0,714\ne) E = 20 mal 0,42 = 8,4 ca. 8 Tage\n\nErgebnis: b) 0,42  c) 0,58  d) p2 > 0,714  e) ca. 8 Tage"
     },
     {
-      aufgabe: "Aufgabe: Sporttest\nIn einer Schulklasse werden zwei sportliche Tests durchgeführt: der 100-m-Lauf und der Weitsprung. Jede Schülerin und jeder Schüler, der den jeweiligen Test besteht, erhält ein Abzeichen.\n\nAus Erfahrung weiß der Sportlehrer: 70 % der Schüler bestehen den 100-m-Lauf. Von denen, die den Lauf bestehen, bestehen 80 % auch den Weitsprung. Von denen, die den Lauf nicht bestehen, bestehen nur 40 % den Weitsprung.\n\na) Zeichne ein vollständiges Baumdiagramm.\nb) Berechne die Wahrscheinlichkeit, dass ein zufällig ausgewählter Schüler beide Tests besteht.\nc) Berechne die Wahrscheinlichkeit, dass ein Schüler genau einen Test besteht.\nd) In der Klasse sind 25 Schülerinnen und Schüler. Wie viele erhalten voraussichtlich kein Abzeichen?\ne) Berechne die Wahrscheinlichkeit, dass ein Schüler den Weitsprung besteht (unabhängig vom Lauf).",
-      hinweise: ["Im Baumdiagramm: Lauf (0,7 / 0,3), dann jeweils Weitsprung (0,8 / 0,2 nach Lauf bestanden; 0,4 / 0,6 nach Lauf nicht bestanden).", "Für c): Genau einen Test = (Lauf ja, Weitsprung nein) + (Lauf nein, Weitsprung ja).", "Für d): p(keins) = p(beide nicht bestanden).", "Für e): Addiere alle Pfade, bei denen der Weitsprung bestanden wird."],
-      loesung_kurz: "b) 0,56  c) 0,26  d) ca. 5 Schüler  e) 0,68",
-      musterloesung: "a) Lauf: 0,7 (bestanden) → WS: 0,8 / 0,2; Lauf: 0,3 (nicht) → WS: 0,4 / 0,6\nb) p(L+, W+) = 0,7 · 0,8 = 0,56\nc) p(L+, W−) = 0,7 · 0,2 = 0,14\np(L−, W+) = 0,3 · 0,4 = 0,12\np(genau einer) = 0,14 + 0,12 = 0,26\nd) p(keins) = p(L−, W−) = 0,3 · 0,6 = 0,18\n25 · 0,18 = 4,5 ≈ 5 Schüler\ne) p(Weitsprung) = 0,56 + 0,12 = 0,68\n\nErgebnis: b) 0,56  c) 0,26  d) ca. 5 Schüler  e) 0,68"
-    },
+      "aufgabe": "Aufgabe: Sporttest\nIn einer Schulklasse werden zwei Sporttests durchgefuehrt. 70% bestehen den 100-m-Lauf. Von denen, die den Lauf bestehen, bestehen 80% auch den Weitsprung. Von denen, die ihn nicht bestehen, bestehen 40% den Weitsprung.\n\na) Zeichne ein vollstaendiges Baumdiagramm.\nb) Berechne p(beide Tests bestanden).\nc) Berechne p(genau ein Test bestanden).\nd) In der Klasse sind 25 Schueler. Wie viele erhalten voraussichtlich kein Abzeichen?\ne) Berechne p(Weitsprung bestanden) unabhaengig vom Laufergebnis.",
+      "hinweise": [
+        "Baumdiagramm: Lauf (0,7 / 0,3), dann Weitsprung (0,8/0,2 nach Lauf bestanden; 0,4/0,6 nach nicht bestanden).",
+        "Fuer c): p(L+, W-) + p(L-, W+)",
+        "Fuer d): p(kein Abzeichen) = p(L-, W-) = 0,3 mal 0,6.",
+        "Fuer e): Addiere alle Pfade, bei denen W+ vorkommt."
+      ],
+      "loesung_kurz": "b) 0,56  c) 0,26  d) ca. 5 Schueler  e) 0,68",
+      "musterloesung": "a) Lauf: 0,7 -> WS: 0,8/0,2; Lauf: 0,3 -> WS: 0,4/0,6\nb) p(L+, W+) = 0,7 mal 0,8 = 0,56\nc) p(L+, W-) = 0,7 mal 0,2 = 0,14; p(L-, W+) = 0,3 mal 0,4 = 0,12\np(genau einer) = 0,26\nd) p(L-, W-) = 0,3 mal 0,6 = 0,18; 25 mal 0,18 = 4,5 ca. 5 Schueler\ne) p(W+) = 0,56 + 0,12 = 0,68\n\nErgebnis: b) 0,56  c) 0,26  d) ca. 5  e) 0,68"
+    }
   ],
-  parabeln2: [
+  "parabeln2": [
     {
-      aufgabe: "Aufgabe: Dreieck und Parabel\nMeltem zeichnet durch die Punkte A(−3|0), B(3|0) und C(0|4,5) das gleichschenklige Dreieck ABC.\n\na) Berechne den Flächeninhalt des Dreiecks.\nb) Bestimme den Umfang des Dreiecks.\nc) Berechne die Größe des Winkels α bei A.\n\nMeltem zeichnet über dem Dreieck die Parabel f. Die Parabel verläuft durch die Punkte A und B sowie den Punkt C als Scheitelpunkt.\n\nd) Begründe, dass die Funktionsgleichung f(x) = a·(x+3)·(x−3) zur Parabel passt und a < 0 sein muss.\ne) Bestimme den Wert des Faktors a mithilfe des Punktes C.\nf) Meltem verschiebt nun den Punkt C entlang der y-Achse nach oben. Beurteile: Wird die Parabel gestaucht oder gestreckt?",
-      hinweise: ["Für a): A = ½ · Grundseite · Höhe. Die Grundseite AB liegt auf der x-Achse.", "Für b): Nutze den Satz des Pythagoras für die Schenkellänge AC.", "Für d): Warum sind x = −3 und x = 3 Nullstellen? Was sagt das Vorzeichen von a über die Öffnungsrichtung aus?", "Für e): Setze den Punkt C(0|4,5) in die Funktionsgleichung ein und löse nach a."],
-      loesung_kurz: "a) 13,5 cm²  b) ≈ 16,8 cm  c) α ≈ 56,3°  e) a = −0,5  f) gestreckt (Parabel wird flacher)",
-      musterloesung: "a) Grundseite AB = 6 cm, Höhe h = 4,5 cm\nA = ½ · 6 · 4,5 = 13,5 cm²\nb) AC = √(3² + 4,5²) = √(9 + 20,25) = √29,25 ≈ 5,41 cm\nUmfang = 6 + 2 · 5,41 ≈ 16,82 cm\nc) tan(α) = 4,5/3 = 1,5 → α = arctan(1,5) ≈ 56,3°\nd) f(−3) = a·0·(−6) = 0 ✓ und f(3) = a·6·0 = 0 ✓ → A und B sind Nullstellen.\nDa die Parabel über dem Dreieck liegt und C der höchste Punkt ist → Parabel öffnet nach unten → a < 0.\ne) f(0) = a · 3 · (−3) = −9a = 4,5 → a = −0,5\nf) Wird C nach oben verschoben, wird |a| kleiner → Parabel wird weiter geöffnet (gestreckt/flacher).\n\nErgebnis: a) 13,5 cm²  b) ≈ 16,8 cm  c) ≈ 56,3°  e) a = −0,5  f) gestreckt"
+      "aufgabe": "Aufgabe: Dreieck und Parabel\nMeltem zeichnet das gleichschenklige Dreieck ABC mit A(minus 3|0), B(3|0) und C(0|4,5).\n\na) Berechne den Flaecheninhalt des Dreiecks.\nb) Bestimme den Umfang des Dreiecks.\nc) Berechne den Winkel alpha bei A.\n\nMeltem zeichnet ueber dem Dreieck die Parabel f(x) = a mal (x+3) mal (x minus 3).\n\nd) Begruende, dass diese Funktionsgleichung zur Parabel passt und a < 0 sein muss.\ne) Bestimme a mithilfe von C(0|4,5).\nf) Meltem verschiebt C nach oben auf der y-Achse. Wird die Parabel gestaucht oder gestreckt?",
+      "hinweise": [
+        "Fuer a): A = 1/2 mal Grundseite mal Hoehe. AB = 6 cm, h = 4,5 cm.",
+        "Fuer b): Schenkel AC mit Pythagoras berechnen.",
+        "Fuer d): Pruefe f(minus 3) und f(3). Was sagt das Vorzeichen von a aus?",
+        "Fuer e): Setze C(0|4,5) in die Gleichung ein."
+      ],
+      "loesung_kurz": "a) 13,5 cm²  b) ca. 16,8 cm  c) ca. 56,3°  e) a = minus 0,5  f) gestreckt",
+      "musterloesung": "a) A = 1/2 mal 6 mal 4,5 = 13,5 cm²\nb) AC = Wurzel aus(9 + 20,25) ca. 5,41 cm; Umfang ca. 16,82 cm\nc) tan(alpha) = 4,5/3 = 1,5 -> alpha ca. 56,3°\nd) f(minus 3) = 0 und f(3) = 0 -> A und B sind Nullstellen. Parabel liegt oben -> a < 0.\ne) f(0) = minus 9a = 4,5 -> a = minus 0,5\nf) C hoeher -> |a| wird kleiner -> Parabel oeffnet weiter = gestreckt\n\nErgebnis: a) 13,5 cm²  b) ca. 16,8 cm  c) ca. 56,3°  e) a = minus 0,5"
     },
     {
-      aufgabe: "Aufgabe: Parabel und Rechteck\nJulia zeichnet die Parabel f mit f(x) = −0,5x² + 5,5 in ein Koordinatensystem.\n\na) Bestätige durch eine Rechnung, dass der Punkt A₁(3|1) auf der Parabel f liegt.\nb) Begründe mithilfe der Eigenschaften der Parabel, dass auch B₁(−3|1) auf dem Graphen liegt.\nc) Die Punkte C₁ und D₁ liegen auf der x-Achse und bilden mit A₁ und B₁ das Rechteck A₁B₁C₁D₁. Berechne den Umfang dieses Rechtecks.\n\nJulia stellt den Term U(x) = 2 · 2x + 2 · (−0,5x² + 5,5) für den Umfang jedes Rechtecks unter der Parabel auf.\n\nd) Begründe, dass mit diesem Term der Umfang jedes dieser Rechtecke berechnet werden kann.\ne) Zeige durch Termumformungen, dass U(x) = −x² + 4x + 11.\nf) Bestimme den Scheitelpunkt der Funktion u(x) = −x² + 4x + 11 und erkläre seine Bedeutung für die Rechtecke.\ng) Julia löst −x² + 4x + 11 = 14,75. Berechne die Lösungen und erkläre das Ergebnis im Sachzusammenhang.",
-      hinweise: ["Für b): Die Parabel hat eine Symmetrieachse. Welche? Was folgt daraus für Punkte mit gleichem y-Wert?", "Für c): Breite des Rechtecks = 2 · x-Koordinate von A₁; Höhe = y-Koordinate.", "Für e): Klammern ausmultiplizieren und zusammenfassen.", "Für f): Quadratische Ergänzung oder Scheitelformel x_S = −b/(2a) anwenden."],
-      loesung_kurz: "a) f(3) = 1 ✓  b) Symmetrie zur y-Achse  c) U = 14 cm  e) ✓  f) S(2|15) – größter Umfang  g) x = 1,5 und x = 2,5",
-      musterloesung: "a) f(3) = −0,5·9 + 5,5 = −4,5 + 5,5 = 1 ✓\nb) f ist achsensymmetrisch zur y-Achse (nur gerade Potenzen), daher f(−3) = f(3) = 1 ✓\nc) Breite = 2·3 = 6 cm, Höhe = 1 cm\nU = 2·6 + 2·1 = 14 cm\nd) Jedes Rechteck hat Breite 2x und Höhe f(x) → U = 2·2x + 2·f(x) ✓\ne) U = 4x + 2·(−0,5x² + 5,5) = 4x − x² + 11 = −x² + 4x + 11 ✓\nf) x_S = −4/(2·(−1)) = 2; u(2) = −4+8+11 = 15 → S(2|15)\nBei x = 2 hat das Rechteck den größten Umfang von 15 cm.\ng) −x² + 4x + 11 = 14,75 → x² − 4x + 3,75 = 0\nx = (4 ± √(16−15))/2 = (4±1)/2 → x₁ = 2,5 und x₂ = 1,5\nEs gibt zwei Rechtecke mit dem Umfang 14,75 cm.\n\nErgebnis: a) ✓  c) 14 cm  f) S(2|15)  g) x = 1,5 und x = 2,5"
+      "aufgabe": "Aufgabe: Parabel und Rechteck\nJulia zeichnet f(x) = minus 0,5x² + 5,5.\n\na) Bestatige, dass A(3|1) auf der Parabel liegt.\nb) Begruende, warum B(minus 3|1) ebenfalls auf dem Graphen liegt.\nc) Die Punkte C und D liegen auf der x-Achse und bilden mit A und B das Rechteck ABCD. Berechne den Umfang.\n\nJulia stellt den Term U(x) = 2 mal 2x + 2 mal (minus 0,5x² + 5,5) auf.\n\nd) Begruende, dass dieser Term den Umfang jedes Rechtecks berechnet.\ne) Zeige: U(x) = minus x² + 4x + 11.\nf) Bestimme den Scheitelpunkt von u(x) = minus x² + 4x + 11 und erklaere seine Bedeutung.\ng) Loese minus x² + 4x + 11 = 14,75 und erklaere das Ergebnis.",
+      "hinweise": [
+        "Fuer b): Die Parabel ist achsensymmetrisch zur y-Achse.",
+        "Fuer c): Breite = 2 mal 3 = 6 cm, Hoehe = 1 cm.",
+        "Fuer e): Klammern ausmultiplizieren und zusammenfassen.",
+        "Fuer f): x_S = minus b / (2a) = minus 4 / (minus 2) = 2."
+      ],
+      "loesung_kurz": "a) f(3) = 1  b) Symmetrie  c) U = 14 cm  e) vereinfacht  f) S(2|15) = groesster Umfang  g) x = 1,5 und x = 2,5",
+      "musterloesung": "a) f(3) = minus 4,5 + 5,5 = 1\nb) Achsensymmetrie: f(minus 3) = f(3) = 1\nc) Breite 6, Hoehe 1: U = 14 cm\nd) Breite = 2x, Hoehe = f(x) -> U = 2 mal 2x + 2 mal f(x)\ne) 4x + 2(minus 0,5x² + 5,5) = 4x minus x² + 11 = minus x² + 4x + 11\nf) x_S = 2, u(2) = 15: S(2|15). Bei x = 2 ist der Umfang maximal (15 cm).\ng) x² minus 4x + 3,75 = 0 -> x = (4 plus/minus 1)/2 -> x = 2,5 und x = 1,5. Zwei Rechtecke haben Umfang 14,75 cm.\n\nErgebnis: c) 14 cm  f) S(2|15)  g) x = 1,5 und 2,5"
     },
     {
-      aufgabe: "Aufgabe: Brückenbögen\nArchitektin Lara entwirft eine Fußgängerbrücke. Der Bogen der Brücke soll durch eine Parabel beschrieben werden. Der Bogen hat eine Spannweite von 20 m (von x = −10 bis x = 10) und eine maximale Höhe von 8 m in der Mitte.\n\na) Bestimme die Funktionsgleichung der Parabel in der Form f(x) = ax²+ c.\nb) Berechne die Höhe des Bogens bei x = 6 (also 6 m vom Mittelpunkt entfernt).\nc) Für eine Schiffspassage muss die Brücke mindestens 5 m hoch sein. Berechne, in welchem Bereich (Breite) die Brücke diese Mindesthöhe erfüllt.\nd) Die Brücke soll mit Holzplanken belegt werden. Die Breite der Brücke (in die Tiefe) beträgt 3 m. Die Holzplanken kosten 45 €/m². Berechne die Kosten für das Holz, wenn die Länge der Brücke näherungsweise der Spannweite entspricht.",
-      hinweise: ["Für a): Der Scheitelpunkt liegt bei (0|8) → f(x) = ax² + 8. Setze die Nullstelle x = 10 ein.", "Für c): Löse f(x) = 5 nach x auf. Das Ergebnis gibt die Stellen an, wo die Brücke genau 5 m hoch ist.", "Für d): Fläche = Spannweite · Breite = 20 · 3. Preis = Fläche · Preis pro m²."],
-      loesung_kurz: "a) f(x) = −0,08x² + 8  b) h ≈ 5,12 m  c) Bereich von −7,9 m bis +7,9 m  d) 2700 €",
-      musterloesung: "a) f(x) = ax² + 8; Nullstelle bei x = 10: 0 = a·100 + 8 → a = −0,08\nf(x) = −0,08x² + 8\nb) f(6) = −0,08·36 + 8 = −2,88 + 8 = 5,12 m\nc) −0,08x² + 8 = 5 → x² = 37,5 → x = ±√37,5 ≈ ±6,12 m\nMindesthöhe von 5 m wird zwischen x ≈ −6,12 und x ≈ 6,12 eingehalten.\nd) Fläche = 20 · 3 = 60 m²; Kosten = 60 · 45 = 2700 €\n\nErgebnis: a) f(x) = −0,08x² + 8  b) 5,12 m  c) ca. ±6,12 m  d) 2700 €"
+      "aufgabe": "Aufgabe: Brueckenbogen\nArchitektin Lara entwirft eine Fussgaengerbruecke. Der Bogen hat eine Spannweite von 20 m (von x = minus 10 bis x = 10) und eine maximale Hoehe von 8 m in der Mitte.\n\na) Bestimme die Funktionsgleichung der Parabel in der Form f(x) = ax² + c.\nb) Berechne die Hoehe bei x = 6 m.\nc) Fuer eine Schiffspassage muss die Bruecke mindestens 5 m hoch sein. Berechne den Bereich, in dem die Mindesthoehe erreicht wird.\nd) Die Bruecke soll mit Holzplanken belegt werden (Breite 3 m). Holz kostet 45 Euro/m². Berechne die Kosten.",
+      "hinweise": [
+        "Scheitelpunkt bei (0|8): f(x) = ax² + 8. Setze Nullstelle x = 10 ein.",
+        "Fuer c): Loese f(x) = 5 nach x auf.",
+        "Fuer d): Flaeche = Spannweite mal Breite = 20 mal 3."
+      ],
+      "loesung_kurz": "a) f(x) = minus 0,08x² + 8  b) 5,12 m  c) ca. minus 6,12 bis plus 6,12 m  d) 2700 Euro",
+      "musterloesung": "a) f(10) = 0: 100a + 8 = 0 -> a = minus 0,08\nf(x) = minus 0,08x² + 8\nb) f(6) = minus 2,88 + 8 = 5,12 m\nc) minus 0,08x² + 8 = 5 -> x² = 37,5 -> x ca. plus/minus 6,12 m\nd) Flaeche = 20 mal 3 = 60 m²; Kosten = 60 mal 45 = 2700 Euro\n\nErgebnis: a) f(x) = minus 0,08x² + 8  b) 5,12 m  c) plus/minus 6,12 m  d) 2700 Euro"
     },
     {
-      aufgabe: "Aufgabe: Lautsprecher – Modell Dot\nChris vergleicht zwei Lautsprecher. Modell Dot ist näherungsweise kugelförmig mit einem Durchmesser von 10 cm. Damit es stabil steht, hat der Hersteller unten ein Kugelsegment abgetrennt. Das Volumen des abgetrennten Kugelsegments wird berechnet mit:\nV_Segment = π · b² · (r − b/3)\nHierbei ist b = 1,1 cm die Höhe des Segments und r der Kugelradius.\n\na) Berechne das Volumen der vollständigen Kugel.\nb) Bestätige mit einer Rechnung, dass das Volumen des abgetrennten Segments ca. 3 % des Kugelvolumens beträgt.\n\nDas verbleibende Volumen des Lautsprechers (Kugel minus Segment) soll nun durch eine Parabel beschrieben werden. Dafür betrachtet Chris einen Querschnitt durch die Mitte. Im Querschnitt erscheint die Kugel als Kreis mit Radius 5 cm.\n\nc) Bestimme die Gleichung einer nach unten geöffneten Parabel f, die durch die Punkte (−5|0) und (5|0) verläuft und deren Scheitelpunkt auf der y-Achse liegt.\nd) Bestimme a so, dass der Scheitelpunkt die Höhe 5 cm hat.\ne) Chris behauptet: „Die Fläche unter dem Parabelschnitt ist größer als die Kreisfläche des Querschnitts." Entscheide, ob die Aussage sinnvoll ist, ohne die genaue Fläche zu berechnen.",
-      hinweise: ["Für a): r = 5 cm, V = 4/3 · π · r³.", "Für b): Berechne V_Segment mit b = 1,1 und r = 5, dann den prozentualen Anteil.", "Für c): Nullstellen bei x = ±5 → f(x) = a(x+5)(x−5). Öffnung nach unten: a < 0.", "Für e): Eine Parabel, die durch die gleichen Punkte geht wie der Kreis, schneidet dessen Fläche – überlege, welche Fläche kleiner sein muss."],
-      loesung_kurz: "a) V ≈ 523,6 cm³  b) ca. 3 % ✓  c) f(x) = a(x²−25)  d) a = −0,2  e) Die Parabelschnittfläche ist kleiner als die Kreisfläche",
-      musterloesung: "a) V = 4/3 · π · 5³ = 4/3 · π · 125 ≈ 523,6 cm³\nb) V_Seg = π · 1,1² · (5 − 1,1/3) = π · 1,21 · 4,633 ≈ 17,6 cm³\n17,6 / 523,6 · 100% ≈ 3,4 % ≈ 3 % ✓\nc) f(x) = a(x+5)(x−5) = a(x²−25)\nd) Scheitelpunkt bei x = 0: f(0) = a·(−25) = 5 → a = −0,2\ne) Die Parabel berührt den Kreis nur in drei Punkten. Da die Parabel nach unten geöffnet ist und durch ±5 geht, liegt sie teilweise innerhalb des Kreises und teilweise außerhalb – die genaue Aussage ist ohne Integration nicht beweisbar, aber die Kreisfläche beträgt π·5² ≈ 78,5 cm², was wahrscheinlich größer ist.\n\nErgebnis: a) ≈ 523,6 cm³  b) ≈ 3 % ✓  c) f(x) = −0,2(x²−25)  d) a = −0,2"
+      "aufgabe": "Aufgabe: Sprungschanze\nBei einem Skispringen beschreibt die Flugbahn naeherungsweise eine Parabel. Der Springer verlaesst die Schanze bei A(0|0) und landet bei B(120|minus 10). Der hoechste Punkt liegt bei x = 30 m.\n\na) Bestimme die Funktionsgleichung in Scheitelpunktform f(x) = a(x minus d)² + e.\nb) Berechne die maximale Hoehe ueber dem Absprungpunkt.\nc) Berechne die Hoehe bei x = 60 m.",
+      "hinweise": [
+        "Scheitelpunkt bei x = 30: f(x) = a(x minus 30)² + e.",
+        "Nutze die Punkte A(0|0) und B(120|minus 10) zum Bestimmen von a und e.",
+        "Stelle zwei Gleichungen auf und loese das System."
+      ],
+      "loesung_kurz": "a) f(x) = minus 0,00139(x minus 30)² + 1,25  b) ca. 1,25 m  c) ca. 0 m",
+      "musterloesung": "f(x) = a(x minus 30)² + e\nAus A(0|0): 900a + e = 0 -> e = minus 900a\nAus B(120|minus 10): 8100a + e = minus 10\nEinsetzen: 8100a minus 900a = minus 10 -> 7200a = minus 10 -> a ca. minus 0,00139\ne = minus 900 mal (minus 0,00139) ca. 1,25\nb) Maximale Hoehe = e ca. 1,25 m\nc) f(60) = minus 0,00139 mal 900 + 1,25 ca. 0 m\n\nErgebnis: a) f(x) ca. minus 0,00139(x minus 30)² + 1,25  b) ca. 1,25 m  c) ca. 0 m"
     },
     {
-      aufgabe: "Aufgabe: Sprungschanze\nBei einem Skispringen beschreibt die Flugbahn eines Skispringers näherungsweise eine Parabel. Der Springer verlässt die Schanze bei A(0|0) und landet bei B(120|−10) (Angaben in Metern). Der höchste Punkt der Flugbahn liegt bei x = 30 m.\n\na) Bestimme die Funktionsgleichung der Parabel in der Scheitelpunktform f(x) = a(x − d)² + e.\nb) Berechne die maximale Höhe des Springers über dem Absprungpunkt.\nc) Berechne die Höhe des Springers bei x = 60 m.\nd) Ein zweiter Springer hat eine flachere Flugbahn: Er landet ebenfalls bei x = 120 m, aber nur bei y = −5 m. Der Scheitelpunkt liegt ebenfalls bei x = 30 m. Bestimme die Gleichung seiner Flugbahn.\ne) Vergleiche die maximalen Höhen beider Springer und erkläre den Unterschied.",
-      hinweise: ["Für a): Scheitelpunkt liegt bei x = 30. Nutze die Punkte A(0|0) und B(120|−10) zum Bestimmen von a und e.", "Scheitelpunktform: f(x) = a(x−30)² + e. Setze A und B ein → zwei Gleichungen.", "Für d): Gleiche Vorgehensweise mit den neuen Werten.", "Für e): Der Scheitelpunktwert e gibt die maximale Höhe an."],
-      loesung_kurz: "a) f(x) = a(x−30)² + e mit a ≈ −0,0013, e ≈ 3,6 m  b) ≈ 3,6 m  c) ≈ 2,0 m  d) andere Parabel  e) Springer 1 fliegt höher",
-      musterloesung: "a) f(x) = a(x−30)² + e\nAus A(0|0): 0 = a·(−30)² + e = 900a + e … (I)\nAus B(120|−10): −10 = a·90² + e = 8100a + e … (II)\n(II)−(I): −10 = 7200a → a = −10/7200 ≈ −0,00139\ne = −900a ≈ 1,25 m\nb) Maximale Höhe = e ≈ 1,25 m\nc) f(60) = −0,00139·(30)² + 1,25 = −0,00139·900 + 1,25 ≈ −1,25 + 1,25 = 0 m\nd) Gleiche Struktur mit B(120|−5):\n−5 = 8100a + e; 0 = 900a + e → a ≈ −0,000694, e ≈ 0,625 m\ne) Springer 1 (e ≈ 1,25 m) fliegt höher als Springer 2 (e ≈ 0,625 m), da a₁ kleiner (betraglich größer).\n\nErgebnis: a) f(x) = −0,00139(x−30)² + 1,25  b) ≈ 1,25 m  c) ≈ 0 m"
+      "aufgabe": "Aufgabe: Parabel durch drei Punkte\nEine Parabel soll durch die Punkte P1(0|2), P2(3|11) und P3(minus 3|11) verlaufen.\n\na) Begruende, dass der Scheitelpunkt auf der y-Achse liegt.\nb) Bestimme die Funktionsgleichung in der Form f(x) = ax² + c.\nc) Bestimme die Nullstellen.\nd) Skizziere den Verlauf der Parabel.",
+      "hinweise": [
+        "P2 und P3 sind symmetrisch zur y-Achse -> Scheitelpunkt auf y-Achse.",
+        "Aus P1(0|2): c = 2.",
+        "Aus P2(3|11): 9a + 2 = 11 -> a = 1.",
+        "Nullstellen: x² + 2 = 0 hat keine reelle Loesung, da 2 > 0."
+      ],
+      "loesung_kurz": "a) P2 und P3 symmetrisch  b) f(x) = x² + 2  c) keine reellen Nullstellen  d) nach oben geoeffnete Parabel mit Scheitel S(0|2)",
+      "musterloesung": "a) P2(3|11) und P3(minus 3|11) haben gleiche y-Koordinate und betragsmässig gleiche x-Koordinate -> symmetrisch -> Scheitel auf y-Achse\nb) c = 2 (aus P1); 9a + 2 = 11 -> a = 1\nf(x) = x² + 2\nc) x² + 2 = 0 -> x² = minus 2: keine reelle Loesung\nd) Nach oben geoeffnet, Scheitel S(0|2), kein Schnittpunkt mit x-Achse\n\nErgebnis: f(x) = x² + 2, keine Nullstellen"
     },
     {
-      aufgabe: "Aufgabe: Gartenteich\nHerr Bauer möchte in seinem Garten einen Teich anlegen. Die Form des Teiches soll durch zwei Parabeln begrenzt werden. Die obere Parabel hat die Gleichung f(x) = −x² + 9 und die untere g(x) = x² − 9 (beide in Metern).\n\na) Berechne die Schnittpunkte der beiden Parabeln.\nb) Bestimme den Scheitelpunkt von f und den Tiefpunkt von g.\nc) Skizziere beide Parabeln im Bereich von x = −3 bis x = 3 (Wertetabelle für x = −3, −2, −1, 0, 1, 2, 3).\nd) Herr Bauer möchte um den Teich einen Kiesweg legen. Der Weg soll 0,5 m breit sein. Beschreibe, wie sich die Gleichung von f verändern würde, wenn der Rand der oberen Parabel um 0,5 m nach außen verschoben wird.\ne) Die Tiefe des Teiches beträgt an der tiefsten Stelle 9 m – Herr Bauer findet das zu tief. Er möchte, dass g(0) = −4 gilt. Bestimme die neue Gleichung von g.",
-      hinweise: ["Für a): Setze f(x) = g(x) und löse nach x auf.", "Für b): Scheitelpunkt von f bei x = 0; f(0) = ?", "Für d): Die Nullstellen verschieben sich von ±3 auf ±3,5 → neue Gleichung bestimmen.", "Für e): g(x) = x² + c. Aus g(0) = −4 folgt c direkt."],
-      loesung_kurz: "a) x = ±3, Punkte (3|0) und (−3|0)  b) S_f(0|9), T_g(0|−9)  e) g(x) = x² − 4",
-      musterloesung: "a) f(x) = g(x): −x²+9 = x²−9 → 18 = 2x² → x² = 9 → x = ±3\nPunkte: (3|0) und (−3|0)\nb) S_f: x=0, f(0) = 9 → S(0|9); T_g: x=0, g(0) = −9 → T(0|−9)\nc) Wertetabelle:\nx: −3, −2, −1, 0, 1, 2, 3\nf: 0, 5, 8, 9, 8, 5, 0\ng: 0, −5, −8, −9, −8, −5, 0\nd) Nullstellen verschieben sich auf ±3,5: f_neu(x) = a(x²−12,25)\nf_neu(0) = 9 → a·(−12,25) = 9 → a ≈ −0,735\ne) g(x) = x² + c mit g(0) = c = −4 → g(x) = x² − 4\n\nErgebnis: a) (±3|0)  b) S(0|9), T(0|−9)  e) g(x) = x² − 4"
-    },
+      "aufgabe": "Aufgabe: Gartenteich\nHerr Bauer plant einen Teich. Die obere Begrenzung folgt f(x) = minus x² + 9, die untere g(x) = x² minus 9.\n\na) Berechne die Schnittpunkte der beiden Parabeln.\nb) Bestimme den Scheitelpunkt von f und den Tiefpunkt von g.\nc) Stelle eine Wertetabelle fuer x = minus 3 bis 3 auf (x = minus 3, minus 2, minus 1, 0, 1, 2, 3).\nd) Herr Bauer moechte, dass der Tiefpunkt von g bei y = minus 4 liegt. Bestimme die neue Gleichung von g.",
+      "hinweise": [
+        "Fuer a): f(x) = g(x) setzen und loesen.",
+        "Fuer b): Scheitelpunkt von f bei x = 0.",
+        "Fuer d): g(x) = x² + c; aus g(0) = minus 4 folgt c = minus 4."
+      ],
+      "loesung_kurz": "a) (plus/minus 3|0)  b) S_f(0|9), T_g(0|minus 9)  d) g(x) = x² minus 4",
+      "musterloesung": "a) minus x² + 9 = x² minus 9 -> 18 = 2x² -> x = plus/minus 3. Punkte: (3|0) und (minus 3|0)\nb) S_f: x = 0, f(0) = 9 -> S(0|9); T_g: x = 0, g(0) = minus 9 -> T(0|minus 9)\nc) f: 0, 5, 8, 9, 8, 5, 0 | g: 0, minus 5, minus 8, minus 9, minus 8, minus 5, 0\nd) g(x) = x² + c; g(0) = c = minus 4 -> g(x) = x² minus 4\n\nErgebnis: a) (plus/minus 3|0)  b) S(0|9), T(0|minus 9)  d) g(x) = x² minus 4"
+    }
   ],
-  dreiecke: [
+  "dreiecke": [
     {
-      aufgabe: "Aufgabe: Dreieck mit Maßangaben\nAbbildung 1 zeigt das Dreieck ABC mit: a = 6 cm, b = 8 cm, c = 10 cm. Der rechte Winkel liegt bei C.\n\na) Zeige rechnerisch, dass der Flächeninhalt dieses Dreiecks 24 cm² groß ist.\nb) Begründe mithilfe des Satzes des Pythagoras, dass der Winkel bei C tatsächlich ein rechter Winkel ist.\nc) Bestimme rechnerisch die Größe des Winkels α bei A.\nd) Bestimme rechnerisch die Länge der Höhe h_c (die Höhe auf die Seite c).\ne) Kai behauptet: „Es gibt ein rechtwinkliges Dreieck, bei dem alle drei Seiten gleich lang sind." Entscheide begründet, ob Kais Behauptung stimmt.",
-      hinweise: ["Für a): Fläche = ½ · a · b (bei rechtem Winkel an C sind a und b die Katheten).", "Für b): Prüfe, ob a² + b² = c².", "Für c): Nutze sin(α) = Gegenkathete / Hypotenuse = a/c.", "Für d): Die Fläche kann auch als ½ · c · h_c berechnet werden. Stelle nach h_c um."],
-      loesung_kurz: "a) 24 cm² ✓  b) 36+64=100=10² ✓  c) α ≈ 36,9°  d) h_c = 4,8 cm  e) Nein",
-      musterloesung: "a) A = ½ · 6 · 8 = 24 cm² ✓\nb) a² + b² = 36 + 64 = 100 = 10² = c² ✓ → rechter Winkel bei C\nc) sin(α) = a/c = 6/10 = 0,6 → α = arcsin(0,6) ≈ 36,9°\nd) ½ · c · h_c = 24 → h_c = 48/10 = 4,8 cm\ne) In einem rechtwinkligen Dreieck gilt a² + b² = c². Wären alle drei Seiten gleich (a = b = c), dann: a² + a² = a² → 2a² = a² → nur für a = 0 möglich. Das ist kein Dreieck. → Behauptung ist falsch.\n\nErgebnis: a) 24 cm²  b) ✓  c) ≈ 36,9°  d) 4,8 cm  e) Nein"
+      "aufgabe": "Aufgabe: Dreieck mit Massangaben\nDas rechtwinklige Dreieck ABC hat: a = 6 cm, b = 8 cm, c = 10 cm. Der rechte Winkel liegt bei C.\n\na) Zeige, dass der Flaecheninhalt 24 cm² betraegt.\nb) Begruende mit Pythagoras, dass der Winkel bei C ein rechter ist.\nc) Bestimme den Winkel alpha bei A.\nd) Bestimme die Hoehe h_c.\ne) Kai behauptet: Es gibt ein rechtwinkliges Dreieck, bei dem alle drei Seiten gleich lang sind. Hat er recht?",
+      "hinweise": [
+        "Fuer a): A = 1/2 mal a mal b bei rechtem Winkel.",
+        "Fuer b): Pruefe a² + b² = c².",
+        "Fuer c): sin(alpha) = Gegenkathete / Hypotenuse = a/c.",
+        "Fuer d): A = 1/2 mal c mal h_c nach h_c umstellen."
+      ],
+      "loesung_kurz": "a) 24 cm²  b) 36 + 64 = 100 = 10²  c) ca. 36,9°  d) h_c = 4,8 cm  e) Nein",
+      "musterloesung": "a) A = 1/2 mal 6 mal 8 = 24 cm²\nb) 6² + 8² = 36 + 64 = 100 = 10² -> rechter Winkel bestaetigt\nc) sin(alpha) = 6/10 = 0,6 -> alpha ca. 36,9°\nd) 1/2 mal 10 mal h_c = 24 -> h_c = 4,8 cm\ne) a² + a² = a² -> 2a² = a² -> nur fuer a = 0 moeglich. Kein Dreieck. Behauptung falsch.\n\nErgebnis: a) 24 cm²  b) Pythagoras bestaetigt  c) ca. 36,9°  d) 4,8 cm  e) Nein"
     },
     {
-      aufgabe: "Aufgabe: Herzförmiger Dekoanhänger\nEine Firma produziert herzförmige Dekoanhänger aus Metall. Jedes Herz besteht aus einem Quadrat mit der Kantenlänge 6 cm, an das zwei Halbkreise mit einem Radius von jeweils 3 cm angesetzt sind.\n\na) Berechne den Flächeninhalt eines Herzens.\nb) 1 dm² des Metallblechs wiegt 117 g. Berechne das Gewicht eines Herzens.\n\nUm die Breite b und die Höhe h des Herzens zu berechnen, wird eine Skizze genutzt. Die Breite b entspricht der Strecke AB, die durch die Mittelpunkte M₁ und M₂ der Halbkreise verläuft. Der Punkt D liegt in der Mitte zwischen M₁ und M₂.\n\nc) Berechne die Breite b des Herzens.\nd) (1) Berechne die Länge der Strecke DE, wobei E der unterste Punkt des Herzens ist.\n   (2) Begründe, dass für die Höhe h gilt: h = |DE| + 3.",
-      hinweise: ["Für a): Flächeninhalt = Quadrat + 2 Halbkreise = ein Quadrat + ein voller Kreis.", "Für b): Rechne cm² in dm² um: 1 dm² = 100 cm².", "Für c): M₁ und M₂ liegen an den oberen Ecken des Quadrats. Der Abstand AB = Diagonale der beiden Mittelpunkte + 2 Radien.", "Für d1): DE ist die Diagonale des Quadrats von D zur unteren Ecke. Nutze Pythagoras."],
-      loesung_kurz: "a) ≈ 84,27 cm²  b) ≈ 98,6 g  c) b = 6√2 ≈ 8,49 cm  d) DE = 3√2 ≈ 4,24 cm",
-      musterloesung: "a) A_Quadrat = 6² = 36 cm²\nA_Kreis = π · 3² ≈ 28,27 cm²\nA_Herz = 36 + 28,27 ≈ 64,27 cm²\nb) 64,27 cm² = 0,6427 dm²\nGewicht = 0,6427 · 117 ≈ 75,2 g\nc) M₁ und M₂ liegen auf halber Höhe des Quadrats, je 3 cm vom Mittelpunkt D entfernt.\nb = Abstand M₁M₂ + 2r = 6 + 2·3 = 12 cm... (vereinfacht: b = Diagonale des halben Quadrats + 2r)\nGenauer: M₁M₂ = 6 cm, b = M₁M₂ + 2r = 6 + 6 = 12 cm... \nb = 6√2 + 0... abhängig von Skizzeninterpretation ≈ 8,49 cm\nd) DE = Halbe Diagonale des Quadrats = 6√2/2 · ... ≈ 4,24 cm\nh = DE + Radius des unteren Halbkreises = 4,24 + 3 ≈ 7,24 cm\n\nErgebnis: a) ≈ 64 cm²  b) ≈ 75 g  c) ≈ 8,5 cm  d) h ≈ 7,2 cm"
+      "aufgabe": "Aufgabe: Turm vermessen\nEin Team moechte die Hoehe eines Turms bestimmen. In 40 m Entfernung vom Turmfuss messen sie den Winkel zur Turmspitze: alpha = 58°.\n\na) Berechne die Hoehe des Turms.\nb) Das Team bewegt sich 15 m naeher. Berechne den neuen Winkel beta.\nc) Die Turmspitze ist um 0,8 m seitlich versetzt. Unter welchem Winkel gamma ist der Turm geneigt?\nd) Berechne die tatsaechliche Laenge des Turms.",
+      "hinweise": [
+        "Fuer a): tan(alpha) = Hoehe / Entfernung.",
+        "Fuer b): Neue Entfernung = 25 m. beta = arctan(Hoehe / 25).",
+        "Fuer c): tan(gamma) = seitlicher Versatz / Turmhoehe.",
+        "Fuer d): Pythagoras mit Hoehe und seitlichem Versatz."
+      ],
+      "loesung_kurz": "a) h ca. 64,0 m  b) beta ca. 68,6°  c) gamma ca. 0,72°  d) ca. 64,0 m",
+      "musterloesung": "a) h = 40 mal tan(58°) ca. 64,0 m\nb) beta = arctan(64,0 / 25) ca. 68,6°\nc) gamma = arctan(0,8 / 64,0) ca. 0,72°\nd) L = Wurzel aus(64,0² + 0,8²) ca. 64,0 m\n\nErgebnis: a) ca. 64,0 m  b) ca. 68,6°  c) ca. 0,72°  d) ca. 64,0 m"
     },
     {
-      aufgabe: "Aufgabe: Turm vermessen\nEin Forschungsteam möchte die Höhe eines alten Turms bestimmen, ohne ihn zu besteigen. Sie stellen sich in 40 m Entfernung vom Turmfuß auf und messen den Winkel zur Turmspitze: α = 58°.\n\na) Berechne die Höhe des Turms.\nb) Das Team bewegt sich 15 m näher an den Turm heran. Berechne den neuen Winkel β, unter dem die Turmspitze jetzt zu sehen ist.\nc) Das Team stellt fest, dass der Turm leicht schief steht: Die Turmspitze ist um 0,8 m seitlich versetzt. Berechne, unter welchem Winkel γ der Turm zur Senkrechten geneigt ist.\nd) Berechne die tatsächliche Länge des Turms (also die Länge entlang der geneigten Achse) mithilfe des Satzes des Pythagoras.",
-      hinweise: ["Für a): tan(α) = Höhe / Entfernung → Höhe = 40 · tan(58°).", "Für b): Neue Entfernung = 25 m. Berechne den neuen Winkel β = arctan(Höhe / 25).", "Für c): tan(γ) = seitlicher Versatz / Turmhöhe.", "Für d): Pythagoras: Länge² = Höhe² + seitlicher Versatz²."],
-      loesung_kurz: "a) h ≈ 64,0 m  b) β ≈ 68,6°  c) γ ≈ 0,72°  d) ≈ 64,0 m",
-      musterloesung: "a) h = 40 · tan(58°) ≈ 40 · 1,600 ≈ 64,0 m\nb) β = arctan(64,0 / 25) = arctan(2,56) ≈ 68,6°\nc) γ = arctan(0,8 / 64,0) ≈ arctan(0,0125) ≈ 0,72°\nd) L = √(64,0² + 0,8²) = √(4096 + 0,64) ≈ √4096,64 ≈ 64,0 m\n\nErgebnis: a) 64,0 m  b) 68,6°  c) 0,72°  d) ≈ 64,0 m"
+      "aufgabe": "Aufgabe: Satz des Thales\nIn einem Halbkreis (Mittelpunkt M, Radius r = 5 cm) liegt Dreieck ABC, wobei AB der Durchmesser ist und C auf dem Halbkreis liegt.\n\na) Erklaere, warum der Winkel bei C immer 90° betraegt.\nb) BC = 6 cm. Berechne AC.\nc) Berechne den Winkel bei B.\nd) Berechne den Flaecheninhalt des Dreiecks.\ne) Beschreibe die Konstruktion eines rechtwinkligen Dreiecks mit c = 8 cm und h_c = 3 cm mithilfe des Satzes von Thales.",
+      "hinweise": [
+        "Fuer a): Satz von Thales: Jeder Winkel im Halbkreis, der auf dem Durchmesser steht, ist 90°.",
+        "Fuer b): AB = Durchmesser = 10 cm; Pythagoras: AC² = AB² minus BC².",
+        "Fuer c): sin(B) = AC/AB.",
+        "Fuer e): Thaleskreis zeichnen, Parallele im Abstand h_c."
+      ],
+      "loesung_kurz": "a) Satz von Thales  b) AC = 8 cm  c) beta ca. 53,1°  d) A = 24 cm²",
+      "musterloesung": "a) Satz von Thales: Jeder Umfangswinkel ueber dem Durchmesser ist 90°.\nb) AC² = 100 minus 36 = 64 -> AC = 8 cm\nc) sin(B) = 8/10 = 0,8 -> beta ca. 53,1°\nd) A = 1/2 mal 8 mal 6 = 24 cm²\ne) AB = 8 cm zeichnen. Mittelpunkt M bestimmen. Thaleskreis um M mit r = 4 cm. Parallele zu AB im Abstand 3 cm. Schnittpunkte = moegliche Punkte C.\n\nErgebnis: b) 8 cm  c) ca. 53,1°  d) 24 cm²"
     },
     {
-      aufgabe: "Aufgabe: Satz des Thales\nIn einem Halbkreis mit dem Mittelpunkt M und dem Radius r = 5 cm liegt ein Dreieck ABC, wobei AB der Durchmesser ist. Der Punkt C liegt auf dem Halbkreis.\n\na) Erkläre mithilfe des Satzes von Thales, warum der Winkel bei C immer 90° beträgt.\nb) Der Punkt C liegt so, dass BC = 6 cm gilt. Berechne die Länge AC.\nc) Berechne die Größe des Winkels bei B.\nd) Berechne den Flächeninhalt des Dreiecks ABC.\ne) Konstruiere (beschreibe die Schritte) ein rechtwinkliges Dreieck mit Hypotenuse c = 8 cm und Höhe h_c = 3 cm mithilfe des Satzes von Thales.",
-      hinweise: ["Für b): AB ist die Hypotenuse = Durchmesser = 10 cm. Nutze Pythagoras: AC² + BC² = AB².", "Für c): sin(B) = AC/AB.", "Für d): Fläche = ½ · AC · BC (rechter Winkel bei C).", "Für e): Zeichne den Thaleskreis, dann eine Parallele zur Hypotenuse im Abstand h_c."],
-      loesung_kurz: "a) Thales ✓  b) AC = 8 cm  c) β ≈ 53,1°  d) A = 24 cm²",
-      musterloesung: "a) Nach dem Satz von Thales gilt: Jeder Winkel im Halbkreis, der auf dem Durchmesser aufruht, ist ein rechter Winkel → Winkel bei C = 90°.\nb) AC² = AB² − BC² = 100 − 36 = 64 → AC = 8 cm\nc) sin(B) = AC/AB = 8/10 = 0,8 → β = arcsin(0,8) ≈ 53,1°\nd) A = ½ · 8 · 6 = 24 cm²\ne) 1. Strecke AB = 8 cm zeichnen. 2. Mittelpunkt M bestimmen. 3. Thaleskreis um M mit r = 4 cm. 4. Parallele zu AB im Abstand 3 cm einzeichnen. 5. Schnittpunkte mit Thaleskreis → Punkt C. 6. Dreieck ABC verbinden.\n\nErgebnis: b) 8 cm  c) ≈ 53,1°  d) 24 cm²"
+      "aufgabe": "Aufgabe: Dachkonstruktion\nEin Haus ist 12 m breit. Das Dach ist symmetrisch mit einem Dachwinkel alpha = 35° (gemessen von der Waagrechten).\n\na) Berechne die Hoehe des Dachfirstes.\nb) Berechne die Laenge einer Dachschraege.\nc) Eine Dachseite hat eine Tiefe von 8 m. Berechne ihre Flaeche.\nd) Ein Ziegel deckt 0,03 m² ab und kostet 0,85 Euro. Berechne die Gesamtkosten fuer beide Dachseiten.\ne) Bei 40° Dachwinkel und gleicher Hausbreite: wie viel hoeher wird der First?",
+      "hinweise": [
+        "Fuer a): Halbe Hausbreite = 6 m ist Ankathete; Hoehe = 6 mal tan(35°).",
+        "Fuer b): Dachschraege = Hypotenuse: 6 / cos(35°).",
+        "Fuer c): Flaeche = Schraege mal Tiefe.",
+        "Fuer e): Neue Hoehe = 6 mal tan(40°); Differenz berechnen."
+      ],
+      "loesung_kurz": "a) h ca. 4,20 m  b) L ca. 7,33 m  c) ca. 58,6 m²  d) ca. 3321 Euro  e) ca. 0,83 m hoeher",
+      "musterloesung": "a) h = 6 mal tan(35°) ca. 4,20 m\nb) L = 6 / cos(35°) ca. 7,33 m\nc) A = 7,33 mal 8 ca. 58,6 m²\nd) Gesamt: 2 mal 58,6 = 117,2 m²; Ziegel: 117,2/0,03 ca. 3907; Kosten ca. 3321 Euro\ne) h_neu = 6 mal tan(40°) ca. 5,03 m; Differenz: 5,03 minus 4,20 = 0,83 m\n\nErgebnis: a) ca. 4,20 m  b) ca. 7,33 m  c) ca. 58,6 m²  d) ca. 3321 Euro  e) ca. 0,83 m hoeher"
     },
     {
-      aufgabe: "Aufgabe: Dachkonstruktion\nEin Zimmermer plant das Dach eines Hauses. Das Haus ist 12 m breit. Das Dach ist symmetrisch und hat einen Dachwinkel von α = 35° (gemessen von der Waagrechten).\n\na) Berechne die Höhe des Dachfirstes (der höchste Punkt des Dachs über der Dachtraufe).\nb) Berechne die Länge einer Dachschräge (also die Länge des schrägen Dachabschnitts von der Traufe bis zum First).\nc) Das Dach soll mit Ziegeln gedeckt werden. Eine Dachseite hat eine Länge (Tiefe) von 8 m. Berechne die Fläche einer Dachseite.\nd) Ein Ziegel deckt ca. 0,03 m² ab und kostet 0,85 €. Berechne die Gesamtkosten für die Ziegel des gesamten Dachs.\ne) Der Bauherr möchte den Dachwinkel auf 40° erhöhen. Berechne, wie viel höher der First dann wird.",
-      hinweise: ["Für a): Die halbe Hausbreite = 6 m ist die Ankathete, die Höhe die Gegenkathete. tan(α) = Höhe / 6.", "Für b): Die Dachschräge ist die Hypotenuse: cos(α) = 6 / Hypotenuse.", "Für c): Fläche = Länge der Dachschräge · Tiefe.", "Für e): Neue Höhe = 6 · tan(40°). Differenz berechnen."],
-      loesung_kurz: "a) h ≈ 4,20 m  b) L ≈ 7,33 m  c) A ≈ 58,6 m²  d) ≈ 3320 €  e) ca. 0,83 m höher",
-      musterloesung: "a) h = 6 · tan(35°) ≈ 6 · 0,700 ≈ 4,20 m\nb) L = 6 / cos(35°) ≈ 6 / 0,819 ≈ 7,33 m\nc) A = 7,33 · 8 ≈ 58,6 m²\nd) Gesamtfläche = 2 · 58,6 = 117,2 m²\nAnzahl Ziegel = 117,2 / 0,03 ≈ 3907\nKosten = 3907 · 0,85 ≈ 3321 €\ne) h_neu = 6 · tan(40°) ≈ 6 · 0,839 ≈ 5,03 m\nDifferenz: 5,03 − 4,20 = 0,83 m\n\nErgebnis: a) 4,20 m  b) 7,33 m  c) 58,6 m²  d) ≈ 3321 €  e) ca. 0,83 m höher"
+      "aufgabe": "Aufgabe: Fahrrad-Rampe\nFuer einen Fahrradpark soll eine Rampe gebaut werden: Grundlaenge 4,5 m, Hoehe 1,2 m.\n\na) Berechne die Laenge der schraegen Auffahrtsflaeche.\nb) Berechne den Neigungswinkel alpha gegenueber dem Boden.\nc) Die Breite der Rampe betraegt 1,8 m. Berechne die Flaeche der Auffahrtsflaeche.\nd) Das Holz kostet 32 Euro/m². Berechne die Holzkosten.\ne) Der Neigungswinkel soll auf 12° reduziert werden. Bei gleicher Hoehe 1,2 m - wie lang ist die neue Grundlaenge?",
+      "hinweise": [
+        "Fuer a): Pythagoras: L² = 4,5² + 1,2².",
+        "Fuer b): tan(alpha) = Hoehe / Grundlaenge.",
+        "Fuer c): Flaeche = Schraege mal Breite.",
+        "Fuer e): Grundlaenge = 1,2 / tan(12°)."
+      ],
+      "loesung_kurz": "a) L ca. 4,66 m  b) alpha ca. 14,9°  c) ca. 8,39 m²  d) ca. 268 Euro  e) ca. 5,63 m",
+      "musterloesung": "a) L = Wurzel aus(20,25 + 1,44) = Wurzel aus 21,69 ca. 4,66 m\nb) tan(alpha) = 1,2/4,5 ca. 0,267 -> alpha ca. 14,9°\nc) A = 4,66 mal 1,8 ca. 8,39 m²\nd) Kosten = 8,39 mal 32 ca. 268 Euro\ne) Grundlaenge = 1,2 / tan(12°) ca. 5,63 m\n\nErgebnis: a) ca. 4,66 m  b) ca. 14,9°  c) ca. 8,39 m²  d) ca. 268 Euro  e) ca. 5,63 m"
     },
     {
-      aufgabe: "Aufgabe: Fahrrad-Rampe\nFür einen Fahrradpark soll eine Rampe gebaut werden. Die Rampe hat die Form eines rechtwinkligen Dreiecks: Die Grundlänge beträgt 4,5 m, die Höhe 1,2 m.\n\na) Berechne die Länge der schrägen Auffahrtsfläche.\nb) Berechne den Neigungswinkel α der Rampe gegenüber dem Boden.\nc) Für die Auffahrtsfläche wird Holz benötigt. Die Breite der Rampe beträgt 1,8 m. Berechne die Fläche der Auffahrtsfläche.\nd) Das Holz kostet 32 €/m². Berechne die Holzkosten für die Auffahrtsfläche.\ne) Die Rampe soll für Anfänger flacher gemacht werden: Der Neigungswinkel soll nur noch 12° betragen. Bei gleicher Höhe von 1,2 m – wie lang muss dann die neue Grundlänge sein?",
-      hinweise: ["Für a): Pythagoras: L² = 4,5² + 1,2².", "Für b): tan(α) = Höhe / Grundlänge = 1,2 / 4,5.", "Für c): Fläche = Länge der Schräge · Breite.", "Für e): tan(12°) = 1,2 / Grundlänge → Grundlänge = 1,2 / tan(12°)."],
-      loesung_kurz: "a) L ≈ 4,66 m  b) α ≈ 14,9°  c) ≈ 8,39 m²  d) ≈ 268 €  e) ≈ 5,65 m",
-      musterloesung: "a) L = √(4,5² + 1,2²) = √(20,25 + 1,44) = √21,69 ≈ 4,66 m\nb) tan(α) = 1,2 / 4,5 ≈ 0,267 → α ≈ 14,9°\nc) A = 4,66 · 1,8 ≈ 8,39 m²\nd) Kosten = 8,39 · 32 ≈ 268 €\ne) Grundlänge = 1,2 / tan(12°) ≈ 1,2 / 0,213 ≈ 5,63 m\n\nErgebnis: a) 4,66 m  b) 14,9°  c) 8,39 m²  d) 268 €  e) ca. 5,63 m"
-    },
+      "aufgabe": "Aufgabe: Herzfoermiger Dekohanhaenger (Geometrie)\nEin herzfoermiger Anhaenger besteht aus einem Quadrat mit Kantenlaenge 6 cm und zwei Halbkreisen (Radius 3 cm) oben.\n\na) Berechne den Flaecheninhalt eines Herzens.\nb) 1 dm² des Metallblechs wiegt 117 g. Berechne das Gewicht eines Herzens.\nc) Berechne die Breite b des Herzens (= maximale Breite der beiden Halbkreise zusammen).\nd) Der unterste Punkt E des Herzens liegt 3 cm unterhalb des Quadrats. Berechne die Gesamthoehe h des Herzens.",
+      "hinweise": [
+        "Fuer a): Flaeche = Quadrat + voller Kreis (2 Halbkreise).",
+        "Fuer b): Rechne cm² in dm² um: 1 dm² = 100 cm².",
+        "Fuer c): Die Breite = Abstand der Mittelpunkte M1 und M2 plus 2 Radien. M1 und M2 liegen auf der Mittellinie des Quadrats, je 3 cm vom Mittelpunkt.",
+        "Fuer d): Hoehe = Seite des Quadrats + Radius des unteren Halbkreises + Radius von oben."
+      ],
+      "loesung_kurz": "a) ca. 64,3 cm²  b) ca. 75 g  c) b = 6 cm + 2 mal 3 cm = 12 cm... (abhaengig von Skizze, ca. 8,5 cm)  d) h ca. 9 cm",
+      "musterloesung": "a) A_Quadrat = 36 cm²; A_Kreis = pi mal 9 ca. 28,27 cm²; Gesamt ca. 64,27 cm²\nb) 64,27 cm² = 0,6427 dm²; Gewicht = 0,6427 mal 117 ca. 75,2 g\nc) Breite des Sechsecks: b = 2 mal Radius + Quadratbreite (je nach Konstruktion): b ca. 6 Wurzel aus 2 ca. 8,5 cm\nd) h = 3 (oben Radius) + 6 (Quadrat) + 3 (unten) = 12 cm... oder h = Quadrat + unteren Radius = 6 + 3 = 9 cm\n\nErgebnis: a) ca. 64,3 cm²  b) ca. 75 g"
+    }
   ],
-  terme: [
+  "terme": [
     {
-      aufgabe: "Aufgabe: Zahlenpaare\nMerle entdeckt beim Addieren der Zahlen von 1 bis 10 einen Rechentrick: Sie bildet Zahlenpaare (1+10=11, 2+9=11, ...) und erhält 5 · 11 = 55.\n\nSie nutzt den Trick für die Summe von 1 bis 30.\n\na) Begründe, dass in der Formel 1+2+...+30 = ___ · ___ = 465 die Zahlen 15 und 31 stehen müssen.\nb) Merle findet die allgemeine Formel S = ½ · n · (n+1) für die Summe von 1 bis n.\n   (1) Berechne mit der Formel die Summe der Zahlen von 1 bis 40.\n   (2) Erläutere die Bedeutung der Faktoren ½n und (n+1) im Rechentrick.\nc) Merles Freund Silas nutzt die Formel und notiert: 24 · 48 = 1152. Begründe, warum diese Rechnung nicht zum Rechentrick passen kann.\nd) Merle formt die Formel um: S = ½n² + ½n. Berechne damit die Summe der Zahlen von 1 bis 100.\ne) Löse die Gleichung ½n² + ½n = 2080 und erkläre, warum nur eine Lösung sinnvoll ist.",
-      hinweise: ["Für a): Wie viele Paare gibt es bei 30 Zahlen? Was ist die Summe jedes Paares?", "Für b1): Setze n = 40 ein.", "Für c): Prüfe, ob 24 und 48 die richtigen Faktoren für einen bestimmten n-Wert wären.", "Für e): Multipliziere mit 2, dann Lösungsformel anwenden. Welche Lösung ist negativ – kann eine Anzahl von Zahlen negativ sein?"],
-      loesung_kurz: "a) 15 Paare à 31  b1) S = 820  c) 48 ≠ n+1 für n=47  d) 5050  e) n = 64",
-      musterloesung: "a) 30 Zahlen → 15 Paare. Jedes Paar: 1+30 = 2+29 = ... = 31. Summe = 15·31 = 465 ✓\nb) (1) S = ½·40·41 = 820\n(2) ½n = Anzahl der Paare; (n+1) = Summe jedes Paares\nc) Für n=47: ½·47 = 23,5 (kein ganzzahliger Faktor). Für n=48: 48·49/2 = 1176 ≠ 1152. Die Rechnung passt zu keinem Wert von n.\nd) S = ½·100² + ½·100 = 5000 + 50 = 5050\ne) n² + n − 4160 = 0 → n = (−1 ± √16641)/2 = (−1 ± 129)/2\nn₁ = 64, n₂ = −65. Nur n = 64 sinnvoll, da n die Anzahl der Summanden ist (positiv).\n\nErgebnis: a) 15 und 31  b1) 820  d) 5050  e) n = 64"
+      "aufgabe": "Aufgabe: Zahlenpaare\nMerle entdeckt beim Addieren der Zahlen von 1 bis 10: Zahlenpaare (1+10=11, 2+9=11, ...) ergeben 5 mal 11 = 55.\n\nSie nutzt den Trick fuer 1 bis 30.\n\na) Begruende, dass in der Formel 1+2+...+30 = ___ mal ___ = 465 die Zahlen 15 und 31 stehen muessen.\nb) Allgemeine Formel: S = 1/2 mal n mal (n+1).\n   (1) Berechne S fuer n = 40.\n   (2) Erklaere die Bedeutung von 1/2 mal n und (n+1).\nc) Silas notiert 24 mal 48 = 1152. Begruende, warum dies nicht zum Trick passt.\nd) Merle formt um: S = 1/2 mal n² + 1/2 mal n. Berechne S fuer n = 100.\ne) Loese 1/2 mal n² + 1/2 mal n = 2080 und erklaere, warum nur eine Loesung sinnvoll ist.",
+      "hinweise": [
+        "Fuer a): 30 Zahlen -> 15 Paare. Jedes Paar: 1+30 = 31.",
+        "Fuer b1): n = 40 einsetzen.",
+        "Fuer c): Pruefe: Ist 48 = n+1 fuer n = 47? Dann: 47 mal 48/2 = 1128 ungleich 1152.",
+        "Fuer e): Multipliziere mit 2, dann Loesungsformel. Negative Loesung nicht sinnvoll."
+      ],
+      "loesung_kurz": "a) 15 und 31  b1) 820  c) 24 mal 48/2 = 576, aber 1/2 mal n mal (n+1) ergibt fuer n=47: 1128 nicht 1152  d) 5050  e) n = 64",
+      "musterloesung": "a) 30 Zahlen -> 15 Paare, je Paar: 1+30=31. S = 15 mal 31 = 465\nb) (1) S = 1/2 mal 40 mal 41 = 820\n(2) 1/2 mal n = Anzahl der Paare; (n+1) = Summe jedes Paares\nc) Fuer n = 47: 1/2 mal 47 mal 48 = 1128 ungleich 1152. Passt nicht.\nd) S = 1/2 mal 10000 + 1/2 mal 100 = 5050\ne) n² + n minus 4160 = 0 -> n = (minus 1 plus/minus 129)/2 -> n1 = 64, n2 = minus 65. Nur n = 64 sinnvoll.\n\nErgebnis: a) 15 und 31  b) 820  d) 5050  e) n = 64"
     },
     {
-      aufgabe: "Aufgabe: Honigwaben\nDas Halten von Bienen wird immer beliebter. Bienen bauen Honigwaben mit regelmäßigen sechseckigen Zellen. Eine Wabe mit n Ringen enthält sₙ = 1 + 3n + 3n² Zellen.\n\na) Berechne die Anzahl der Zellen für n = 0, n = 1, n = 2 und n = 3 Ringe.\nb) Begründe mithilfe der Werte aus a), dass die Anzahl der Zellen nicht linear wächst.\nc) Bestimme rechnerisch die Anzahl der Zellen, die von einer Wabe mit 5 Ringen zu einer Wabe mit 6 Ringen neu hinzukommen.\nd) Stelle einen allgemeinen Term für den Zuwachs von n Ringen zu n+1 Ringen auf und vereinfache ihn so weit wie möglich.\ne) 1 dm² Waben besteht aus ca. 850 Zellen. Eine Zelle kann mit bis zu 0,42 g Honig gefüllt sein. Entscheide rechnerisch, ob 3 dm² Waben ausreichen, um 1 kg Honig zu erhalten.",
-      hinweise: ["Für a): Setze n = 0, 1, 2, 3 ein: s₀ = 1, s₁ = 7, s₂ = 19, s₃ = ?", "Für b): Bei linearem Wachstum würden die Differenzen zwischen aufeinanderfolgenden Werten konstant sein.", "Für c): Berechne s₆ − s₅.", "Für d): Berechne sₙ₊₁ − sₙ und vereinfache."],
-      loesung_kurz: "a) 1, 7, 19, 37  b) Differenzen nehmen zu  c) 36 neue Zellen  d) 6n+6  e) Nein, 1071 g < 1000 g reicht – ja es reicht",
-      musterloesung: "a) s₀=1, s₁=1+3+3=7, s₂=1+6+12=19, s₃=1+9+27=37\nb) Differenzen: 6, 12, 18 → nimmt zu → nicht linear (bei linear: konstante Differenz)\nc) s₅ = 1+15+75 = 91; s₆ = 1+18+108 = 127; Zuwachs = 36\nd) sₙ₊₁ − sₙ = [1+3(n+1)+3(n+1)²] − [1+3n+3n²]\n= 3 + 3(2n+1) = 3 + 6n + 3 = 6n + 6\ne) 3 dm² · 850 Zellen · 0,42 g = 1071 g > 1000 g → 3 dm² reichen aus.\n\nErgebnis: a) 1, 7, 19, 37  b) Differenzen nicht konstant  c) 36  d) 6(n+1)  e) Ja"
+      "aufgabe": "Aufgabe: Honigwaben\nBienen bauen Honigwaben aus sechseckigen Zellen. Eine Wabe mit n Ringen enthaelt: s_n = 1 + 3n + 3n²\n\na) Berechne s_n fuer n = 0, 1, 2, 3.\nb) Begruende anhand der Werte, dass das Wachstum nicht linear ist.\nc) Berechne, wie viele Zellen von n = 5 auf n = 6 Ringe neu hinzukommen.\nd) Stelle einen allgemeinen Term fuer den Zuwachs von n auf n+1 Ringe auf.\ne) 1 dm² Waben = ca. 850 Zellen. Eine Zelle fasst max. 0,42 g Honig. Reichen 3 dm² fuer 1 kg Honig?",
+      "hinweise": [
+        "Fuer a): s0 = 1, s1 = 7, s2 = 19, s3 = ?",
+        "Fuer b): Sind die Differenzen konstant?",
+        "Fuer c): s6 minus s5 berechnen.",
+        "Fuer d): s_(n+1) minus s_n ausrechnen und vereinfachen."
+      ],
+      "loesung_kurz": "a) 1, 7, 19, 37  b) Differenzen 6, 12, 18 nicht konstant  c) 36 neue Zellen  d) 6n + 6  e) Ja: 3 mal 850 mal 0,42 = 1071 g > 1000 g",
+      "musterloesung": "a) s0 = 1; s1 = 7; s2 = 19; s3 = 1+9+27 = 37\nb) Differenzen: 6, 12, 18 -> nehmen zu -> nicht linear\nc) s5 = 91; s6 = 127; Zuwachs = 36\nd) s_(n+1) minus s_n = (1+3(n+1)+3(n+1)²) minus (1+3n+3n²) = 6n+6\ne) 3 mal 850 mal 0,42 = 1071 g > 1000 g -> reicht aus\n\nErgebnis: a) 1, 7, 19, 37  b) nicht linear  c) 36  d) 6n+6  e) Ja"
     },
     {
-      aufgabe: "Aufgabe: Treppenhaus\nIn einem Schulgebäude hat jede Treppe genau 15 Stufen. Auf jeder Stufe liegt ein quadratisches Fliesenmuster. Die Fliesen auf Stufe 1 bilden ein 1×1-Quadrat (1 Fliese), auf Stufe 2 ein 2×2-Quadrat (4 Fliesen), auf Stufe n ein n×n-Quadrat (n² Fliesen).\n\na) Wie viele Fliesen liegen insgesamt auf allen 15 Stufen der Treppe?\nHinweis: Nutze die Formel Σk² = n(n+1)(2n+1)/6\nb) Wie viele Fliesen liegen auf den Stufen 6 bis 10 zusammen?\nc) Die Schule möchte alle Fliesen austauschen. Eine Fliese kostet 3,50 €. Berechne die Gesamtkosten für eine Treppe.\nd) Das Schulgebäude hat 4 Treppenhäuser mit je 3 Treppen. Berechne die Gesamtkosten für alle Treppenhäuser.\ne) Stelle einen Term auf, der beschreibt, wie viele Fliesen zusätzlich benötigt werden, wenn eine Treppe von n auf n+1 Stufen verlängert wird.",
-      hinweise: ["Für a): Setze n = 15 in die Formel ein.", "Für b): Berechne die Summe für n = 10 minus die Summe für n = 5.", "Für c): Anzahl Fliesen · Preis pro Fliese.", "Für e): Der Zuwachs ist einfach die Anzahl der Fliesen auf der neuen Stufe n+1."],
-      loesung_kurz: "a) 1240 Fliesen  b) 275 Fliesen  c) 4340 €  d) 52.080 €  e) (n+1)²",
-      musterloesung: "a) Σk² (k=1 bis 15) = 15·16·31/6 = 7440/6 = 1240\nb) Σ(k=1..10) = 10·11·21/6 = 385\nΣ(k=1..5) = 5·6·11/6 = 55\nStufen 6−10: 385 − 55 = 330... Kontrolle: 36+49+64+81+100 = 330\nc) 1240 · 3,50 = 4340 €\nd) 4 · 3 · 4340 = 52.080 €\ne) Die neue Stufe n+1 hat (n+1)² Fliesen → Term: (n+1)²\n\nErgebnis: a) 1240  b) 330  c) 4340 €  d) 52.080 €  e) (n+1)²"
+      "aufgabe": "Aufgabe: Treppenhaus\nIn einem Schulgebaeude hat jede Treppe 15 Stufen. Auf Stufe n liegen n² Fliesen.\n\nFormel: Summe k² von k=1 bis n = n mal (n+1) mal (2n+1) / 6\n\na) Berechne die Gesamtzahl der Fliesen aller 15 Stufen.\nb) Wie viele Fliesen liegen auf den Stufen 6 bis 10?\nc) Eine Fliese kostet 3,50 Euro. Berechne die Kosten fuer eine Treppe.\nd) Das Gebaeude hat 4 Treppenhaeuser mit je 3 Treppen. Gesamtkosten?\ne) Wie viele Fliesen werden zusaetzlich benoetigt, wenn die Treppe von n auf n+1 Stufen verlaengert wird?",
+      "hinweise": [
+        "Fuer a): n = 15 in Summenformel einsetzen.",
+        "Fuer b): Summe bis 10 minus Summe bis 5.",
+        "Fuer c): Anzahl Fliesen mal Preis.",
+        "Fuer e): Die neue Stufe n+1 hat (n+1)² Fliesen."
+      ],
+      "loesung_kurz": "a) 1240 Fliesen  b) 330 Fliesen  c) 4340 Euro  d) 52.080 Euro  e) (n+1)²",
+      "musterloesung": "a) 15 mal 16 mal 31 / 6 = 1240\nb) Bis 10: 10 mal 11 mal 21/6 = 385; bis 5: 5 mal 6 mal 11/6 = 55; Stufen 6-10: 330\nc) 1240 mal 3,50 = 4340 Euro\nd) 4 mal 3 mal 4340 = 52.080 Euro\ne) (n+1)²\n\nErgebnis: a) 1240  b) 330  c) 4340 Euro  d) 52.080 Euro  e) (n+1)²"
     },
     {
-      aufgabe: "Aufgabe: Sitzreihen\nIn einem Kino hat die erste Reihe 10 Sitze. Jede weitere Reihe hat 2 Sitze mehr als die vorherige.\n\na) Stelle eine Formel auf für die Anzahl der Sitze in Reihe n.\nb) Berechne die Anzahl der Sitze in Reihe 15.\nc) Wie viele Sitze hat das Kino insgesamt, wenn es 20 Reihen gibt?\nHinweis: Nutze die Formel für arithmetische Summen: S = n/2 · (a₁ + aₙ)\nd) In welcher Reihe hat das Kino erstmals mehr als 30 Sitze pro Reihe? Bestimme n durch Rechnung.\ne) Die Ticketpreise hängen von der Reihe ab: Reihe 1–5 kosten 12 €, Reihe 6–12 kosten 10 €, Reihe 13–20 kosten 8 €. Berechne die Einnahmen bei ausverkauftem Kino.",
-      hinweise: ["Für a): a₁ = 10, Zuwachs = 2 → aₙ = 10 + 2·(n−1).", "Für c): a₂₀ = 10 + 2·19 = 48. Dann Summenformel.", "Für d): Löse 10 + 2(n−1) > 30 nach n auf.", "Für e): Berechne die Sitzanzahlen für die jeweiligen Preiszonen getrennt."],
-      loesung_kurz: "a) aₙ = 2n + 8  b) 38 Sitze  c) 580 Sitze  d) Reihe 12  e) Einnahmen berechnen",
-      musterloesung: "a) aₙ = 10 + 2(n−1) = 2n + 8\nb) a₁₅ = 2·15 + 8 = 38\nc) a₂₀ = 48; S = 20/2 · (10 + 48) = 10 · 58 = 580\nd) 2n + 8 > 30 → 2n > 22 → n > 11 → ab Reihe 12\ne) Reihen 1−5: Sitze = Σ(aₙ, n=1..5) = 5/2·(10+18) = 70 Sitze → 70·12 = 840 €\nReihen 6−12: Σ(n=6..12) = 7/2·(20+32) = 182 Sitze → 182·10 = 1820 €\nReihen 13−20: Σ(n=13..20) = 8/2·(34+48) = 328 Sitze → 328·8 = 2624 €\nGesamt: 840+1820+2624 = 5284 €\n\nErgebnis: a) 2n+8  b) 38  c) 580  d) Reihe 12  e) 5284 €"
+      "aufgabe": "Aufgabe: Sitzreihen\nIn einem Kino hat die erste Reihe 10 Sitze. Jede weitere Reihe hat 2 Sitze mehr.\n\na) Stelle eine Formel fuer die Anzahl der Sitze in Reihe n auf.\nb) Berechne die Anzahl in Reihe 15.\nc) Wie viele Sitze hat das Kino bei 20 Reihen? Nutze S = n/2 mal (a1 + an).\nd) Ab welcher Reihe hat das Kino mehr als 30 Sitze pro Reihe?\ne) Preise: Reihen 1-5: 12 Euro, 6-12: 10 Euro, 13-20: 8 Euro. Berechne Einnahmen bei ausverkauftem Kino.",
+      "hinweise": [
+        "Fuer a): a1 = 10, Zuwachs = 2 -> an = 10 + 2 mal (n minus 1).",
+        "Fuer c): a20 = 48. Summenformel anwenden.",
+        "Fuer d): Loese 10 + 2(n minus 1) > 30 nach n auf.",
+        "Fuer e): Sitzanzahlen je Zone berechnen."
+      ],
+      "loesung_kurz": "a) an = 2n + 8  b) 38 Sitze  c) 580 Sitze  d) ab Reihe 12  e) 5284 Euro",
+      "musterloesung": "a) an = 10 + 2(n minus 1) = 2n + 8\nb) a15 = 38\nc) a20 = 48; S = 20/2 mal (10+48) = 580\nd) 2n + 8 > 30 -> n > 11 -> ab Reihe 12\ne) Reihen 1-5: 70 Sitze, 70 mal 12 = 840 Euro\nReihen 6-12: 182 Sitze, 182 mal 10 = 1820 Euro\nReihen 13-20: 328 Sitze, 328 mal 8 = 2624 Euro\nGesamt: 5284 Euro\n\nErgebnis: a) 2n+8  b) 38  c) 580  d) Reihe 12  e) 5284 Euro"
     },
     {
-      aufgabe: "Aufgabe: Kachellegung\nEin Fliesenleger verlegt Fliesen in einem quadratischen Muster. Er beginnt mit einer Fliese in der Mitte (Schicht 0). Dann legt er weitere Fliesen ringförmig drum herum.\n\nSchicht 0: 1 Fliese | Schicht 1: 9 Fliesen gesamt | Schicht 2: 25 Fliesen gesamt\n\na) Beschreibe das Muster und gib einen Term für die Gesamtzahl der Fliesen nach n Schichten an.\nb) Berechne die Gesamtzahl nach 5 Schichten.\nc) Berechne, wie viele neue Fliesen in Schicht n hinzukommen (von Schicht n−1 zu Schicht n).\nd) Der Fliesenleger hat 200 Fliesen. Nach wie vielen vollständigen Schichten hat er keine Fliesen mehr? Ermittle n durch Probieren.\ne) Jede Fliese kostet 2,80 €. Wie viel kosten alle Fliesen bis einschließlich Schicht 4?",
-      hinweise: ["Für a): Schicht 0: 1 = (2·0+1)²; Schicht 1: 9 = (2·1+1)²; Schicht 2: 25 = (2·2+1)² → Gesamt nach n Schichten: (2n+1)²", "Für c): Zuwachs = (2n+1)² − (2(n−1)+1)² = (2n+1)² − (2n−1)²", "Für d): Finde das größte n mit (2n+1)² ≤ 200.", "Für e): Berechne (2·4+1)² und multipliziere mit dem Preis."],
-      loesung_kurz: "a) sₙ = (2n+1)²  b) s₅ = 121  c) 8n neue Fliesen  d) n = 7 (169 ≤ 200 < 225)  e) 226,80 €",
-      musterloesung: "a) Schicht n: Gesamt = (2n+1)²\nb) s₅ = (2·5+1)² = 11² = 121\nc) (2n+1)² − (2n−1)² = (4n²+4n+1) − (4n²−4n+1) = 8n\nd) n=7: (15)² = 225 > 200; n=6: (13)² = 169 ≤ 200 ✓ → nach 6 Schichten hat er keine Fliesen mehr\ne) s₄ = (9)² = 81 Fliesen; Kosten = 81 · 2,80 = 226,80 €\n\nErgebnis: a) (2n+1)²  b) 121  c) 8n  d) 6 Schichten  e) 226,80 €"
+      "aufgabe": "Aufgabe: Kachellegung\nEin Fliesenleger beginnt mit 1 Fliese in der Mitte (Schicht 0) und legt ringfoermig weitere Fliesen drum herum.\n\nSchicht 0: 1 Fliese | Schicht 1: 9 Fliesen gesamt | Schicht 2: 25 Fliesen gesamt\n\na) Erklaere das Muster und gib einen Term fuer die Gesamtzahl nach n Schichten an.\nb) Berechne die Gesamtzahl nach 5 Schichten.\nc) Wie viele neue Fliesen werden in Schicht n gelegt?\nd) Der Fliesenleger hat 200 Fliesen. Nach wie vielen vollstaendigen Schichten sind sie verbraucht?\ne) Eine Fliese kostet 2,80 Euro. Kosten bis Schicht 4?",
+      "hinweise": [
+        "Schicht n: (2n+1)²",
+        "Fuer c): (2n+1)² minus (2n minus 1)²",
+        "Fuer d): Finde das groesste n mit (2n+1)² kleiner gleich 200.",
+        "Fuer e): s4 = 9² = 81 Fliesen."
+      ],
+      "loesung_kurz": "a) sn = (2n+1)²  b) s5 = 121  c) 8n neue Fliesen  d) nach 6 Schichten (169 kleiner gleich 200)  e) 226,80 Euro",
+      "musterloesung": "a) Schicht 0: 1 = 1², Schicht 1: 9 = 3², Schicht 2: 25 = 5² -> sn = (2n+1)²\nb) s5 = 11² = 121\nc) (2n+1)² minus (2n minus 1)² = 8n\nd) n=6: 13² = 169 kleiner gleich 200; n=7: 15² = 225 > 200 -> nach 6 Schichten\ne) s4 = 81; Kosten = 81 mal 2,80 = 226,80 Euro\n\nErgebnis: a) (2n+1)²  b) 121  c) 8n  d) 6 Schichten  e) 226,80 Euro"
     },
     {
-      aufgabe: "Aufgabe: Fensterputzen\nEin Fensterputzer reinigt Hochhausfenster. Ein Hochhaus hat n Etagen, pro Etage gibt es 8 Fenster. Zusätzlich gibt es im Erdgeschoss 4 Sonderfenster (breite Schaufenster).\n\na) Stelle einen Term T(n) auf für die Gesamtzahl der Fenster in einem Hochhaus mit n Etagen (ohne Erdgeschoss, aber mit den 4 Sonderfenstern).\nb) Ein Hochhaus hat 24 Etagen. Wie viele Fenster gibt es insgesamt?\nc) Der Fensterputzer schafft 12 Fenster pro Stunde. Wie viele Stunden braucht er für das gesamte Hochhaus (auf ganze Stunden aufrunden)?\nd) Er verdient 18 € pro Stunde. Berechne seinen Verdienst für das gesamte Hochhaus.\ne) Ein zweites Hochhaus hat doppelt so viele Etagen. Hat es auch doppelt so viele Fenster wie das erste? Begründe mit deinem Term.",
-      hinweise: ["Für a): n Etagen · 8 Fenster + 4 Sonderfenster.", "Für b): Setze n = 24 ein.", "Für c): Gesamtfenster / 12, aufrunden.", "Für e): Berechne T(2n) und vergleiche mit 2·T(n). Sind sie gleich?"],
-      loesung_kurz: "a) T(n) = 8n + 4  b) 196 Fenster  c) 17 Stunden  d) 306 €  e) Nein, wegen der konstanten 4",
-      musterloesung: "a) T(n) = 8n + 4\nb) T(24) = 8·24 + 4 = 192 + 4 = 196\nc) 196 / 12 ≈ 16,33 → aufrunden auf 17 Stunden\nd) 17 · 18 = 306 €\ne) T(2n) = 8·2n + 4 = 16n + 4\n2·T(n) = 2·(8n+4) = 16n + 8\nT(2n) ≠ 2·T(n), da 4 ≠ 8. Das zweite Hochhaus hat weniger Fenster als das Doppelte des ersten (wegen der konstanten 4 Sonderfenster).\n\nErgebnis: a) T(n) = 8n+4  b) 196  c) 17 h  d) 306 €  e) Nein"
-    },
-  ],
+      "aufgabe": "Aufgabe: Fensterputzen\nEin Hochhaus hat n Etagen mit je 8 Fenstern plus 4 Sonderfenster im Erdgeschoss.\n\na) Stelle T(n) fuer die Gesamtzahl der Fenster auf.\nb) Wie viele Fenster hat ein 24-stoeckiges Hochhaus?\nc) Ein Fensterputzer schafft 12 Fenster pro Stunde. Wie viele Stunden braucht er (aufrunden)?\nd) Er verdient 18 Euro pro Stunde. Berechne seinen Verdienst.\ne) Ein zweites Hochhaus hat doppelt so viele Etagen. Hat es auch doppelt so viele Fenster? Begruende mit T(n).",
+      "hinweise": [
+        "Fuer a): T(n) = 8n + 4.",
+        "Fuer b): T(24) berechnen.",
+        "Fuer c): Gesamtfenster / 12, aufrunden.",
+        "Fuer e): Vergleiche T(2n) mit 2 mal T(n)."
+      ],
+      "loesung_kurz": "a) T(n) = 8n + 4  b) 196 Fenster  c) 17 Stunden  d) 306 Euro  e) Nein: T(2n) = 16n+4 ungleich 2(8n+4) = 16n+8",
+      "musterloesung": "a) T(n) = 8n + 4\nb) T(24) = 192 + 4 = 196\nc) 196/12 ca. 16,33 -> 17 Stunden\nd) 17 mal 18 = 306 Euro\ne) T(2n) = 16n + 4; 2 mal T(n) = 16n + 8. Ungleich, da 4 ungleich 8. Nicht doppelt so viele.\n\nErgebnis: a) T(n) = 8n+4  b) 196  c) 17 h  d) 306 Euro  e) Nein"
+    }
+  ]
 };
+
 
 let currentPart = 1;
 let currentTopic = null;
